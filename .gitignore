@@ -4,9 +4,11 @@ docker/
 docs/
 flavors/
 release/
+test/
 composer.json
 cypress.json
 renovate.json
+Dockerfile
 
 # macOS
 .DS_Store
