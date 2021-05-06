@@ -1,0 +1,32 @@
+#swagger-ui {
+    max-width: 70%;
+}
+
+.swagger-ui {
+    .opblock {
+        position: relative;
+    }
+
+    select {
+        width: fit-content !important; 
+    }
+}
+
+.responses-wrapper {
+    width: 30vw;
+    display: flex;
+    position: absolute;
+    right: -30vw;
+    flex-wrap: wrap;
+    top: 0;
+    padding: 0 18px 0 40px;
+
+    .responses-inner {
+        flex: 1;
+    }
+
+    .opblock-section-header{
+        width: 100%;
+    }
+    
+}

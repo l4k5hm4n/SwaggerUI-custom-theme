@@ -1,0 +1,12 @@
+node_modules/
+config/
+docker/
+docs/
+flavors/
+release/
+composer.json
+cypress.json
+renovate.json
+
+# macOS
+.DS_Store
