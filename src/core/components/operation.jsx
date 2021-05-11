@@ -114,10 +114,9 @@ export default class Operation extends PureComponent {
 
     return (
         <div className={deprecated ? "opblock opblock-deprecated" : true ? `opblock opblock-${method} is-open` : `opblock opblock-${method}`} id={escapeDeepLinkPath(isShownKey.join("-"))} >
-        <OperationSummary operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} />
-          <Collapse isOpened={true}>
-            <div className="opblock-body">
-              { (operation && operation.size) || operation === null ? null :
+        <OperationSummary operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} >
+
+        { (operation && operation.size) || operation === null ? null :
                 <img height={"32px"} width={"32px"} src={require("core/../img/rolling-load.svg")} className="opblock-loading-animation" />
               }
               { deprecated && <h4 className="opblock-title_normal"> Warning: Deprecated</h4>}
@@ -140,7 +139,9 @@ export default class Operation extends PureComponent {
                   </div>
                 </div> : null
               }
-
+          </OperationSummary> 
+          <Collapse isOpened={true}>
+            <div className="opblock-body">
               { !operation || !operation.size ? null :
                 <Parameters
                   parameters={parameters}
@@ -160,7 +161,30 @@ export default class Operation extends PureComponent {
                   getConfigs={ getConfigs }
                   oas3Actions={ oas3Actions }
                   oas3Selectors={ oas3Selectors }
-                />
+                >  
+                <div className={(!tryItOutEnabled || !response || !allowTryItOut) ? "execute-wrapper" : "btn-group"}>
+                { !tryItOutEnabled || !allowTryItOut ? null :
+  
+                    <Execute
+                      operation={ operation }
+                      specActions={ specActions }
+                      specSelectors={ specSelectors }
+                      oas3Selectors={ oas3Selectors }
+                      oas3Actions={ oas3Actions }
+                      path={ path }
+                      method={ method }
+                      onExecute={ onExecute }
+                      disabled={executeInProgress}/>
+                }
+  
+                { (!tryItOutEnabled || !response || !allowTryItOut) ? null :
+                    <Clear
+                      specActions={ specActions }
+                      path={ path }
+                      method={ method }/>
+                }
+              </div>
+                </Parameters >
               }
 
               { !tryItOutEnabled ? null :
@@ -187,28 +211,6 @@ export default class Operation extends PureComponent {
                   </div> : null
               }
 
-            <div className={(!tryItOutEnabled || !response || !allowTryItOut) ? "execute-wrapper" : "btn-group"}>
-              { !tryItOutEnabled || !allowTryItOut ? null :
-
-                  <Execute
-                    operation={ operation }
-                    specActions={ specActions }
-                    specSelectors={ specSelectors }
-                    oas3Selectors={ oas3Selectors }
-                    oas3Actions={ oas3Actions }
-                    path={ path }
-                    method={ method }
-                    onExecute={ onExecute }
-                    disabled={executeInProgress}/>
-              }
-
-              { (!tryItOutEnabled || !response || !allowTryItOut) ? null :
-                  <Clear
-                    specActions={ specActions }
-                    path={ path }
-                    method={ method }/>
-              }
-            </div>
 
             {executeInProgress ? <div className="loading-container"><div className="loading"></div></div> : null}
 
@@ -236,6 +238,7 @@ export default class Operation extends PureComponent {
                 <OperationExt extensions={ extensions } getComponent={ getComponent } />
               }
             </div>
+
           </Collapse>
         </div>
     )

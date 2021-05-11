@@ -3,7 +3,8 @@
     width: 100%;
     max-width: 1460px;
     margin: 0 auto;
-    padding: 0 20px;
+    // padding: 0 20px;
+    padding-left: 20px;
     box-sizing: border-box;
 }
 
@@ -97,9 +98,12 @@
 {
     font-size: 12px;
 
-    padding: 5px 0;
+    padding: 2px 0 0 6px;
 
     @include text_code();
+
+    color: #00000080;
+
 }
 
 .parameter-controls {
@@ -168,9 +172,9 @@
 {
     margin: 0 0 15px 0;
 
-    border: 1px solid $opblock-border-color;
-    border-radius: 4px;
-    box-shadow: 0 0 3px rgba($opblock-box-shadow-color,.19);
+    // border: 1px solid $opblock-border-color;
+    // border-radius: 4px;
+    // box-shadow: 0 0 3px rgba($opblock-box-shadow-color,.19);
 
     .tab-header
     {
@@ -222,7 +226,7 @@
     {
         .opblock-summary
         {
-            border-bottom: 1px solid $opblock-isopen-summary-border-bottom-color;
+            // border-bottom: 1px solid $opblock-isopen-summary-border-bottom-color;
         }
     }
 
@@ -231,12 +235,12 @@
         display: flex;
         align-items: center;
 
-        padding: 8px 20px;
+        padding: 8px 0;
 
         min-height: 50px;
 
-        background: rgba($opblock-isopen-section-header-background-color,.8);
-        box-shadow: 0 1px 2px rgba($opblock-isopen-section-header-box-shadow-color,.1);
+        // background: rgba($opblock-isopen-section-header-background-color,.8);
+        // box-shadow: 0 1px 2px rgba($opblock-isopen-section-header-box-shadow-color,.1);
 
         >label
         {
@@ -250,6 +254,7 @@
             margin-left: auto;
 
             @include text_headline();
+            margin-right: 130px;
 
             >span
             {
@@ -259,7 +264,7 @@
 
         h4
         {
-            font-size: 14px;
+            font-size: 18px;
 
             flex: 1;
 
@@ -272,18 +277,13 @@
     .opblock-summary-method
     {
         font-size: 14px;
-        font-weight: bold;
-
-        min-width: 80px;
-        padding: 6px 15px;
-
+        font-weight: 700;
+        padding: 10px 16px;
         text-align: center;
-
-        border-radius: 3px;
-        background: $opblock-summary-method-background-color;
-        text-shadow: 0 1px 0 rgba($opblock-summary-method-text-shadow-color,.1);
-
-        @include text_headline($opblock-summary-method-font-color);
+        border-radius: 6px;
+        background: #4a59d91a;
+        font-family: sans-serif;
+        color: #4A59D9;
     }
 
     .opblock-summary-path,
@@ -295,8 +295,6 @@
           font-size: 12px;
         }
 
-
-        display: flex;
         align-items: center;
 
         word-break: break-word;
@@ -304,7 +302,7 @@
         padding: 0 10px;
 
         @include text_code();
-
+        font-weight: 400;
     }
 
     .opblock-summary-path
@@ -325,13 +323,14 @@
 
     .opblock-summary-description
     {
-        font-size: 13px;
+        font-size: 14px;
 
         flex: 1 1 auto;
 
         word-break: break-word;
 
         @include text_body();
+        padding: 10px 5px 34px 5px;
     }
 
     .opblock-summary
@@ -369,44 +368,44 @@
 
     &.opblock-post
     {
-        @include method($_color-post);
+        // @include method($_color-post);
     }
 
     &.opblock-put
     {
-        @include method($_color-put);
+        // @include method($_color-put);
     }
 
     &.opblock-delete
     {
-        @include method($_color-delete);
+        // @include method($_color-delete);
     }
 
     &.opblock-get
     {
-        @include method($_color-get);
+        // @include method($_color-get);
     }
 
     &.opblock-patch
     {
-        @include method($_color-patch);
+        // @include method($_color-patch);
     }
 
     &.opblock-head
     {
-        @include method($_color-head);
+        // @include method($_color-head);
     }
 
     &.opblock-options
     {
-        @include method($_color-options);
+        // @include method($_color-options);
     }
 
     &.opblock-deprecated
     {
         opacity: .6;
 
-        @include method($_color-disabled);
+        // @include method($_color-disabled);
     }
 
     .opblock-schemes
@@ -459,7 +458,7 @@
 
     li
     {
-        font-size: 12px;
+        font-size: 14px;
 
         min-width: 60px;
         padding: 0;
@@ -503,8 +502,8 @@
 {
     font-size: 12px;
 
-    margin: 0 0 5px 0;
-    padding: 15px 20px;
+    margin: -16px 0 5px;
+    padding: 0px 5px 30px;
 
     @include text_body();
 
@@ -535,7 +534,6 @@
 
 .execute-wrapper
 {
-    padding: 20px;
 
     text-align: right;
 
@@ -716,6 +714,9 @@
         display: flex;
         align-items: flex-end;
 
+        .schemes-title {
+            font-size: 16px
+        }
          > label
         {
             font-size: 12px;
@@ -724,14 +725,13 @@
             display: flex;
             flex-direction: column;
 
-            margin: -20px 15px 0 0;
+            margin: 0px 15px -12px 0px;
 
             @include text_headline();
 
             select
             {
-                min-width: 130px;
-
+                padding-left: 0;
                 text-transform: uppercase;
             }
         }

@@ -31,7 +31,7 @@ table
     {
         td
         {
-            font-size: 12px;
+            font-size: 14px;
             font-weight: 300;
 
             vertical-align: middle;
@@ -89,12 +89,11 @@ table
 
 .parameters-col_description
 {
-    width: 99%; // forces other columns to shrink to their content widths
-    margin-bottom: 2em;
     input[type=text]
     {
         width: 100%;
         max-width: 340px;
+        font-size: 14px;
     }
 
     select {
@@ -102,39 +101,55 @@ table
     }
 }
 
+.parameters__query .parameter__item, .parameters__body .parameter__item {
+    margin-bottom: 28px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #0000001c;
+
+    &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 18px;
+        border-bottom: none
+    }
+}
+
 .parameter__name
 {
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 600;
 
     // hack to give breathing room to the name column
     // TODO: refactor all of this to flexbox
     margin-right: .75em;
 
     @include text_headline();
+    display: flex;
+    position: relative;
 
     &.required
     {
-        font-weight: bold;
 
-        span
+        span.parameter__required
         {
-            color: red;
+            color: #B50000;
+            position: absolute;
+            right: 0;
+            font-weight: 400;
         }
 
-        &:after
-        {
-            font-size: 10px;
+        // &:after
+        // {
+        //     font-size: 10px;
 
-            position: relative;
-            top: -6px;
+        //     position: relative;
+        //     top: -6px;
 
-            padding: 5px;
+        //     padding: 5px;
 
-            content: 'required';
+        //     content: 'required';
 
-            color: rgba($table-parameter-name-required-font-color, .6);
-        }
+        //     color: rgba($table-parameter-name-required-font-color, .6);
+        // }
     }
 }
 
@@ -173,7 +188,7 @@ table
 
 .table-container
 {
-    padding: 20px;
+    padding: 0px 5px;
 }
 
 

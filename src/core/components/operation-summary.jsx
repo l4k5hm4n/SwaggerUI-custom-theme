@@ -63,6 +63,7 @@ export default class OperationSummary extends PureComponent {
       <section id={`${method}/${operationId || originalOperationId || displayOperationId }`}>
       <div className={`opblock-summary opblock-summary-${method}`} onClick={toggleShown} >
         <OperationSummaryMethod method={method} />
+        <div className={`opblock-summary-container`}>
         <OperationSummaryPath getComponent={getComponent} operationProps={operationProps} specPath={specPath} />
 
         {/* {!showSummary ? null :
@@ -84,6 +85,8 @@ export default class OperationSummary extends PureComponent {
             />
         }
 
+        </div>
+
         <JumpToPath path={specPath} />{/* TODO: use wrapComponents here, swagger-ui doesn't care about jumpToPath */}
       </div>
       {!showSummary ? null :
@@ -91,6 +94,8 @@ export default class OperationSummary extends PureComponent {
           {toString(resolvedSummary || summary)}
         </div>
       }
+
+      {this.props.children}
       </section>
     )
 

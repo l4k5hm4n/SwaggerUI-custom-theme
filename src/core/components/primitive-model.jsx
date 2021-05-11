@@ -42,7 +42,7 @@ export default class Primitive extends Component {
       <span className="prop">
         { name && <span className={`${depth === 1 && "model-title"} prop-name`}>{ title }</span> }
         <span className="prop-type">{ type }</span>
-        { format && <span className="prop-format">(${format})</span>}
+        { format && <span className="prop-format"> (${format})</span>}
         {
           properties.size ? properties.entrySeq().map( ( [ key, v ] ) => <Property key={`${key}-${v}`} propKey={ key } propVal={ v } propClass={ propClass } />) : null
         }

@@ -269,26 +269,26 @@ export default class ParameterRow extends Component {
     }
 
     return (
-      <tr data-param-name={param.get("name")} data-param-in={param.get("in")}>
-        <td className="parameters-col_name">
+      <div className="parameter__item"> 
+        <div className="parameters-col_name" data-param-name={param.get("name")} data-param-in={param.get("in")}>
           <div className={required ? "parameter__name required" : "parameter__name"}>
-            { param.get("name") }
-            { !required ? null : <span>&nbsp;*</span> }
-          </div>
-          <div className="parameter__type">
+            <span>{ param.get("name") }</span>
+            <div className="parameter__type">
             { type }
             { itemType && `[${itemType}]` }
             { format && <span className="prop-format">(${format})</span>}
           </div>
+            { !required ? null : <span className="parameter__required">&nbsp;*Required</span> }
+          </div>
           <div className="parameter__deprecated">
             { isOAS3 && param.get("deprecated") ? "deprecated": null }
           </div>
-          <div className="parameter__in">({ param.get("in") })</div>
+          {/* <div className="parameter__in">({ param.get("in") })</div> */}
           { !showCommonExtensions || !commonExt.size ? null : commonExt.entrySeq().map(([key, v]) => <ParameterExt key={`${key}-${v}`} xKey={key} xVal={v} /> )}
           { !showExtensions || !extensions.size ? null : extensions.entrySeq().map(([key, v]) => <ParameterExt key={`${key}-${v}`} xKey={key} xVal={v} /> )}
-        </td>
+        </div>
 
-        <td className="parameters-col_description">
+        <div className="parameters-col_description">
           { param.get("description") ? <Markdown source={ param.get("description") }/> : null }
 
           { (bodyParam || !isExecute) && isDisplayParamEnum ?
@@ -374,9 +374,9 @@ export default class ParameterRow extends Component {
             ) : null
           }
 
-        </td>
+        </div>
 
-      </tr>
+    </div>
     )
 
   }

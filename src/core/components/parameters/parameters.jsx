@@ -13,6 +13,7 @@ export default class Parameters extends Component {
     }
   }
 
+
   static propTypes = {
     parameters: ImPropTypes.list.isRequired,
     operation: PropTypes.object.isRequired,
@@ -109,6 +110,10 @@ export default class Parameters extends Component {
       operation,
     } = this.props
 
+
+let parametersQuery = []
+let parametersBody = []
+
     const ParameterRow = getComponent("parameterRow")
     const TryItOutButton = getComponent("TryItOutButton")
     const ContentType = getComponent("contentType")
@@ -133,70 +138,129 @@ export default class Parameters extends Component {
     const retainRequestBodyValueFlagForOperation = (f) => oas3Actions.setRetainRequestBodyValueFlag({ value: f, pathMethod })
     return (
       <div className="opblock-section">
-        <div className="opblock-section-header">
-          {isOAS3 ? (
-            <div className="tab-header">
-              <div onClick={() => this.toggleTab("parameters")}
-                   className={`tab-item ${this.state.parametersVisible && "active"}`}>
-                <h4 className="opblock-title"><span>Parameters</span></h4>
-              </div>
-              {operation.get("callbacks") ?
-                (
-                  <div onClick={() => this.toggleTab("callbacks")}
-                       className={`tab-item ${this.state.callbackVisible && "active"}`}>
-                    <h4 className="opblock-title"><span>Callbacks</span></h4>
-                  </div>
-                ) : null
-              }
-            </div>
-          ) : (
-            <div className="tab-header">
-              <h4 className="opblock-title">Parameters</h4>
-            </div>
-          )}
-          {allowTryItOut ? (
-            <TryItOutButton
-              isOAS3={specSelectors.isOAS3()}
-              hasUserEditedBody={oas3Selectors.hasUserEditedBody(...pathMethod)}
-              enabled={tryItOutEnabled}
-              onCancelClick={this.props.onCancelClick}
-              onTryoutClick={onTryoutClick}
-              onResetClick={() => oas3Actions.setRequestBodyValue({ value: undefined, pathMethod })}/>
-          ) : null}
-        </div>
+                              {allowTryItOut ? (
+                              <TryItOutButton
+                                isOAS3={specSelectors.isOAS3()}
+                                hasUserEditedBody={oas3Selectors.hasUserEditedBody(...pathMethod)}
+                                enabled={tryItOutEnabled}
+                                onCancelClick={this.props.onCancelClick}
+                                onTryoutClick={onTryoutClick}
+                                onResetClick={() => oas3Actions.setRequestBodyValue({ value: undefined, pathMethod })}/>
+                            ) : null}
         {this.state.parametersVisible ? <div className="parameters-container">
           {!groupedParametersArr.length ? <div className="opblock-description-wrapper"><p>No parameters</p></div> :
-            <div className="table-container">
-              <table className="parameters">
+            <div className="table-container parameters">
+              {/* <table className="">
                 <thead>
                 <tr>
                   <th className="col_header parameters-col_name">Name</th>
                   <th className="col_header parameters-col_description">Description</th>
                 </tr>
-                </thead>
-                <tbody>
+                </thead> 
+                <tbody> */}
                 {
-                  groupedParametersArr.map((parameter, i) => (
-                    <ParameterRow
-                      fn={fn}
-                      specPath={specPath.push(i.toString())}
-                      getComponent={getComponent}
-                      getConfigs={getConfigs}
-                      rawParam={parameter}
-                      param={specSelectors.parameterWithMetaByIdentity(pathMethod, parameter)}
-                      key={`${parameter.get("in")}.${parameter.get("name")}`}
-                      onChange={this.onChange}
-                      onChangeConsumes={this.onChangeConsumesWrapper}
-                      specSelectors={specSelectors}
-                      specActions={specActions}
-                      oas3Actions={oas3Actions}
-                      oas3Selectors={oas3Selectors}
-                      pathMethod={pathMethod}
-                      isExecute={isExecute} />
-                  ))
+                  groupedParametersArr.map((parameter, i) => {
+
+                    if(specSelectors.parameterWithMetaByIdentity(pathMethod, parameter).get('in') == "path") {
+
+                        parametersQuery = [...parametersQuery ,<ParameterRow
+                          fn={fn}
+                          specPath={specPath.push(i.toString())}
+                          getComponent={getComponent}
+                          getConfigs={getConfigs}
+                          rawParam={parameter}
+                          param={specSelectors.parameterWithMetaByIdentity(pathMethod, parameter)}
+                          key={`${parameter.get("in")}.${parameter.get("name")}`}
+                          onChange={this.onChange}
+                          onChangeConsumes={this.onChangeConsumesWrapper}
+                          specSelectors={specSelectors}
+                          specActions={specActions}
+                          oas3Actions={oas3Actions}
+                          oas3Selectors={oas3Selectors}
+                          pathMethod={pathMethod}
+                          isExecute={isExecute} />]
+
+                    }
+
+                    else {
+                      parametersBody = [...parametersBody ,<ParameterRow
+                        fn={fn}
+                        specPath={specPath.push(i.toString())}
+                        getComponent={getComponent}
+                        getConfigs={getConfigs}
+                        rawParam={parameter}
+                        param={specSelectors.parameterWithMetaByIdentity(pathMethod, parameter)}
+                        key={`${parameter.get("in")}.${parameter.get("name")}`}
+                        onChange={this.onChange}
+                        onChangeConsumes={this.onChangeConsumesWrapper}
+                        specSelectors={specSelectors}
+                        specActions={specActions}
+                        oas3Actions={oas3Actions}
+                        oas3Selectors={oas3Selectors}
+                        pathMethod={pathMethod}
+                        isExecute={isExecute} />]
+                    }
+
+                  })
                 }
-                </tbody>
-              </table>
+                  <div className="parameters__query">
+                  {parametersQuery.length > 0 ?
+                  <div className="opblock-section-header">
+                            {isOAS3 ? (
+                              <div className="tab-header">
+                                <div onClick={() => this.toggleTab("parameters")}
+                                    className={`tab-item ${this.state.parametersVisible && "active"}`}>
+                                  <h4 className="opblock-title"><span>Query Parameters</span></h4>
+                                </div>
+                                {operation.get("callbacks") ?
+                                  (
+                                    <div onClick={() => this.toggleTab("callbacks")}
+                                        className={`tab-item ${this.state.callbackVisible && "active"}`}>
+                                      <h4 className="opblock-title"><span>Callbacks</span></h4>
+                                    </div>
+                                  ) : null
+                                }
+                              </div>
+                            ) : (
+                              <div className="tab-header">
+                                <h4 className="opblock-title">Query Parameters</h4>
+                              </div>
+                            )}
+                  </div> : null }
+
+                  {parametersQuery.map((parameter, i) => parameter) }
+                  </div>
+
+                  <div className="parameters__body">
+                  {parametersBody.length > 0 ?
+                  <div className="opblock-section-header">
+                            {isOAS3 ? (
+                              <div className="tab-header">
+                                <div onClick={() => this.toggleTab("parameters")}
+                                    className={`tab-item ${this.state.parametersVisible && "active"}`}>
+                                  <h4 className="opblock-title"><span>Body Parameters</span></h4>
+                                </div>
+                                {operation.get("callbacks") ?
+                                  (
+                                    <div onClick={() => this.toggleTab("callbacks")}
+                                        className={`tab-item ${this.state.callbackVisible && "active"}`}>
+                                      <h4 className="opblock-title"><span>Callbacks</span></h4>
+                                    </div>
+                                  ) : null
+                                }
+                              </div>
+                            ) : (
+                              <div className="tab-header">
+                                <h4 className="opblock-title">Body Parameters</h4>
+                              </div>
+                            )}
+                  </div> : null }
+
+                  {parametersBody.map((parameter, i) => parameter)}
+                  </div>
+                                  
+                {/* </tbody>
+              </table> */}
             </div>
           }
         </div> : null}
@@ -271,6 +335,7 @@ export default class Parameters extends Component {
             </div>
           </div>
         }
+        {this.props.children}
       </div>
     )
   }
