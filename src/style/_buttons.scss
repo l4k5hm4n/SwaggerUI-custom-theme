@@ -1,15 +1,15 @@
 .btn
 {
     font-size: 14px;
-    font-weight: bold;
-
-    padding: 5px 23px;
+    border: 1px solid #c0c3c7;
+    font-weight: 500;
+    padding: 5px 16px;
 
     transition: all .3s;
 
-    border: 2px solid $btn-border-color;
     border-radius: 4px;
     background: transparent;
+    
 
     @include text_headline();
 
