@@ -28,11 +28,26 @@
       margin:0;
       background: #fafafa;
     }
+
+    .flex {
+      display: flex;
+    }
+
+    .left-nav {
+      flex: 0 0 24%;
+    }
+
+    #swagger-ui {
+      flex: 1;
+    }
   </style>
 </head>
 
 <body>
+  <div class="flex">
+  <div class="left-nav"></div>
   <div id="swagger-ui"></div>
+  </div>
 
   <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
   <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
@@ -42,7 +57,7 @@
       window["SwaggerUIStandalonePreset"] = window["swagger-ui-standalone-preset"]
       // Build a system
       const ui = SwaggerUIBundle({
-        url: "https://petstore.swagger.io/v2/swagger.json",
+        url: "http://0.0.0.0:3200/test.yml",
         dom_id: '#swagger-ui',
         presets: [
           SwaggerUIBundle.presets.apis,

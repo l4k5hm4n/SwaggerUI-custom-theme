@@ -1,0 +1,6724 @@
+{
+    "info": {
+      "version": "v1", 
+      "contact": {
+        "name": "Rahil S", 
+        "email": "rahilr@zeta.tech"
+      }, 
+      "description": "Cosmos AHP", 
+      "title": "Cosmos AHP API Doc"
+    }, 
+    "paths": {
+      "/api/v1/ifi/{ifiId}/application/{applicationId}": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "Id of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "Id of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationId"
+            }
+          ], 
+          "tags": [
+            "ApplicationV2 Management"
+          ], 
+          "description": "", 
+          "summary": "Get application details by Id", 
+          "operationId": "getApplicationById"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/companies/{companyID}": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/CompanyResponseV2"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "companyID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get details of a specific company by ID", 
+          "operationId": "getCompanyById"
+        }
+      }, 
+      "/api/v1/ifi/{ifiID}/spool/{spoolID}/application/{applicationID}/section/{sectionName}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "Section Updated", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the section is being updated", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "spool ID of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolID"
+            }, 
+            {
+              "description": "ID of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Section name of the application", 
+              "required": true, 
+              "x-example": "POP", 
+              "in": "path", 
+              "type": "string", 
+              "name": "sectionName"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/UpdateApplicationSectionRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application Section Management"
+          ], 
+          "description": "", 
+          "summary": "Update a section", 
+          "operationId": "updateSection"
+        }, 
+        "post": {
+          "responses": {
+            "201": {
+              "description": "Section Created", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationSectionResponse"
+              }
+            }, 
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the section is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "spool ID of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolID"
+            }, 
+            {
+              "description": "ID of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Section name of the application", 
+              "required": true, 
+              "x-example": "POP", 
+              "in": "path", 
+              "type": "string", 
+              "name": "sectionName"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/AddApplicationSectionRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application Section Management"
+          ], 
+          "description": "", 
+          "summary": "Create a section", 
+          "operationId": "createSection"
+        }, 
+        "get": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the section is being updated", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "spool ID of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolID"
+            }, 
+            {
+              "description": "ID of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Section name of the application", 
+              "required": true, 
+              "x-example": "POP", 
+              "in": "path", 
+              "type": "string", 
+              "name": "sectionName"
+            }
+          ], 
+          "tags": [
+            "Application Section Management"
+          ], 
+          "description": "", 
+          "summary": "Get a section", 
+          "operationId": "getSection"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolId}/application/{applicationId}/vectors": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/PagedModel"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "Id of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool Id of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolId"
+            }, 
+            {
+              "description": "Id of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationId"
+            }, 
+            {
+              "description": "Page Size of vectors needed in response", 
+              "format": "int64", 
+              "required": true, 
+              "maximum": 50, 
+              "minimum": 1, 
+              "x-example": 10, 
+              "in": "query", 
+              "type": "integer", 
+              "name": "pageSize"
+            }, 
+            {
+              "description": "Page number of vectors needed in response", 
+              "format": "int64", 
+              "required": true, 
+              "minimum": 1, 
+              "x-example": 1, 
+              "in": "query", 
+              "type": "integer", 
+              "name": "pageNumber"
+            }, 
+            {
+              "description": "Value on which the page should be sorted", 
+              "required": false, 
+              "x-example": "createdAt", 
+              "in": "query", 
+              "type": "string", 
+              "name": "sortBy"
+            }, 
+            {
+              "description": "The order of sort needed in response", 
+              "required": false, 
+              "x-example": "asc", 
+              "in": "query", 
+              "type": "string", 
+              "name": "sortOrder"
+            }
+          ], 
+          "tags": [
+            "Application Vector"
+          ], 
+          "description": "", 
+          "summary": "Get all application vectors", 
+          "operationId": "getAllApplicationVectors"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/editApplications/{applicationID}": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get application details by ID", 
+          "operationId": "getEditApplicationByID"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/editApplications/{applicationID}/action/{action}": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Action to be performed on the application", 
+              "required": true, 
+              "x-example": "123", 
+              "in": "path", 
+              "type": "string", 
+              "name": "action"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/ActionOnApplicationRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Perform action on the application", 
+          "operationId": "actionOnEditApplication"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/editApplications/{applicationID}/editCorporateSection/{editCorporateSectionID}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/ActionOnSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "ID of the section which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "editCorporateSectionID"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/ActionOnEditCorporateSectionRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Perform action on the corporate section of the application", 
+          "operationId": "editCorporateSection"
+        }, 
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/EditCorporateDataObjectResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "ID of the section which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "editCorporateSectionID"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get the corporate section of an application by ID", 
+          "operationId": "getEditCorporateSectionByID"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolID}/application/{applicationID}/stage/{stage}/complete": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool ID of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolID"
+            }, 
+            {
+              "description": "ID of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Stage of the application", 
+              "required": true, 
+              "x-example": "ENRICHMENT", 
+              "in": "path", 
+              "type": "string", 
+              "name": "stage"
+            }
+          ], 
+          "tags": [
+            "Application Stage Management"
+          ], 
+          "description": "", 
+          "summary": "Mark Application's stage as Complete", 
+          "operationId": "markComplete"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications/{applicationID}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationStandardResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/UpdateAccountHolderApplicationStandardRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Update Individual Application", 
+          "operationId": "updateApplication"
+        }, 
+        "delete": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/CompletionStageVoid"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Delete Individual Application", 
+          "operationId": "deleteApplication"
+        }, 
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationStandardResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Get Individual Application", 
+          "operationId": "getApplication"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications/{applicationID}/status/{newStatus}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationStandardResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "newStatus", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Update Application Status", 
+          "operationId": "updateApplicationStatus"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolID}/application/{applicationID}/stage/{stage}/action/{action}": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool ID of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolID"
+            }, 
+            {
+              "description": "ID of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Stage of the application", 
+              "required": true, 
+              "x-example": "ENRICHMENT", 
+              "in": "path", 
+              "type": "string", 
+              "name": "stage"
+            }, 
+            {
+              "description": "Action on application", 
+              "required": true, 
+              "x-example": "COMPLETE", 
+              "in": "path", 
+              "type": "string", 
+              "name": "action"
+            }
+          ], 
+          "tags": [
+            "Application Stage Management"
+          ], 
+          "description": "", 
+          "summary": "Action On Application", 
+          "operationId": "actionOnApplication"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/application/{applicationId}/vector": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "Id of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "Id of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationId"
+            }, 
+            {
+              "description": "type of vector", 
+              "required": true, 
+              "x-example": "p", 
+              "in": "query", 
+              "type": "string", 
+              "name": "type"
+            }, 
+            {
+              "description": "type of vector", 
+              "required": true, 
+              "x-example": "+919000000900", 
+              "in": "query", 
+              "type": "string", 
+              "name": "value"
+            }
+          ], 
+          "tags": [
+            "ApplicationV2 Management"
+          ], 
+          "description": "", 
+          "summary": "Get application by vector", 
+          "operationId": "getApplicationByVector"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications/{applicationID}/spool/{spoolID}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationStandardResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "spoolID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Update Application Spool", 
+          "operationId": "updateApplicationSpool"
+        }
+      }, 
+      "/ifi/{ifiId}/applications/{applicationId}/sections/{sectionId}/logs": {
+        "get": {
+          "operationId": "getAuditLogsOfSection", 
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/GetAuditLogsOfSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiId", 
+              "in": "path"
+            }, 
+            {
+              "format": "int32", 
+              "required": true, 
+              "type": "integer", 
+              "name": "applicationId", 
+              "in": "path"
+            }, 
+            {
+              "format": "int32", 
+              "required": true, 
+              "type": "integer", 
+              "name": "sectionId", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "sectionType", 
+              "enum": [
+                "ADD_COMPANY", 
+                "ADD_CORPORATE", 
+                "EDIT_CORPORATE", 
+                "EDIT_COMPANY"
+              ], 
+              "in": "query"
+            }
+          ], 
+          "tags": [
+            "Audit"
+          ]
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolId}/application/{applicationId}/vector": {
+        "post": {
+          "responses": {
+            "201": {
+              "description": "Vector added to application", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationVectorResponse"
+              }
+            }, 
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationVectorResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "Id of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool Id of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolId"
+            }, 
+            {
+              "description": "Id of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationId"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/AddApplicationVectorRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application Vector"
+          ], 
+          "description": "", 
+          "summary": "Add vector in a application", 
+          "operationId": "addVector"
+        }, 
+        "delete": {
+          "responses": {
+            "200": {
+              "description": "Vector deleted from application", 
+              "schema": {
+                "$ref": "#/definitions/CompletionStageVoid"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "Id of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool Id of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolId"
+            }, 
+            {
+              "description": "Id of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationId"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/DeleteApplicationVectorRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application Vector"
+          ], 
+          "description": "", 
+          "summary": "Delete an existing vector in a application", 
+          "operationId": "deleteVector"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/PagedModel"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "status", 
+              "in": "query"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "sortBy", 
+              "in": "query"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "sortOrder", 
+              "in": "query"
+            }, 
+            {
+              "name": "pageSize", 
+              "format": "int32", 
+              "required": true, 
+              "maximum": 50, 
+              "minimum": 1, 
+              "in": "query", 
+              "type": "integer"
+            }, 
+            {
+              "name": "pageNumber", 
+              "format": "int32", 
+              "required": true, 
+              "minimum": 1, 
+              "in": "query", 
+              "type": "integer"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Get All Applications", 
+          "operationId": "getAllApplications"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/application": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/PagedModel"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "Id of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "Page Size for applications needed in response", 
+              "format": "int64", 
+              "required": true, 
+              "maximum": 50, 
+              "minimum": 1, 
+              "x-example": 10, 
+              "in": "query", 
+              "type": "integer", 
+              "name": "pageSize"
+            }, 
+            {
+              "description": "Page number for applications needed in response", 
+              "format": "int64", 
+              "required": true, 
+              "minimum": 1, 
+              "x-example": 1, 
+              "in": "query", 
+              "type": "integer", 
+              "name": "pageNumber"
+            }, 
+            {
+              "description": "Value on which the page should be sorted", 
+              "required": false, 
+              "x-example": "createdAt", 
+              "in": "query", 
+              "type": "string", 
+              "name": "sortBy"
+            }, 
+            {
+              "description": "Sort order needed in response", 
+              "required": false, 
+              "x-example": "asc", 
+              "in": "query", 
+              "type": "string", 
+              "name": "sortOrder"
+            }
+          ], 
+          "tags": [
+            "ApplicationV2 Management"
+          ], 
+          "description": "", 
+          "summary": "Get all applications", 
+          "operationId": "getAllApplications"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolID}/application/{applicationID}/stage/{stage}/fail": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool ID of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolID"
+            }, 
+            {
+              "description": "ID of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Stage of the application", 
+              "required": true, 
+              "x-example": "ENRICHMENT", 
+              "in": "path", 
+              "type": "string", 
+              "name": "stage"
+            }
+          ], 
+          "tags": [
+            "Application Stage Management"
+          ], 
+          "description": "", 
+          "summary": "Mark Application's stage as FAILED", 
+          "operationId": "markFail"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolID}/application/{applicationID}/stage/{stage}/initiate": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool ID of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolID"
+            }, 
+            {
+              "description": "ID of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Stage of the application", 
+              "required": true, 
+              "x-example": "ENRICHMENT", 
+              "in": "path", 
+              "type": "string", 
+              "name": "stage"
+            }
+          ], 
+          "tags": [
+            "Application Stage Management"
+          ], 
+          "description": "", 
+          "summary": "Mark Application's stage as Initiated", 
+          "operationId": "markInitiate"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications/newIndividual": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationStandardResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/CreateAccountHolderWithAutoApprovalStandardRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Create Individual Application With Auto Approval", 
+          "operationId": "createApplicationWithAutoApproval"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications/editCorporate": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/CreateEditCorporateApplicationRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Create an application for editing an existing corporate", 
+          "operationId": "createEditCorporateApplication"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/applications": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/PagedModel"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationType", 
+              "in": "query"
+            }, 
+            {
+              "name": "pageSize", 
+              "format": "int32", 
+              "required": true, 
+              "maximum": 50, 
+              "minimum": 1, 
+              "in": "query", 
+              "type": "integer"
+            }, 
+            {
+              "description": "Page number for programs needed in response", 
+              "format": "int32", 
+              "required": true, 
+              "minimum": 1, 
+              "x-example": "test", 
+              "in": "query", 
+              "type": "integer", 
+              "name": "pageNumber"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "sortBy", 
+              "in": "query"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "sortOrder", 
+              "in": "query"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get all the applications of an IFI of a specific applicationType ", 
+          "operationId": "getApplicationsByIFI"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/applications/{applicationID}/addCorporateSection/{addCorporateSectionID}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/ActionOnSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "ID of the section which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "addCorporateSectionID"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/ActionOnAddCorporateSectionRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Perform action on the corporate section of the application", 
+          "operationId": "addCorporateSection"
+        }, 
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AddCorporateDataObjectResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "ID of the section which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "addCorporateSectionID"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get the corporate section of an application by ID", 
+          "operationId": "getAddCorporateSectionByID"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications/{applicationID}/mark/{newStatus}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationStandardResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "newStatus", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Mark Application Status as Completed or Rejected", 
+          "operationId": "markApplicationStatus"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/editApplications/{applicationID}/editCompanySections/{editCompanySectionID}": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/EditCompanySectionDataObjectResponseV2"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "ID of the section which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "editCompanySectionID"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get the company section of an application by ID", 
+          "operationId": "getCompanySectionByID"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/{corporateID}/companies": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/PagedModel"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "format": "int32", 
+              "required": true, 
+              "type": "integer", 
+              "name": "corporateID", 
+              "in": "path"
+            }, 
+            {
+              "name": "pageSize", 
+              "format": "int64", 
+              "required": true, 
+              "maximum": 50, 
+              "minimum": 1, 
+              "in": "query", 
+              "type": "integer"
+            }, 
+            {
+              "description": "Page number for programs needed in response", 
+              "format": "int64", 
+              "required": true, 
+              "minimum": 1, 
+              "x-example": "test", 
+              "in": "query", 
+              "type": "integer", 
+              "name": "pageNumber"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "sortBy", 
+              "in": "query"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "sortOrder", 
+              "in": "query"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get details of all the companies of a specific corporate", 
+          "operationId": "getAllCompaniesOfCorporate"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/editApplications/{applicationID}/editCompanySection/{editCompanySectionID}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/ActionOnSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "ID of the section which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "editCompanySectionID"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/ActionOnEditCompanySectionRequestV2"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Perform action on the company section of the application", 
+          "operationId": "editCompanySection"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications/addCorporate": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/CreateAddCorporateApplicationRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Create an application for creating a new corporate", 
+          "operationId": "createCorporateApplication"
+        }
+      }, 
+      "/api/v1/ifi/{ifiID}/applications/{applicationID}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/UpdateAccountHolderApplicationRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application"
+          ], 
+          "description": "", 
+          "summary": "Update Individual Application", 
+          "operationId": "updateApplication"
+        }, 
+        "delete": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/CompletionStageVoid"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "Application"
+          ], 
+          "description": "", 
+          "summary": "Delete Individual Application", 
+          "operationId": "deleteApplication"
+        }, 
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "Application"
+          ], 
+          "description": "", 
+          "summary": "Get Individual Application", 
+          "operationId": "getApplication"
+        }
+      }, 
+      "/ifi/{ifiId}/entities/{entityId}/logs": {
+        "get": {
+          "operationId": "getCompleteAuditLogsOfEntity", 
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/GetAuditLogsOfSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiId", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "entityId", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "entityType", 
+              "enum": [
+                "COMPANY", 
+                "CORPORATE"
+              ], 
+              "in": "query"
+            }
+          ], 
+          "tags": [
+            "Audit"
+          ]
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/companies": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "name": "pageSize", 
+              "format": "int32", 
+              "required": true, 
+              "maximum": 50, 
+              "minimum": 1, 
+              "in": "query", 
+              "type": "integer"
+            }, 
+            {
+              "description": "Page number for programs needed in response", 
+              "format": "int32", 
+              "required": true, 
+              "minimum": 1, 
+              "x-example": "test", 
+              "in": "query", 
+              "type": "integer", 
+              "name": "pageNumber"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "sortBy", 
+              "in": "query"
+            }, 
+            {
+              "required": false, 
+              "type": "string", 
+              "name": "sortOrder", 
+              "in": "query"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get all the companies of a specific IFI", 
+          "operationId": "getCompaniesByIFI"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/{corporateID}/companies/{companyID}": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/CompanyResponseV2"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the company exists", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "corporateID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "companyID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get details of a specific company of a specific corporate", 
+          "operationId": "getCompanyOfCorporateById"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/applications/{applicationID}/action/{action}": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "Action to be performed on the application", 
+              "required": true, 
+              "x-example": "123", 
+              "in": "path", 
+              "type": "string", 
+              "name": "action"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/ActionOnApplicationRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Perform action on the application", 
+          "operationId": "actionOnApplication"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/applications/{applicationID}": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": ""
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get application details by ID", 
+          "operationId": "getApplicationByID"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/applications/{applicationID}/addCompanySections/{addCompanySectionID}": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AddCompanyDataObjectResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "ID of the section which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "addCompanySectionID"
+            }, 
+            {
+              "schema": {
+                "type": "string"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get the company section of an application by ID", 
+          "operationId": "getCompanySectionByID"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolId}/application/{applicationId}/stage/{stage}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "Success", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationStageResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the stage is being updated", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool ID of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolId"
+            }, 
+            {
+              "description": "ID of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationId"
+            }, 
+            {
+              "description": "Stage name of the application", 
+              "required": true, 
+              "x-example": "DATA_CAPTURE/ENRICHMENT", 
+              "in": "path", 
+              "type": "string", 
+              "name": "stage"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/UpdateApplicationStageRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application Stage Management"
+          ], 
+          "description": "", 
+          "summary": "Update a stage", 
+          "operationId": "updateStage"
+        }
+      }, 
+      "/api/v1/ifi/{ifiID}/applications/newIndividualApplication": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/CreateAccountHolderApplicationRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application"
+          ], 
+          "deprecated": true, 
+          "description": "", 
+          "summary": "Create Individual Application", 
+          "operationId": "createApplication"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/applications/newIndividualApplication": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationStandardResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/CreateAccountHolderApplicationStandardRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "ApplicationV0"
+          ], 
+          "description": "", 
+          "summary": "Create Individual Application", 
+          "operationId": "createApplication"
+        }
+      }, 
+      "/api/v1/ifi/{ifiID}/applications": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "status", 
+              "in": "query"
+            }, 
+            {
+              "format": "int32", 
+              "required": true, 
+              "type": "integer", 
+              "name": "pageSize", 
+              "in": "query"
+            }, 
+            {
+              "format": "int32", 
+              "required": true, 
+              "type": "integer", 
+              "name": "pageNumber", 
+              "in": "query"
+            }
+          ], 
+          "tags": [
+            "Application"
+          ], 
+          "description": "", 
+          "summary": "Get All Applications", 
+          "operationId": "getAllApplications"
+        }
+      }, 
+      "/api/v1/ifi/{ifiID}/applications/newIndividual": {
+        "post": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/CreateAccountHolderWithAutoApprovalRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application"
+          ], 
+          "description": "", 
+          "summary": "Create Individual Application With Auto Approval", 
+          "operationId": "createApplicationWithAutoApproval"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolId}/application/{applicationId}/vector/{vectorId}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "Vector updated", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationVectorResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "Id of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool Id of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolId"
+            }, 
+            {
+              "description": "Id of the application", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "applicationId"
+            }, 
+            {
+              "description": "Id of the vector", 
+              "required": true, 
+              "x-example": "4dd32898-01a3-4eb9-a4ce-e94271963d3a", 
+              "in": "path", 
+              "type": "string", 
+              "name": "vectorId"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/UpdateApplicationVectorRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Application Vector"
+          ], 
+          "description": "", 
+          "summary": "Update an existing vector in a application", 
+          "operationId": "updateVectorById"
+        }
+      }, 
+      "/api/v1/ifi/{ifiID}/applications/{applicationID}/status/{newStatus}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "newStatus", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "Application"
+          ], 
+          "description": "", 
+          "summary": "Update Application Status", 
+          "operationId": "updateApplicationStatus"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/applications/{applicationID}/addCompanySection/{addCompanySectionID}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/ActionOnSectionResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "description": "ID of the application which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "applicationID"
+            }, 
+            {
+              "description": "ID of the section which is being updated", 
+              "format": "int32", 
+              "required": true, 
+              "x-example": 123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "addCompanySectionID"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/ActionOnAddCompanySectionRequestV2"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Perform action on the company section of the application", 
+          "operationId": "addCompanySection"
+        }
+      }, 
+      "/api/v2/ifi/{ifiID}/corporate/{corporateID}": {
+        "get": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/CorporateResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 123123, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiID"
+            }, 
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "corporateID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "Corporate & Company"
+          ], 
+          "description": "", 
+          "summary": "Get details of a specific corporate", 
+          "operationId": "getCorporateById"
+        }
+      }, 
+      "/api/v1/ifi/{ifiId}/spool/{spoolId}/application": {
+        "post": {
+          "responses": {
+            "201": {
+              "description": "Application Created", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationResponse"
+              }
+            }, 
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/ApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "description": "Id of the IFI (on-boarded organization) under which the application is being created", 
+              "format": "int64", 
+              "required": true, 
+              "x-example": 140827, 
+              "in": "path", 
+              "type": "integer", 
+              "name": "ifiId"
+            }, 
+            {
+              "description": "spool Id of the application", 
+              "required": true, 
+              "x-example": "067561d4-b7fd-4b1d-89b4-5c58926fd998", 
+              "in": "path", 
+              "type": "string", 
+              "name": "spoolId"
+            }, 
+            {
+              "schema": {
+                "$ref": "#/definitions/CreateApplicationRequest"
+              }, 
+              "required": false, 
+              "name": "body", 
+              "in": "body"
+            }
+          ], 
+          "tags": [
+            "ApplicationV2 Management"
+          ], 
+          "description": "", 
+          "summary": "Create a application", 
+          "operationId": "createApplication"
+        }
+      }, 
+      "/api/v1/ifi/{ifiID}/applications/{applicationID}/spool/{spoolID}": {
+        "put": {
+          "responses": {
+            "200": {
+              "description": "successful operation", 
+              "schema": {
+                "$ref": "#/definitions/AccountHolderApplicationResponse"
+              }
+            }
+          }, 
+          "parameters": [
+            {
+              "format": "int64", 
+              "required": true, 
+              "type": "integer", 
+              "name": "ifiID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "applicationID", 
+              "in": "path"
+            }, 
+            {
+              "required": true, 
+              "type": "string", 
+              "name": "spoolID", 
+              "in": "path"
+            }
+          ], 
+          "tags": [
+            "Application"
+          ], 
+          "description": "", 
+          "summary": "Update Application Spool", 
+          "operationId": "updateApplicationSpool"
+        }
+      }
+    }, 
+    "schemes": [
+      "http", 
+      "https"
+    ], 
+    "tags": [
+      {
+        "name": "Agent Onboarding"
+      }, 
+      {
+        "name": "Application"
+      }, 
+      {
+        "name": "Application Section Management"
+      }, 
+      {
+        "name": "Application Stage Management"
+      }, 
+      {
+        "name": "Application Vector"
+      }, 
+      {
+        "name": "ApplicationV0"
+      }, 
+      {
+        "name": "ApplicationV2 Management"
+      }, 
+      {
+        "name": "Audit"
+      }, 
+      {
+        "name": "Corporate & Company"
+      }, 
+      {
+        "name": "SKU Management"
+      }, 
+      {
+        "name": "Section Role Management"
+      }, 
+      {
+        "name": "Spool Management"
+      }, 
+      {
+        "name": "Spool Validator Management"
+      }
+    ], 
+    "basePath": "/api", 
+    "definitions": {
+      "ActionOnAddCompanySectionRequestV2": {
+        "required": [
+          "opsActionOnSection"
+        ], 
+        "type": "object", 
+        "properties": {
+          "documents": {
+            "items": {
+              "$ref": "#/definitions/DocumentV2"
+            }, 
+            "type": "array"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "opsActionOnSection": {
+            "enum": [
+              "SAVE", 
+              "MARK_AS_COMPLETE", 
+              "REJECT", 
+              "ACCEPT"
+            ], 
+            "type": "string"
+          }, 
+          "logoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "type": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "ModificationLog": {
+        "type": "object", 
+        "properties": {
+          "diff": {
+            "additionalProperties": {
+              "$ref": "#/definitions/DataModification"
+            }, 
+            "type": "object"
+          }
+        }
+      }, 
+      "KYCStatus": {
+        "type": "object", 
+        "properties": {
+          "updateTime": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "accountHolderID": {
+            "type": "string"
+          }, 
+          "standardUpdateTime": {
+            "type": "string"
+          }, 
+          "expiryTime": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "kycStatus": {
+            "type": "string"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "kycStatusPostExpiry": {
+            "type": "string"
+          }, 
+          "standardExpiryTime": {
+            "type": "string"
+          }
+        }
+      }, 
+      "DataModification": {
+        "type": "object", 
+        "properties": {
+          "to": {
+            "type": "object"
+          }, 
+          "from": {
+            "type": "object"
+          }
+        }
+      }, 
+      "SKUResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "ENABLED/DISABLED", 
+            "description": "state of the sku"
+          }, 
+          "code": {
+            "type": "string", 
+            "example": "SKU1010921", 
+            "description": "code of the sku"
+          }, 
+          "name": {
+            "type": "string", 
+            "example": "abc", 
+            "description": "name of the sku"
+          }, 
+          "coverImageURL": {
+            "type": "string", 
+            "example": "http/abc", 
+            "description": "cover image URL for the sku"
+          }, 
+          "contactInfo": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "contact information of the sku"
+          }, 
+          "tnc": {
+            "type": "string", 
+            "description": "tnc of the sku"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "example": "2020-07-20T09:25:35+00:00", 
+            "description": "Created at details in ISO 8601 Format"
+          }, 
+          "ifiId": {
+            "description": "ifiId of the requested sku", 
+            "type": "integer", 
+            "example": 123456, 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "attributes of the sku"
+          }, 
+          "thumbnailURL": {
+            "type": "string", 
+            "example": "http/abc", 
+            "description": "thumbnail URL for the sku"
+          }, 
+          "id": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "Id of the requested sku"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "example": "2020-07-20T09:25:35+00:00", 
+            "description": "Created at details in ISO 8601 Format"
+          }
+        }
+      }, 
+      "CreateAccountHolderWithAutoApprovalRequest": {
+        "type": "object", 
+        "properties": {
+          "pops": {
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "spoolID": {
+            "type": "string"
+          }, 
+          "vectors": {
+            "items": {
+              "$ref": "#/definitions/VectorRequest"
+            }, 
+            "type": "array"
+          }, 
+          "description": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "profilePicURL": {
+            "type": "string"
+          }, 
+          "middleName": {
+            "type": "string"
+          }, 
+          "lastName": {
+            "type": "string"
+          }, 
+          "kycDetails": {
+            "$ref": "#/definitions/KYCDetails"
+          }, 
+          "formID": {
+            "type": "string"
+          }, 
+          "mothersMaidenName": {
+            "type": "string"
+          }, 
+          "salutation": {
+            "type": "string"
+          }, 
+          "requestID": {
+            "minLength": 0, 
+            "type": "string", 
+            "maxLength": 50
+          }, 
+          "gender": {
+            "type": "string"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "dob": {
+            "type": "string", 
+            "format": "date"
+          }, 
+          "customFields": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "individualType": {
+            "type": "string"
+          }
+        }
+      }, 
+      "ApplicationSectionResponse": {
+        "type": "object", 
+        "properties": {
+          "spoolId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "spool Id of the application"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "sectionId": {
+            "type": "string"
+          }, 
+          "applicationId": {
+            "type": "string"
+          }, 
+          "details": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "description": "updated date and time of the section"
+          }, 
+          "ifiId": {
+            "description": "ID of the IFI (on-boarded organization) under which the section is being created", 
+            "type": "integer", 
+            "example": "93480e72-b883-46fa-8f3f-abe326ab9df7", 
+            "format": "int64"
+          }, 
+          "type": {
+            "type": "string"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "description": "created date and time of the section"
+          }
+        }
+      }, 
+      "AccountHolderVector": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }, 
+          "accountHolderID": {
+            "type": "string"
+          }, 
+          "verified": {
+            "type": "boolean"
+          }, 
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "array"
+          }, 
+          "value": {
+            "type": "string"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "type": {
+            "type": "string"
+          }, 
+          "id": {
+            "type": "string"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "format": "date-time"
+          }
+        }
+      }, 
+      "PagedModel": {
+        "type": "object", 
+        "properties": {
+          "content": {
+            "items": {
+              "type": "object"
+            }, 
+            "type": "array"
+          }, 
+          "page": {
+            "$ref": "#/definitions/PageMetadata"
+          }
+        }
+      }, 
+      "AddCorporateDataObject": {
+        "type": "object", 
+        "properties": {
+          "agreementNumber": {
+            "type": "string"
+          }, 
+          "sectionStatus": {
+            "enum": [
+              "NEW", 
+              "PENDING", 
+              "TEMP_COMPLETED", 
+              "APPROVED", 
+              "REJECTED", 
+              "IN_REVIEW", 
+              "ACCEPTED"
+            ], 
+            "type": "string"
+          }, 
+          "sectionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "revisionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "agreementURL": {
+            "type": "string"
+          }, 
+          "agreementStartDate": {
+            "type": "string"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "signingAuthority": {
+            "$ref": "#/definitions/SigningAuthority"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "ifiId": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "corporateName": {
+            "type": "string"
+          }, 
+          "entityId": {
+            "type": "string"
+          }, 
+          "diff": {
+            "$ref": "#/definitions/ModificationLog"
+          }, 
+          "createdOn": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "sectionType": {
+            "enum": [
+              "ADD_COMPANY", 
+              "ADD_CORPORATE", 
+              "EDIT_CORPORATE", 
+              "EDIT_COMPANY"
+            ], 
+            "type": "string"
+          }, 
+          "agreementEndDate": {
+            "type": "string"
+          }
+        }
+      }, 
+      "UpdateApplicationStageRequest": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "Education details", 
+            "description": "type of the section"
+          }, 
+          "details": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "POP", 
+            "description": "details of the section"
+          }, 
+          "result": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "POP", 
+            "description": "details of the section"
+          }
+        }
+      }, 
+      "JID": {
+        "type": "object", 
+        "properties": {
+          "serviceInstanceJID": {
+            "type": "boolean"
+          }, 
+          "resource": {
+            "type": "string"
+          }, 
+          "internalJID": {
+            "type": "boolean"
+          }, 
+          "defaultServiceNode": {
+            "type": "boolean"
+          }, 
+          "appDomain": {
+            "type": "string"
+          }, 
+          "nodeId": {
+            "type": "string"
+          }, 
+          "serviceViewJID": {
+            "type": "boolean"
+          }, 
+          "primaryServiceName": {
+            "type": "string"
+          }, 
+          "serviceName": {
+            "type": "string"
+          }, 
+          "bareJID": {
+            "$ref": "#/definitions/JID"
+          }, 
+          "proxyServiceJID": {
+            "type": "boolean"
+          }, 
+          "serviceViewName": {
+            "type": "string"
+          }, 
+          "jidOfAGroup": {
+            "type": "boolean"
+          }
+        }
+      }, 
+      "JsonElement": {
+        "type": "object", 
+        "properties": {
+          "asBigDecimal": {
+            "type": "number"
+          }, 
+          "jsonPrimitive": {
+            "type": "boolean"
+          }, 
+          "asByte": {
+            "type": "string", 
+            "format": "byte"
+          }, 
+          "jsonObject": {
+            "type": "boolean"
+          }, 
+          "asJsonPrimitive": {
+            "type": "object"
+          }, 
+          "asJsonNull": {
+            "type": "object"
+          }, 
+          "asBoolean": {
+            "type": "boolean"
+          }, 
+          "jsonNull": {
+            "type": "boolean"
+          }, 
+          "asShort": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "asNumber": {
+            "$ref": "#/definitions/Number"
+          }, 
+          "asBigInteger": {
+            "type": "integer"
+          }, 
+          "asCharacter": {
+            "type": "string"
+          }, 
+          "asDouble": {
+            "type": "number", 
+            "format": "double"
+          }, 
+          "jsonArray": {
+            "type": "boolean"
+          }, 
+          "asFloat": {
+            "type": "number", 
+            "format": "float"
+          }, 
+          "asJsonArray": {
+            "type": "object"
+          }, 
+          "asString": {
+            "type": "string"
+          }, 
+          "asLong": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "asInt": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "asJsonObject": {
+            "type": "object"
+          }
+        }
+      }, 
+      "AgentAuthResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        }
+      }, 
+      "CreateSpoolValidatorRequest": {
+        "required": [
+          "config", 
+          "type"
+        ], 
+        "type": "object", 
+        "properties": {
+          "config": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "{}", 
+            "description": "Config Meta Data to be used for validation"
+          }, 
+          "type": {
+            "type": "string", 
+            "example": "JsonSchemaValidator", 
+            "description": "Type of the Spool Validator to be created"
+          }
+        }
+      }, 
+      "EditCompanySectionDataObjectResponse": {
+        "type": "object", 
+        "properties": {
+          "documentsV2": {
+            "items": {
+              "$ref": "#/definitions/DocumentV2"
+            }, 
+            "type": "array"
+          }, 
+          "documents": {
+            "$ref": "#/definitions/Documents"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "sectionStatus": {
+            "enum": [
+              "EDIT_INITIATED", 
+              "PENDING", 
+              "TEMP_COMPLETED", 
+              "APPROVED", 
+              "REJECTED", 
+              "IN_REVIEW", 
+              "ACCEPTED"
+            ], 
+            "type": "string"
+          }, 
+          "companyId": {
+            "type": "string"
+          }, 
+          "type": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }, 
+          "createdOn": {
+            "type": "string"
+          }, 
+          "sectionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "revisionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "diff": {
+            "$ref": "#/definitions/ModificationLog"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "logoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "entityId": {
+            "type": "string"
+          }, 
+          "shortCode": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string"
+          }, 
+          "sectionType": {
+            "enum": [
+              "ADD_COMPANY", 
+              "ADD_CORPORATE", 
+              "EDIT_CORPORATE", 
+              "EDIT_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "AddCorporateDataObjectResponse": {
+        "type": "object", 
+        "properties": {
+          "agreementNumber": {
+            "type": "string"
+          }, 
+          "sectionStatus": {
+            "enum": [
+              "NEW", 
+              "PENDING", 
+              "TEMP_COMPLETED", 
+              "APPROVED", 
+              "REJECTED", 
+              "IN_REVIEW", 
+              "ACCEPTED"
+            ], 
+            "type": "string"
+          }, 
+          "sectionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "revisionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "agreementURL": {
+            "type": "string"
+          }, 
+          "agreementStartDate": {
+            "type": "string"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string"
+          }, 
+          "signingAuthority": {
+            "$ref": "#/definitions/SigningAuthority"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "ifiId": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "corporateName": {
+            "type": "string"
+          }, 
+          "entityId": {
+            "type": "string"
+          }, 
+          "diff": {
+            "$ref": "#/definitions/ModificationLog"
+          }, 
+          "createdOn": {
+            "type": "string"
+          }, 
+          "sectionType": {
+            "enum": [
+              "ADD_COMPANY", 
+              "ADD_CORPORATE", 
+              "EDIT_CORPORATE", 
+              "EDIT_COMPANY"
+            ], 
+            "type": "string"
+          }, 
+          "agreementEndDate": {
+            "type": "string"
+          }
+        }
+      }, 
+      "EditCorporateDataObjectResponse": {
+        "type": "object", 
+        "properties": {
+          "agreementNumber": {
+            "type": "string"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "sectionStatus": {
+            "enum": [
+              "EDIT_INITIATED", 
+              "PENDING", 
+              "TEMP_COMPLETED", 
+              "APPROVED", 
+              "REJECTED", 
+              "IN_REVIEW", 
+              "ACCEPTED"
+            ], 
+            "type": "string"
+          }, 
+          "sectionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "revisionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "agreementURL": {
+            "type": "string"
+          }, 
+          "corporateId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "agreementStartDate": {
+            "type": "string"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string"
+          }, 
+          "signingAuthority": {
+            "$ref": "#/definitions/SigningAuthority"
+          }, 
+          "diff": {
+            "$ref": "#/definitions/ModificationLog"
+          }, 
+          "ifiId": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "entityId": {
+            "type": "string"
+          }, 
+          "createdOn": {
+            "type": "string"
+          }, 
+          "sectionType": {
+            "enum": [
+              "ADD_COMPANY", 
+              "ADD_CORPORATE", 
+              "EDIT_CORPORATE", 
+              "EDIT_COMPANY"
+            ], 
+            "type": "string"
+          }, 
+          "agreementEndDate": {
+            "type": "string"
+          }
+        }
+      }, 
+      "Tag": {
+        "type": "object", 
+        "properties": {
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "type": {
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }
+      }, 
+      "EditCompanySectionDataObjectResponseV2": {
+        "type": "object", 
+        "properties": {
+          "documents": {
+            "items": {
+              "$ref": "#/definitions/DocumentV2"
+            }, 
+            "type": "array"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "sectionStatus": {
+            "enum": [
+              "EDIT_INITIATED", 
+              "PENDING", 
+              "TEMP_COMPLETED", 
+              "APPROVED", 
+              "REJECTED", 
+              "IN_REVIEW", 
+              "ACCEPTED"
+            ], 
+            "type": "string"
+          }, 
+          "companyId": {
+            "type": "string"
+          }, 
+          "type": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }, 
+          "createdOn": {
+            "type": "string"
+          }, 
+          "sectionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "revisionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "diff": {
+            "$ref": "#/definitions/ModificationLog"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "logoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "entityId": {
+            "type": "string"
+          }, 
+          "shortCode": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string"
+          }, 
+          "sectionType": {
+            "enum": [
+              "ADD_COMPANY", 
+              "ADD_CORPORATE", 
+              "EDIT_CORPORATE", 
+              "EDIT_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "PageMetadata": {
+        "type": "object", 
+        "properties": {
+          "totalPages": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "totalElements": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "number": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "size": {
+            "type": "integer", 
+            "format": "int64"
+          }
+        }
+      }, 
+      "GetApplicationDetailsResponse": {
+        "type": "object", 
+        "properties": {
+          "applicationDetails": {
+            "type": "object"
+          }
+        }
+      }, 
+      "CreateEditCorporateApplicationRequest": {
+        "required": [
+          "corporateId", 
+          "tags"
+        ], 
+        "type": "object", 
+        "properties": {
+          "corporateId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "array"
+          }
+        }
+      }, 
+      "UpdateSpoolRequest": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "ENABLED", 
+            "description": "Status of the spool ENABLED, DISABLED OR DELETED"
+          }, 
+          "name": {
+            "type": "string", 
+            "example": "CURRENT_ACCOUNT", 
+            "description": "Name of the Spool"
+          }, 
+          "spoolManager": {
+            "type": "string", 
+            "example": "SPOOL_MANAGER_ACCOUNTS", 
+            "description": "Name of the spool manager"
+          }, 
+          "provisionalWorkFlowHAR": {
+            "type": "object", 
+            "example": "{}", 
+            "description": "provisionalWorkFlowHAR"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "{}", 
+            "description": "Extra attributes to be associated with the spool"
+          }, 
+          "schema": {
+            "type": "object", 
+            "example": "{}", 
+            "description": "Schema for the applications belonging to this spool"
+          }
+        }
+      }, 
+      "Documents": {
+        "type": "object", 
+        "properties": {
+          "cinURL": {
+            "type": "string"
+          }, 
+          "cin": {
+            "type": "string"
+          }, 
+          "panURL": {
+            "type": "string"
+          }, 
+          "gstin": {
+            "type": "string"
+          }, 
+          "gstinURL": {
+            "type": "string"
+          }, 
+          "pan": {
+            "type": "string"
+          }
+        }
+      }, 
+      "CompanyResponseV2": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }, 
+          "documents": {
+            "items": {
+              "$ref": "#/definitions/DocumentV2"
+            }, 
+            "type": "array"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string"
+          }, 
+          "createdOn": {
+            "type": "string"
+          }, 
+          "corporateId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "companyLogoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "ifiId": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "id": {
+            "type": "string"
+          }, 
+          "companyType": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "ApplicationAccountHolderVector": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }, 
+          "verified": {
+            "type": "boolean"
+          }, 
+          "value": {
+            "type": "string"
+          }, 
+          "updatedAt": {
+            "type": "string"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "type": {
+            "type": "string"
+          }, 
+          "id": {
+            "type": "string"
+          }, 
+          "createdAt": {
+            "type": "string"
+          }
+        }
+      }, 
+      "ApplicationResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "INITIATED/COMPLETED/FAILED/REJECTED/ACCEPTED", 
+            "description": "status of a application"
+          }, 
+          "spoolId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "spool Id of the application"
+          }, 
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "array", 
+            "description": "tags of a application"
+          }, 
+          "sections": {
+            "additionalProperties": {
+              "$ref": "#/definitions/ApplicationSectionResponse"
+            }, 
+            "type": "object", 
+            "description": "sections of a application"
+          }, 
+          "vectors": {
+            "items": {
+              "$ref": "#/definitions/ApplicationVectorResponse"
+            }, 
+            "type": "array", 
+            "description": "vectors of a application"
+          }, 
+          "requestId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "request Id of the application"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "description": "updated date and time of the application(ISO 8601 Format)"
+          }, 
+          "ifiId": {
+            "description": "ifi Id of the application", 
+            "type": "integer", 
+            "example": 123456, 
+            "format": "int64"
+          }, 
+          "stages": {
+            "items": {
+              "$ref": "#/definitions/ApplicationStageResponse"
+            }, 
+            "type": "array", 
+            "description": "stages of a application"
+          }, 
+          "applicationId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "application Id of the application"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "description": "created date and time of the application(ISO 8601 Format)"
+          }
+        }
+      }, 
+      "SectionRoleResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "ENABLED", 
+            "description": "Section Role Status"
+          }, 
+          "spoolId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "Spool to which the section role belongs"
+          }, 
+          "section": {
+            "type": "string", 
+            "example": "PersonalDetails", 
+            "description": "Section Name"
+          }, 
+          "role": {
+            "enum": [
+              "{ASSESSOR", 
+              "ENRICHER", 
+              "REVIEWER}"
+            ], 
+            "type": "string", 
+            "example": "ASSESSOR", 
+            "description": "Role Name"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "example": "2020-07-20T09:25:35+00:00", 
+            "description": "Updated at details in ISO 8601 Format"
+          }, 
+          "ifiId": {
+            "description": "ifiId to which section role belongs", 
+            "type": "integer", 
+            "example": 140827, 
+            "format": "int64"
+          }, 
+          "id": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "Id of the section role mapping"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "example": "2020-07-20T09:25:35+00:00", 
+            "description": "Created at details in ISO 8601 Format"
+          }
+        }
+      }, 
+      "ActionOnEditCorporateSectionRequest": {
+        "required": [
+          "opsActionOnSection"
+        ], 
+        "type": "object", 
+        "properties": {
+          "agreementNumber": {
+            "type": "string"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "agreementURL": {
+            "type": "string"
+          }, 
+          "corporateId": {
+            "type": "string"
+          }, 
+          "agreementStartDate": {
+            "type": "string"
+          }, 
+          "signingAuthority": {
+            "$ref": "#/definitions/SigningAuthority"
+          }, 
+          "sectionData": {
+            "$ref": "#/definitions/EditCorporateDataObject"
+          }, 
+          "opsActionOnSection": {
+            "enum": [
+              "SAVE", 
+              "MARK_AS_COMPLETE", 
+              "REJECT", 
+              "ACCEPT"
+            ], 
+            "type": "string"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "agreementEndDate": {
+            "type": "string"
+          }
+        }
+      }, 
+      "AssessmentDecisionEngine": {
+        "type": "object", 
+        "properties": {
+          "config": {
+            "type": "string", 
+            "example": "<> xml format", 
+            "description": "Decision engine config to be associated with the spool"
+          }, 
+          "key": {
+            "type": "string", 
+            "description": "Decision key id for which rule needs to be evaluated"
+          }
+        }
+      }, 
+      "PubSubEvent": {
+        "type": "object", 
+        "properties": {
+          "eventID": {
+            "type": "string", 
+            "format": "uuid"
+          }, 
+          "origin": {
+            "$ref": "#/definitions/PubSubEventOrigin"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "publisher": {
+            "$ref": "#/definitions/JID"
+          }, 
+          "type": {
+            "type": "string"
+          }, 
+          "topic": {
+            "type": "string"
+          }, 
+          "source": {
+            "$ref": "#/definitions/PubSubEventSource"
+          }, 
+          "encryptedData": {
+            "type": "string"
+          }, 
+          "data": {
+            "type": "object"
+          }, 
+          "metaData": {
+            "$ref": "#/definitions/EventMetaData"
+          }
+        }
+      }, 
+      "CompanyResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }, 
+          "documents": {
+            "$ref": "#/definitions/Documents"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string"
+          }, 
+          "createdOn": {
+            "type": "string"
+          }, 
+          "corporateId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "companyLogoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "ifiId": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "id": {
+            "type": "string"
+          }, 
+          "companyType": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "JsonPrimitive": {
+        "type": "object", 
+        "properties": {
+          "asByte": {
+            "type": "string", 
+            "format": "byte"
+          }, 
+          "asJsonNull": {
+            "type": "object"
+          }, 
+          "number": {
+            "type": "boolean"
+          }, 
+          "asShort": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "boolean": {
+            "type": "boolean"
+          }, 
+          "jsonPrimitive": {
+            "type": "boolean"
+          }, 
+          "jsonNull": {
+            "type": "boolean"
+          }, 
+          "asString": {
+            "type": "string"
+          }, 
+          "asCharacter": {
+            "type": "string"
+          }, 
+          "asBoolean": {
+            "type": "boolean"
+          }, 
+          "asBigDecimal": {
+            "type": "number"
+          }, 
+          "asBigInteger": {
+            "type": "integer"
+          }, 
+          "asFloat": {
+            "type": "number", 
+            "format": "float"
+          }, 
+          "string": {
+            "type": "boolean"
+          }, 
+          "asJsonPrimitive": {
+            "type": "object"
+          }, 
+          "asLong": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "asJsonObject": {
+            "type": "object"
+          }, 
+          "jsonArray": {
+            "type": "boolean"
+          }, 
+          "jsonObject": {
+            "type": "boolean"
+          }, 
+          "asNumber": {
+            "$ref": "#/definitions/Number"
+          }, 
+          "asDouble": {
+            "type": "number", 
+            "format": "double"
+          }, 
+          "asJsonArray": {
+            "type": "object"
+          }, 
+          "asInt": {
+            "type": "integer", 
+            "format": "int32"
+          }
+        }
+      }, 
+      "AddAuthRequest": {
+        "required": [
+          "authProfileId", 
+          "domain"
+        ], 
+        "type": "object", 
+        "properties": {
+          "domain": {
+            "type": "string", 
+            "example": "<tenantName>_agent.<agentType>", 
+            "description": "domain under which the auth profile is present"
+          }, 
+          "authProfileId": {
+            "type": "string", 
+            "example": "jwB-gFCCjnlZ-RPga9AvIw==", 
+            "description": "ID of the authProfile"
+          }
+        }
+      }, 
+      "CreateAccountHolderWithAutoApprovalStandardRequest": {
+        "type": "object", 
+        "properties": {
+          "pops": {
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "profilePicURL": {
+            "type": "string"
+          }, 
+          "vectors": {
+            "items": {
+              "$ref": "#/definitions/VectorRequest"
+            }, 
+            "type": "array"
+          }, 
+          "description": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "middleName": {
+            "type": "string"
+          }, 
+          "lastName": {
+            "type": "string"
+          }, 
+          "kycDetails": {
+            "$ref": "#/definitions/KYCDetails"
+          }, 
+          "mothersMaidenName": {
+            "type": "string"
+          }, 
+          "salutation": {
+            "type": "string"
+          }, 
+          "requestID": {
+            "minLength": 0, 
+            "type": "string", 
+            "maxLength": 50
+          }, 
+          "gender": {
+            "type": "string"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "dob": {
+            "type": "string", 
+            "format": "date"
+          }, 
+          "customFields": {
+            "additionalProperties": {
+              "additionalProperties": {
+                "type": "string"
+              }, 
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "individualType": {
+            "type": "string"
+          }
+        }
+      }, 
+      "PubSubEventOrigin": {
+        "type": "object", 
+        "properties": {
+          "instance": {
+            "type": "string", 
+            "format": "uri"
+          }, 
+          "flowID": {
+            "type": "string", 
+            "format": "uuid"
+          }, 
+          "time": {
+            "type": "integer", 
+            "format": "int64"
+          }
+        }
+      }, 
+      "EditCorporateDataObject": {
+        "type": "object", 
+        "properties": {
+          "agreementNumber": {
+            "type": "string"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "sectionStatus": {
+            "enum": [
+              "EDIT_INITIATED", 
+              "PENDING", 
+              "TEMP_COMPLETED", 
+              "APPROVED", 
+              "REJECTED", 
+              "IN_REVIEW", 
+              "ACCEPTED"
+            ], 
+            "type": "string"
+          }, 
+          "sectionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "revisionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "agreementURL": {
+            "type": "string"
+          }, 
+          "corporateId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "agreementStartDate": {
+            "type": "string"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "signingAuthority": {
+            "$ref": "#/definitions/SigningAuthority"
+          }, 
+          "diff": {
+            "$ref": "#/definitions/ModificationLog"
+          }, 
+          "ifiId": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "entityId": {
+            "type": "string"
+          }, 
+          "createdOn": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "sectionType": {
+            "enum": [
+              "ADD_COMPANY", 
+              "ADD_CORPORATE", 
+              "EDIT_CORPORATE", 
+              "EDIT_COMPANY"
+            ], 
+            "type": "string"
+          }, 
+          "agreementEndDate": {
+            "type": "string"
+          }
+        }
+      }, 
+      "Contact": {
+        "type": "object", 
+        "properties": {
+          "lastName": {
+            "type": "string"
+          }, 
+          "vectors": {
+            "items": {
+              "$ref": "#/definitions/AccountHolderVector"
+            }, 
+            "type": "array"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }
+        }
+      }, 
+      "UpdateApplicationSectionRequest": {
+        "type": "object", 
+        "properties": {
+          "type": {
+            "type": "string", 
+            "example": "Education details", 
+            "description": "type of the section"
+          }, 
+          "details": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "POP", 
+            "description": "details of the section"
+          }
+        }
+      }, 
+      "CreateSpoolRequest": {
+        "required": [
+          "code", 
+          "name", 
+          "provisionalWorkFlowHAR", 
+          "skuId"
+        ], 
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "ENABLED", 
+            "description": "Status of the spool ENABLED, DISABLED OR DELETED"
+          }, 
+          "skuId": {
+            "type": "string", 
+            "example": "c482d651-73fa-4de8-ba09-bbc231121111", 
+            "description": "skuId to which this spool belongs"
+          }, 
+          "code": {
+            "type": "string", 
+            "example": "NRI_SAV_01", 
+            "description": "Unique to identify any spool for an ifi"
+          }, 
+          "name": {
+            "type": "string", 
+            "example": "NRI_SAVINGS_ACCOUNT", 
+            "description": "Name of the Spool"
+          }, 
+          "assessmentDecisionEngine": {
+            "$ref": "#/definitions/AssessmentDecisionEngine", 
+            "example": "{'key' : 'decision_key_name', 'config' : '<>'}", 
+            "description": "Decision Assessment engine to be associated with the spool"
+          }, 
+          "spoolManager": {
+            "type": "string", 
+            "example": "SPOOL_MANAGER", 
+            "description": "Name of the spool manager"
+          }, 
+          "provisionalWorkFlowHAR": {
+            "type": "object", 
+            "example": "{}", 
+            "description": "provisionalWorkFlowHAR"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "{}", 
+            "description": "Extra attributes to be associated with the spool"
+          }, 
+          "sla": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object", 
+            "example": "{}", 
+            "description": "sla"
+          }, 
+          "schema": {
+            "type": "object", 
+            "example": "{}", 
+            "description": "Schema for the applications belonging to this spool"
+          }
+        }
+      }, 
+      "CompletionStageGetAuditLogsOfSectionResponse": {
+        "type": "object"
+      }, 
+      "ActionOnEditCompanySectionRequest": {
+        "required": [
+          "opsActionOnSection"
+        ], 
+        "type": "object", 
+        "properties": {
+          "documents": {
+            "$ref": "#/definitions/Documents"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "companyId": {
+            "type": "string"
+          }, 
+          "shortCode": {
+            "type": "string"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "opsActionOnSection": {
+            "enum": [
+              "SAVE", 
+              "MARK_AS_COMPLETE", 
+              "REJECT", 
+              "ACCEPT"
+            ], 
+            "type": "string"
+          }, 
+          "logoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "type": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "ZetaSignature": {
+        "type": "object", 
+        "properties": {
+          "algoID": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "signature": {
+            "items": {
+              "type": "string", 
+              "format": "byte"
+            }, 
+            "type": "array"
+          }, 
+          "publicKeyID": {
+            "type": "string"
+          }, 
+          "signatureAlgorithm": {
+            "$ref": "#/definitions/SignatureAlgorithm"
+          }
+        }
+      }, 
+      "AccountHolderApplicationStandardResponse": {
+        "type": "object", 
+        "properties": {
+          "pops": {
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "dedupeDetails": {
+            "$ref": "#/definitions/DedupeDetails"
+          }, 
+          "individualID": {
+            "type": "string"
+          }, 
+          "mothersMaidenName": {
+            "type": "string"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "requestID": {
+            "type": "string"
+          }, 
+          "updatedAt": {
+            "type": "string"
+          }, 
+          "salutation": {
+            "type": "string"
+          }, 
+          "createdAt": {
+            "type": "string"
+          }, 
+          "middleName": {
+            "type": "string"
+          }, 
+          "documentList": {
+            "items": {
+              "$ref": "#/definitions/DocumentResponse"
+            }, 
+            "type": "array"
+          }, 
+          "customFields": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "applicationID": {
+            "type": "string"
+          }, 
+          "status": {
+            "enum": [
+              "PROCESSING", 
+              "PENDING_ON_USER_ACTION", 
+              "REJECTED", 
+              "APPROVED", 
+              "COMPLETED", 
+              "DELETED"
+            ], 
+            "type": "string"
+          }, 
+          "description": {
+            "type": "string"
+          }, 
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "array"
+          }, 
+          "profilePicURL": {
+            "type": "string"
+          }, 
+          "gender": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "dob": {
+            "type": "string"
+          }, 
+          "lastName": {
+            "type": "string"
+          }, 
+          "vectors": {
+            "items": {
+              "$ref": "#/definitions/ApplicationAccountHolderVector"
+            }, 
+            "type": "array"
+          }, 
+          "kycDetails": {
+            "$ref": "#/definitions/KYCDetailsStandard"
+          }, 
+          "statusDetails": {
+            "type": "object"
+          }
+        }
+      }, 
+      "Vector": {
+        "type": "object", 
+        "properties": {
+          "verified": {
+            "type": "boolean"
+          }, 
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "array"
+          }, 
+          "type": {
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "aetherID": {
+            "type": "string"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "format": "date-time"
+          }
+        }
+      }, 
+      "ActionOnSectionResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        }
+      }, 
+      "ApplicationStageResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "description": "status of the stage"
+          }, 
+          "spoolId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "spool Id of the application"
+          }, 
+          "name": {
+            "type": "string", 
+            "description": "name of the stage"
+          }, 
+          "details": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "details of the stage"
+          }, 
+          "stageId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "Id of the stage"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "description": "updated date and time of the stage(ISO 8601 Format)"
+          }, 
+          "ifiId": {
+            "description": "ifi Id of the stage", 
+            "type": "integer", 
+            "example": 123456, 
+            "format": "int64"
+          }, 
+          "applicationId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "application Id of the stage"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "description": "created date and time of the stage(ISO 8601 Format)"
+          }, 
+          "result": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "result of the stage"
+          }
+        }
+      }, 
+      "JsonArray": {
+        "type": "object", 
+        "properties": {
+          "asBigDecimal": {
+            "type": "number"
+          }, 
+          "jsonPrimitive": {
+            "type": "boolean"
+          }, 
+          "asByte": {
+            "type": "string", 
+            "format": "byte"
+          }, 
+          "jsonObject": {
+            "type": "boolean"
+          }, 
+          "asJsonPrimitive": {
+            "type": "object"
+          }, 
+          "asJsonNull": {
+            "type": "object"
+          }, 
+          "asBoolean": {
+            "type": "boolean"
+          }, 
+          "jsonNull": {
+            "type": "boolean"
+          }, 
+          "asShort": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "asNumber": {
+            "$ref": "#/definitions/Number"
+          }, 
+          "asBigInteger": {
+            "type": "integer"
+          }, 
+          "asCharacter": {
+            "type": "string"
+          }, 
+          "asDouble": {
+            "type": "number", 
+            "format": "double"
+          }, 
+          "jsonArray": {
+            "type": "boolean"
+          }, 
+          "asFloat": {
+            "type": "number", 
+            "format": "float"
+          }, 
+          "asJsonArray": {
+            "type": "object"
+          }, 
+          "asString": {
+            "type": "string"
+          }, 
+          "asLong": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "asInt": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "asJsonObject": {
+            "type": "object"
+          }
+        }
+      }, 
+      "JsonObject": {
+        "type": "object", 
+        "properties": {
+          "asBigDecimal": {
+            "type": "number"
+          }, 
+          "jsonPrimitive": {
+            "type": "boolean"
+          }, 
+          "asByte": {
+            "type": "string", 
+            "format": "byte"
+          }, 
+          "jsonObject": {
+            "type": "boolean"
+          }, 
+          "asJsonPrimitive": {
+            "type": "object"
+          }, 
+          "asJsonNull": {
+            "type": "object"
+          }, 
+          "asBoolean": {
+            "type": "boolean"
+          }, 
+          "jsonNull": {
+            "type": "boolean"
+          }, 
+          "asShort": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "asNumber": {
+            "$ref": "#/definitions/Number"
+          }, 
+          "asBigInteger": {
+            "type": "integer"
+          }, 
+          "asCharacter": {
+            "type": "string"
+          }, 
+          "asDouble": {
+            "type": "number", 
+            "format": "double"
+          }, 
+          "jsonArray": {
+            "type": "boolean"
+          }, 
+          "asFloat": {
+            "type": "number", 
+            "format": "float"
+          }, 
+          "asJsonArray": {
+            "type": "object"
+          }, 
+          "asString": {
+            "type": "string"
+          }, 
+          "asLong": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "asInt": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "asJsonObject": {
+            "type": "object"
+          }
+        }
+      }, 
+      "PubSubEventSource": {
+        "type": "object", 
+        "properties": {
+          "state": {
+            "type": "string"
+          }, 
+          "uri": {
+            "type": "string", 
+            "format": "uri"
+          }, 
+          "tags": {
+            "items": {
+              "type": "string", 
+              "format": "uri"
+            }, 
+            "type": "array"
+          }
+        }
+      }, 
+      "ActionOnAddCompanySectionRequest": {
+        "required": [
+          "opsActionOnSection"
+        ], 
+        "type": "object", 
+        "properties": {
+          "documents": {
+            "$ref": "#/definitions/Documents"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "opsActionOnSection": {
+            "enum": [
+              "SAVE", 
+              "MARK_AS_COMPLETE", 
+              "REJECT", 
+              "ACCEPT"
+            ], 
+            "type": "string"
+          }, 
+          "logoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "type": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "AddApplicationSectionRequest": {
+        "type": "object", 
+        "properties": {
+          "type": {
+            "type": "string", 
+            "example": "Education details", 
+            "description": "type of the section"
+          }, 
+          "details": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "POP", 
+            "description": "details of the section"
+          }
+        }
+      }, 
+      "AuthStatusResponse": {
+        "type": "object", 
+        "properties": {
+          "isAuthorized": {
+            "type": "boolean"
+          }
+        }
+      }, 
+      "GetAuditLogsOfSectionResponse": {
+        "type": "object", 
+        "properties": {
+          "auditLogs": {
+            "items": {
+              "$ref": "#/definitions/OperatorActionOnSectionLog"
+            }, 
+            "type": "array"
+          }
+        }
+      }, 
+      "AddCompanyDataObjectResponse": {
+        "type": "object", 
+        "properties": {
+          "documentsV2": {
+            "items": {
+              "$ref": "#/definitions/DocumentV2"
+            }, 
+            "type": "array"
+          }, 
+          "documents": {
+            "$ref": "#/definitions/Documents"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "sectionStatus": {
+            "enum": [
+              "NEW", 
+              "PENDING", 
+              "TEMP_COMPLETED", 
+              "APPROVED", 
+              "REJECTED", 
+              "IN_REVIEW", 
+              "ACCEPTED"
+            ], 
+            "type": "string"
+          }, 
+          "sectionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "createdOn": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "diff": {
+            "$ref": "#/definitions/ModificationLog"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "logoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "entityId": {
+            "type": "string"
+          }, 
+          "type": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }, 
+          "revisionId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "sectionType": {
+            "enum": [
+              "ADD_COMPANY", 
+              "ADD_CORPORATE", 
+              "EDIT_CORPORATE", 
+              "EDIT_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "UpdateSpoolValidatorRequest": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "DISABLED", 
+            "description": "New status to which the spool has to be updated to (To be filled only if status is intended to be updated)"
+          }, 
+          "config": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "{}", 
+            "description": "New meta data to which the spool has to be updated to (To be filled only if config is intended to be updated)"
+          }, 
+          "type": {
+            "type": "string", 
+            "example": "JsonSchemaValidator", 
+            "description": "New type to which the spool has to be updated to (To be filled only if type is intended to be updated)"
+          }
+        }
+      }, 
+      "DedupeDetails": {
+        "type": "object", 
+        "properties": {
+          "accountHolderExists": {
+            "type": "boolean"
+          }, 
+          "updated": {
+            "type": "boolean"
+          }
+        }
+      }, 
+      "ActionOnApplicationRequest": {
+        "required": [
+          "moderatedApplicationType"
+        ], 
+        "type": "object", 
+        "properties": {
+          "remarks": {
+            "type": "string"
+          }, 
+          "moderatedApplicationType": {
+            "enum": [
+              "SIGN_UP", 
+              "EDIT_CORPORATE"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "AddSectionRoleRequest": {
+        "required": [
+          "role"
+        ], 
+        "type": "object", 
+        "properties": {
+          "role": {
+            "enum": [
+              "{ENRICHER", 
+              "ASSESSOR", 
+              "REVIEWER}"
+            ], 
+            "type": "string", 
+            "example": "ASSESSOR", 
+            "description": "Role to be given access to the section"
+          }
+        }
+      }, 
+      "CreateAddCorporateApplicationRequest": {
+        "required": [
+          "ifiParams", 
+          "tags"
+        ], 
+        "type": "object", 
+        "properties": {
+          "ifiParams": {
+            "type": "object"
+          }, 
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "array"
+          }
+        }
+      }, 
+      "CreateAccountHolderApplicationStandardRequest": {
+        "type": "object", 
+        "properties": {
+          "profilePicURL": {
+            "type": "string"
+          }, 
+          "vectors": {
+            "items": {
+              "$ref": "#/definitions/Vector"
+            }, 
+            "type": "array"
+          }, 
+          "description": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "middleName": {
+            "type": "string"
+          }, 
+          "lastName": {
+            "type": "string"
+          }, 
+          "kycDetails": {
+            "$ref": "#/definitions/KYCDetails"
+          }, 
+          "mothersMaidenName": {
+            "type": "string"
+          }, 
+          "dob": {
+            "type": "string"
+          }, 
+          "requestID": {
+            "minLength": 0, 
+            "type": "string", 
+            "maxLength": 50
+          }, 
+          "gender": {
+            "type": "string"
+          }, 
+          "salutation": {
+            "type": "string"
+          }, 
+          "customFields": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "pops": {
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }
+        }
+      }, 
+      "UpdateSKURequest": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "ENABLED/DISABLED", 
+            "description": "state of the sku"
+          }, 
+          "contactInfo": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "contact information of the sku"
+          }, 
+          "name": {
+            "type": "string", 
+            "example": "abc", 
+            "description": "name of the sku"
+          }, 
+          "coverImageURL": {
+            "type": "string", 
+            "example": "http/abc", 
+            "description": "cover image URL for the sku"
+          }, 
+          "tnc": {
+            "type": "string", 
+            "description": "tnc of the sku"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "attributes of the sku"
+          }, 
+          "thumbnailURL": {
+            "type": "string", 
+            "example": "http/abc", 
+            "description": "thumbnail URL for the sku"
+          }
+        }
+      }, 
+      "EmptyPayload": {
+        "type": "object"
+      }, 
+      "CreateAccountHolderApplicationRequest": {
+        "type": "object", 
+        "properties": {
+          "individualID": {
+            "type": "string"
+          }, 
+          "pops": {
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "salutation": {
+            "type": "string"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "spoolID": {
+            "type": "string"
+          }, 
+          "middleName": {
+            "type": "string"
+          }, 
+          "formID": {
+            "type": "string"
+          }, 
+          "source": {
+            "type": "string"
+          }, 
+          "customFields": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "individualType": {
+            "type": "string"
+          }, 
+          "description": {
+            "type": "string"
+          }, 
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "array"
+          }, 
+          "mothersMaidenName": {
+            "type": "string"
+          }, 
+          "kycDetails": {
+            "$ref": "#/definitions/KYCDetails"
+          }, 
+          "profilePicURL": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "dob": {
+            "type": "string", 
+            "format": "date"
+          }, 
+          "gender": {
+            "type": "string"
+          }, 
+          "vectors": {
+            "items": {
+              "$ref": "#/definitions/Vector"
+            }, 
+            "type": "array"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "applicationType": {
+            "enum": [
+              "KYC", 
+              "CREATE_ACCOUNT_HOLDER", 
+              "EDIT_ACCOUNT_HOLDER"
+            ], 
+            "type": "string"
+          }, 
+          "lastName": {
+            "type": "string"
+          }
+        }
+      }, 
+      "AccountHolderApplicationResponse": {
+        "type": "object", 
+        "properties": {
+          "pops": {
+            "additionalProperties": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "object"
+          }, 
+          "dedupeDetails": {
+            "$ref": "#/definitions/DedupeDetails"
+          }, 
+          "individualID": {
+            "type": "string"
+          }, 
+          "mothersMaidenName": {
+            "type": "string"
+          }, 
+          "salutation": {
+            "type": "string"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "spoolID": {
+            "type": "string"
+          }, 
+          "middleName": {
+            "type": "string"
+          }, 
+          "documentList": {
+            "items": {
+              "$ref": "#/definitions/DocumentResponse"
+            }, 
+            "type": "array"
+          }, 
+          "formID": {
+            "type": "string"
+          }, 
+          "source": {
+            "type": "string"
+          }, 
+          "customFields": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "applicationID": {
+            "type": "string"
+          }, 
+          "status": {
+            "enum": [
+              "PROCESSING", 
+              "PENDING_ON_USER_ACTION", 
+              "REJECTED", 
+              "APPROVED", 
+              "COMPLETED", 
+              "DELETED"
+            ], 
+            "type": "string"
+          }, 
+          "description": {
+            "type": "string"
+          }, 
+          "tags": {
+            "additionalProperties": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "object"
+          }, 
+          "kycDetails": {
+            "$ref": "#/definitions/KYCDetails"
+          }, 
+          "profilePicURL": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "dob": {
+            "type": "string", 
+            "format": "date"
+          }, 
+          "gender": {
+            "type": "string"
+          }, 
+          "vectors": {
+            "additionalProperties": {
+              "$ref": "#/definitions/Vector"
+            }, 
+            "type": "object"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "applicationType": {
+            "type": "string"
+          }, 
+          "lastName": {
+            "type": "string"
+          }, 
+          "statusDetails": {
+            "type": "object"
+          }
+        }
+      }, 
+      "DocumentResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "subType": {
+            "type": "string"
+          }, 
+          "url": {
+            "type": "string"
+          }, 
+          "type": {
+            "type": "string"
+          }, 
+          "mediaType": {
+            "type": "string"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "applicationID": {
+            "type": "string"
+          }, 
+          "id": {
+            "type": "string"
+          }
+        }
+      }, 
+      "Number": {
+        "type": "object"
+      }, 
+      "VectorRequest": {
+        "type": "object", 
+        "properties": {
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "verified": {
+            "type": "boolean"
+          }, 
+          "type": {
+            "type": "string"
+          }, 
+          "value": {
+            "type": "string"
+          }
+        }
+      }, 
+      "EventMetaData": {
+        "type": "object", 
+        "properties": {
+          "nonce": {
+            "type": "string"
+          }, 
+          "encryptionScheme": {
+            "enum": [
+              "SHARED_SECRET_KEY", 
+              "DH_KEY"
+            ], 
+            "type": "string"
+          }, 
+          "hmac": {
+            "type": "string"
+          }, 
+          "dhPublicKey": {
+            "type": "string"
+          }
+        }
+      }, 
+      "KYCDetailsStandard": {
+        "type": "object", 
+        "properties": {
+          "updateTime": {
+            "type": "string"
+          }, 
+          "expiryTime": {
+            "type": "string"
+          }, 
+          "authType": {
+            "type": "string"
+          }, 
+          "kycAttributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "kycStatus": {
+            "type": "string"
+          }, 
+          "kycStatusPostExpiry": {
+            "type": "string"
+          }, 
+          "authData": {
+            "type": "object"
+          }
+        }
+      }, 
+      "DeleteApplicationVectorRequest": {
+        "required": [
+          "type", 
+          "value"
+        ], 
+        "type": "object", 
+        "properties": {
+          "type": {
+            "type": "string", 
+            "description": "type of the vector"
+          }, 
+          "value": {
+            "type": "string", 
+            "description": "value of the vector"
+          }
+        }
+      }, 
+      "ActionOnEditCompanySectionRequestV2": {
+        "required": [
+          "opsActionOnSection"
+        ], 
+        "type": "object", 
+        "properties": {
+          "documents": {
+            "items": {
+              "$ref": "#/definitions/DocumentV2"
+            }, 
+            "type": "array"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "companyId": {
+            "type": "string"
+          }, 
+          "shortCode": {
+            "type": "string"
+          }, 
+          "pointsOfPresence": {
+            "uniqueItems": true, 
+            "items": {
+              "$ref": "#/definitions/POP"
+            }, 
+            "type": "array"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "opsActionOnSection": {
+            "enum": [
+              "SAVE", 
+              "MARK_AS_COMPLETE", 
+              "REJECT", 
+              "ACCEPT"
+            ], 
+            "type": "string"
+          }, 
+          "logoURL": {
+            "type": "string"
+          }, 
+          "kycStatus": {
+            "$ref": "#/definitions/KYCStatus"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "type": {
+            "enum": [
+              "LLP", 
+              "SOLE_PROPRIETOR", 
+              "TRUST", 
+              "PRIVATE_LIMITED", 
+              "PARTNER_FIRM", 
+              "PUBLIC", 
+              "NPO_NGO", 
+              "BRANCH_OFFICE", 
+              "LIAISON_OFFICE", 
+              "PUBLIC_COMPANY"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "ActionOnApplicationResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }
+        }
+      }, 
+      "SigningAuthority": {
+        "type": "object", 
+        "properties": {
+          "phoneNumber": {
+            "type": "string"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "email": {
+            "type": "string"
+          }
+        }
+      }, 
+      "CorporateResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "enum": [
+              "ENABLED", 
+              "DISABLED"
+            ], 
+            "type": "string"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "updatedOn": {
+            "type": "string"
+          }, 
+          "createdOn": {
+            "type": "string"
+          }, 
+          "ifiId": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "id": {
+            "type": "integer", 
+            "format": "int32"
+          }
+        }
+      }, 
+      "SignatureAlgorithm": {
+        "type": "object", 
+        "properties": {
+          "id": {
+            "type": "integer", 
+            "format": "int32"
+          }
+        }
+      }, 
+      "AddApplicationVectorRequest": {
+        "required": [
+          "type", 
+          "value"
+        ], 
+        "type": "object", 
+        "properties": {
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "attributes of the vector"
+          }, 
+          "type": {
+            "type": "string", 
+            "description": "type of the vector"
+          }, 
+          "value": {
+            "type": "string", 
+            "description": "value of the vector"
+          }
+        }
+      }, 
+      "CompletionStageVoid": {
+        "type": "object"
+      }, 
+      "SpoolResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "DISABLED", 
+            "description": "Status of the spool - ENABLED, DISABLED OR DELETED"
+          }, 
+          "skuId": {
+            "type": "string", 
+            "example": "c482d651-73fa-4de8-ba09-bbc231121111", 
+            "description": "skuId to which this spool belongs"
+          }, 
+          "code": {
+            "type": "string", 
+            "example": "NRI_SAV_01", 
+            "description": "Unique to identify any spool for an ifi"
+          }, 
+          "name": {
+            "type": "string", 
+            "example": "NRI_SAVINGS_ACCOUNT", 
+            "description": "Name of the Spool"
+          }, 
+          "assessmentDecisionEngine": {
+            "$ref": "#/definitions/AssessmentDecisionEngine", 
+            "example": "{'key' : 'decision_key_name', 'config' : '<>'}", 
+            "description": "Decision Assessment engine to be associated with the spool"
+          }, 
+          "spoolManager": {
+            "type": "string", 
+            "example": "SPOOL_MANAGER", 
+            "description": "Name of the spool manager"
+          }, 
+          "sla": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object", 
+            "example": "{}", 
+            "description": "sla"
+          }, 
+          "provisionalWorkFlowHAR": {
+            "type": "object", 
+            "example": "{}", 
+            "description": "provisionalWorkFlowHAR"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "example": "2020-07-20T09:25:35+00:00", 
+            "description": "Updated at details in ISO 8601 Format"
+          }, 
+          "ifiId": {
+            "description": "ID of the IFI (on-boarded organization) under which the application is being created", 
+            "type": "integer", 
+            "example": 140827, 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "{}", 
+            "description": "Extra attributes to be associated with the spool"
+          }, 
+          "id": {
+            "type": "string", 
+            "example": "c482d651-73fa-4de8-ba09-bbc231121111", 
+            "description": "Id of the Spool"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "example": "2020-07-20T09:25:35+00:00", 
+            "description": "Created at details in ISO 8601 Format"
+          }, 
+          "schema": {
+            "type": "object", 
+            "example": "{}", 
+            "description": "Schema for the applications belonging to this spool"
+          }
+        }
+      }, 
+      "POP": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string"
+          }, 
+          "contactList": {
+            "items": {
+              "$ref": "#/definitions/Contact"
+            }, 
+            "type": "array"
+          }, 
+          "default": {
+            "type": "boolean"
+          }, 
+          "entityType": {
+            "type": "string"
+          }, 
+          "label": {
+            "type": "string"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "modifiedAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "address": {
+            "$ref": "#/definitions/Address"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "entityID": {
+            "type": "string"
+          }, 
+          "id": {
+            "type": "string"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "format": "date-time"
+          }
+        }
+      }, 
+      "CreateApplicationRequest": {
+        "required": [
+          "requestId"
+        ], 
+        "type": "object", 
+        "properties": {
+          "vectors": {
+            "items": {
+              "$ref": "#/definitions/AddApplicationVectorRequest"
+            }, 
+            "type": "array", 
+            "description": "vectors of a application"
+          }, 
+          "sections": {
+            "additionalProperties": {
+              "$ref": "#/definitions/CreateApplicationSectionRequest"
+            }, 
+            "type": "object", 
+            "description": "sections of a application"
+          }, 
+          "requestId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "spool Id of the application"
+          }, 
+          "tags": {
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }, 
+            "type": "array", 
+            "description": "tags of a application"
+          }
+        }
+      }, 
+      "Address": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "enum": [
+              "ENABLED", 
+              "DELETED"
+            ], 
+            "type": "string"
+          }, 
+          "city": {
+            "type": "string"
+          }, 
+          "accountHolderID": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "default": {
+            "type": "boolean"
+          }, 
+          "lastName": {
+            "type": "string"
+          }, 
+          "line2": {
+            "type": "string"
+          }, 
+          "line1": {
+            "type": "string"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "state": {
+            "type": "string"
+          }, 
+          "tag": {
+            "type": "string"
+          }, 
+          "postCode": {
+            "type": "string"
+          }, 
+          "country": {
+            "type": "string"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "accountHolderVectors": {
+            "items": {
+              "$ref": "#/definitions/AccountHolderVector"
+            }, 
+            "type": "array"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }
+        }
+      }, 
+      "JsonNull": {
+        "type": "object", 
+        "properties": {
+          "asBigDecimal": {
+            "type": "number"
+          }, 
+          "jsonPrimitive": {
+            "type": "boolean"
+          }, 
+          "asByte": {
+            "type": "string", 
+            "format": "byte"
+          }, 
+          "jsonObject": {
+            "type": "boolean"
+          }, 
+          "asJsonPrimitive": {
+            "type": "object"
+          }, 
+          "asJsonNull": {
+            "type": "object"
+          }, 
+          "asBoolean": {
+            "type": "boolean"
+          }, 
+          "jsonNull": {
+            "type": "boolean"
+          }, 
+          "asShort": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "asNumber": {
+            "$ref": "#/definitions/Number"
+          }, 
+          "asBigInteger": {
+            "type": "integer"
+          }, 
+          "asCharacter": {
+            "type": "string"
+          }, 
+          "asDouble": {
+            "type": "number", 
+            "format": "double"
+          }, 
+          "jsonArray": {
+            "type": "boolean"
+          }, 
+          "asFloat": {
+            "type": "number", 
+            "format": "float"
+          }, 
+          "asJsonArray": {
+            "type": "object"
+          }, 
+          "asString": {
+            "type": "string"
+          }, 
+          "asLong": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "asInt": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "asJsonObject": {
+            "type": "object"
+          }
+        }
+      }, 
+      "GenericCreateApplicationResponse": {
+        "type": "object", 
+        "properties": {
+          "applicationID": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "applicationType": {
+            "enum": [
+              "SIGN_UP", 
+              "EDIT_CORPORATE"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "CreateSKURequest": {
+        "required": [
+          "code", 
+          "contactInfo", 
+          "coverImageURL", 
+          "name", 
+          "thumbnailURL", 
+          "tnc"
+        ], 
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "example": "ENABLED/DISABLED", 
+            "description": "state of the sku"
+          }, 
+          "code": {
+            "type": "string", 
+            "example": "SKU1010921", 
+            "description": "code of the sku"
+          }, 
+          "name": {
+            "type": "string", 
+            "example": "abc", 
+            "description": "name of the sku"
+          }, 
+          "coverImageURL": {
+            "type": "string", 
+            "example": "http/abc", 
+            "description": "cover image URL for the sku"
+          }, 
+          "contactInfo": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "contact information of the sku"
+          }, 
+          "tnc": {
+            "type": "string", 
+            "description": "tnc of the sku"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "attributes of the sku"
+          }, 
+          "thumbnailURL": {
+            "type": "string", 
+            "example": "http/abc", 
+            "description": "thumbnail URL for the sku"
+          }
+        }
+      }, 
+      "KYCDetails": {
+        "type": "object", 
+        "properties": {
+          "updateTime": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "expiryTime": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "authType": {
+            "type": "string"
+          }, 
+          "kycAttributes": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "kycStatus": {
+            "type": "string"
+          }, 
+          "kycStatusPostExpiry": {
+            "type": "string"
+          }, 
+          "authData": {
+            "type": "object"
+          }
+        }
+      }, 
+      "UpdateApplicationVectorRequest": {
+        "required": [
+          "type", 
+          "value"
+        ], 
+        "type": "object", 
+        "properties": {
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "attributes of the vector"
+          }, 
+          "type": {
+            "type": "string", 
+            "description": "type of the vector"
+          }, 
+          "value": {
+            "type": "string", 
+            "description": "value of the vector"
+          }
+        }
+      }, 
+      "ActionOnAddCorporateSectionRequest": {
+        "required": [
+          "opsActionOnSection"
+        ], 
+        "type": "object", 
+        "properties": {
+          "agreementNumber": {
+            "type": "string"
+          }, 
+          "opsActionOnSection": {
+            "enum": [
+              "SAVE", 
+              "MARK_AS_COMPLETE", 
+              "REJECT", 
+              "ACCEPT"
+            ], 
+            "type": "string"
+          }, 
+          "agreementURL": {
+            "type": "string"
+          }, 
+          "agreementStartDate": {
+            "type": "string"
+          }, 
+          "signingAuthority": {
+            "$ref": "#/definitions/SigningAuthority"
+          }, 
+          "sectionData": {
+            "$ref": "#/definitions/AddCorporateDataObject"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "corporateName": {
+            "type": "string"
+          }, 
+          "agreementEndDate": {
+            "type": "string"
+          }
+        }
+      }, 
+      "CreateApplicationSectionRequest": {
+        "type": "object", 
+        "properties": {
+          "type": {
+            "type": "string", 
+            "example": "Education details", 
+            "description": "type of the section"
+          }, 
+          "name": {
+            "type": "string", 
+            "example": "Education", 
+            "description": "name of the section"
+          }, 
+          "details": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "POP", 
+            "description": "details of the section"
+          }
+        }
+      }, 
+      "UpdateAccountHolderApplicationRequest": {
+        "type": "object", 
+        "properties": {
+          "profilePicURL": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "middleName": {
+            "type": "string"
+          }, 
+          "lastName": {
+            "type": "string"
+          }, 
+          "mothersMaidenName": {
+            "type": "string"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "dob": {
+            "type": "string", 
+            "format": "date"
+          }, 
+          "gender": {
+            "type": "string"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "salutation": {
+            "type": "string"
+          }, 
+          "applicationID": {
+            "type": "string"
+          }
+        }
+      }, 
+      "ApplicationVectorResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "type": "string", 
+            "description": "status of the vector"
+          }, 
+          "spoolId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "spool Id of the application"
+          }, 
+          "type": {
+            "type": "string", 
+            "description": "type of the vector"
+          }, 
+          "value": {
+            "type": "string", 
+            "description": "value of the vector"
+          }, 
+          "vectorId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "Id of the vector"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "description": "updated date and time of the vector(ISO 8601 Format)"
+          }, 
+          "ifiId": {
+            "description": "ifi Id of the vector", 
+            "type": "integer", 
+            "example": 123456, 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "description": "attributes of the vector"
+          }, 
+          "applicationId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "application Id of the vector"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "description": "created date and time of the vector(ISO 8601 Format)"
+          }
+        }
+      }, 
+      "CreateApplicationResponse": {
+        "type": "object", 
+        "properties": {
+          "applicationId": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "applicationType": {
+            "enum": [
+              "SIGN_UP", 
+              "EDIT_CORPORATE"
+            ], 
+            "type": "string"
+          }
+        }
+      }, 
+      "CompletionStage": {
+        "type": "object"
+      }, 
+      "DocumentV2": {
+        "type": "object", 
+        "properties": {
+          "payloadVersion": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "name": {
+            "type": "string"
+          }, 
+          "sensitive": {
+            "type": "boolean"
+          }, 
+          "url": {
+            "type": "string"
+          }, 
+          "entityType": {
+            "type": "string"
+          }, 
+          "zetaSignature": {
+            "$ref": "#/definitions/ZetaSignature"
+          }, 
+          "signed": {
+            "type": "boolean"
+          }, 
+          "headers": {
+            "additionalProperties": {
+              "type": "string"
+            }, 
+            "type": "object"
+          }, 
+          "modifiedAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "signature": {
+            "type": "string"
+          }, 
+          "ifiId": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "attributes": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object"
+          }, 
+          "entityId": {
+            "type": "string"
+          }, 
+          "thumbnailUrl": {
+            "type": "string"
+          }, 
+          "id": {
+            "type": "string"
+          }, 
+          "documentId": {
+            "type": "string"
+          }, 
+          "signatoryJID": {
+            "$ref": "#/definitions/JID"
+          }
+        }
+      }, 
+      "SpoolValidatorResponse": {
+        "type": "object", 
+        "properties": {
+          "status": {
+            "enum": [
+              "ENABLED/DISABLED/DELETED"
+            ], 
+            "type": "string", 
+            "example": "ENABLED", 
+            "description": "status of validator"
+          }, 
+          "spoolId": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "Spool to which the validator belongs"
+          }, 
+          "type": {
+            "type": "string", 
+            "example": "JsonSchemaValidator", 
+            "description": "Type of validator"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "example": "2020-07-20T09:25:35+00:00", 
+            "description": "Updated at details in ISO 8601 Format"
+          }, 
+          "ifiId": {
+            "description": "ifiId to which the spool validator belongs", 
+            "type": "integer", 
+            "example": 140827, 
+            "format": "int64"
+          }, 
+          "config": {
+            "additionalProperties": {
+              "type": "object"
+            }, 
+            "type": "object", 
+            "example": "{}", 
+            "description": "Validator meta data"
+          }, 
+          "id": {
+            "type": "string", 
+            "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4", 
+            "description": "Id of the spool validator"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "example": "2020-07-20T09:25:35+00:00", 
+            "description": "Created at details in ISO 8601 Format"
+          }
+        }
+      }, 
+      "UpdateAccountHolderApplicationStandardRequest": {
+        "type": "object", 
+        "properties": {
+          "profilePicURL": {
+            "type": "string"
+          }, 
+          "firstName": {
+            "type": "string"
+          }, 
+          "middleName": {
+            "type": "string"
+          }, 
+          "lastName": {
+            "type": "string"
+          }, 
+          "mothersMaidenName": {
+            "type": "string"
+          }, 
+          "salutation": {
+            "type": "string"
+          }, 
+          "dob": {
+            "type": "string"
+          }, 
+          "gender": {
+            "type": "string"
+          }, 
+          "ifiID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "applicationID": {
+            "type": "string"
+          }
+        }
+      }, 
+      "OperatorActionOnSectionLog": {
+        "type": "object", 
+        "properties": {
+          "operatorMobile": {
+            "type": "string"
+          }, 
+          "operatorID": {
+            "type": "integer", 
+            "format": "int64"
+          }, 
+          "sectionID": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "revisionID": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "logID": {
+            "type": "integer", 
+            "format": "int32"
+          }, 
+          "opsActionOnSection": {
+            "enum": [
+              "SAVE", 
+              "MARK_AS_COMPLETE", 
+              "REJECT", 
+              "ACCEPT"
+            ], 
+            "type": "string"
+          }, 
+          "createdAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "updatedAt": {
+            "type": "string", 
+            "format": "date-time"
+          }, 
+          "remarks": {
+            "type": "string"
+          }, 
+          "operatorName": {
+            "type": "string"
+          }, 
+          "sectionType": {
+            "enum": [
+              "ADD_COMPANY", 
+              "ADD_CORPORATE", 
+              "EDIT_CORPORATE", 
+              "EDIT_COMPANY"
+            ], 
+            "type": "string"
+          }, 
+          "modificationLog": {
+            "$ref": "#/definitions/ModificationLog"
+          }
+        }
+      }
+    }, 
+    "swagger": "2.0"
+  }

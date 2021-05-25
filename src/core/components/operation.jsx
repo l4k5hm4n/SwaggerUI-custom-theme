@@ -114,34 +114,38 @@ export default class Operation extends PureComponent {
 
     return (
         <div className={deprecated ? "opblock opblock-deprecated" : true ? `opblock opblock-${method} is-open` : `opblock opblock-${method}`} id={escapeDeepLinkPath(isShownKey.join("-"))} >
-        <OperationSummary operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} >
 
-        { (operation && operation.size) || operation === null ? null :
-                <img height={"32px"} width={"32px"} src={require("core/../img/rolling-load.svg")} className="opblock-loading-animation" />
-              }
-              { deprecated && <h4 className="opblock-title_normal"> Warning: Deprecated</h4>}
-              { description &&
-                <div className="opblock-description-wrapper">
-                  <div className="opblock-description">
-                    <Markdown source={ description } />
-                  </div>
-                </div>
-              }
-              {
-                externalDocsUrl ?
-                <div className="opblock-external-docs-wrapper">
-                  <h4 className="opblock-title_normal">Find more details</h4>
-                  <div className="opblock-external-docs">
-                    <span className="opblock-external-docs__description">
-                      <Markdown source={ externalDocs.description } />
-                    </span>
-                    <Link target="_blank" className="opblock-external-docs__link" href={sanitizeUrl(externalDocsUrl)}>{externalDocsUrl}</Link>
-                  </div>
-                </div> : null
-              }
-          </OperationSummary> 
           <Collapse isOpened={true}>
             <div className="opblock-body">
+            <div className="opblock-body--left">
+            <OperationSummary operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} >
+
+            { (operation && operation.size) || operation === null ? null :
+                    <img height={"32px"} width={"32px"} src={require("core/../img/rolling-load.svg")} className="opblock-loading-animation" />
+                  }
+                  { deprecated && <h4 className="opblock-title_normal"> Warning: Deprecated</h4>}
+                  { description &&
+                    <div className="opblock-description-wrapper">
+                      <div className="opblock-description">
+                        <Markdown source={ description } />
+                      </div>
+                    </div>
+                  }
+                  {
+                    externalDocsUrl ?
+                    <div className="opblock-external-docs-wrapper">
+                      <h4 className="opblock-title_normal">Find more details</h4>
+                      <div className="opblock-external-docs">
+                        <span className="opblock-external-docs__description">
+                          <Markdown source={ externalDocs.description } />
+                        </span>
+                        <Link target="_blank" className="opblock-external-docs__link" href={sanitizeUrl(externalDocsUrl)}>{externalDocsUrl}</Link>
+                      </div>
+                    </div> : null
+                  }
+
+              </OperationSummary> 
+
               { !operation || !operation.size ? null :
                 <Parameters
                   parameters={parameters}
@@ -162,6 +166,20 @@ export default class Operation extends PureComponent {
                   oas3Actions={ oas3Actions }
                   oas3Selectors={ oas3Selectors }
                 >  
+                { !tryItOutEnabled ? null :
+                <OperationServers
+                  getComponent={getComponent}
+                  path={path}
+                  method={method}
+                  operationServers={operation.get("servers")}
+                  pathServers={specSelectors.paths().getIn([path, "servers"])}
+                  getSelectedServer={oas3Selectors.selectedServer}
+                  setSelectedServer={oas3Actions.setSelectedServer}
+                  setServerVariableValue={oas3Actions.setServerVariableValue}
+                  getServerVariable={oas3Selectors.serverVariableValue}
+                  getEffectiveServerValue={oas3Selectors.serverEffectiveValue}
+                />
+              }
                 <div className={(!tryItOutEnabled || !response || !allowTryItOut) ? "execute-wrapper" : "btn-group"}>
                 { !tryItOutEnabled || !allowTryItOut ? null :
   
@@ -183,23 +201,9 @@ export default class Operation extends PureComponent {
                       path={ path }
                       method={ method }/>
                 }
+                
               </div>
                 </Parameters >
-              }
-
-              { !tryItOutEnabled ? null :
-                <OperationServers
-                  getComponent={getComponent}
-                  path={path}
-                  method={method}
-                  operationServers={operation.get("servers")}
-                  pathServers={specSelectors.paths().getIn([path, "servers"])}
-                  getSelectedServer={oas3Selectors.selectedServer}
-                  setSelectedServer={oas3Actions.setSelectedServer}
-                  setServerVariableValue={oas3Actions.setServerVariableValue}
-                  getServerVariable={oas3Selectors.serverVariableValue}
-                  getEffectiveServerValue={oas3Selectors.serverEffectiveValue}
-                />
               }
 
               {!tryItOutEnabled || !allowTryItOut ? null : schemes && schemes.size ? <div className="opblock-schemes">
@@ -211,7 +215,7 @@ export default class Operation extends PureComponent {
                   </div> : null
               }
 
-
+            </div>
             {executeInProgress ? <div className="loading-container"><div className="loading"></div></div> : null}
 
               { !responses ? null :

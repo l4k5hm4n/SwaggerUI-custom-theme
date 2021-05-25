@@ -1,6 +1,5 @@
 #swagger-ui {
-    max-width: 65vw;
-
+    padding-right: 2em;
 }
 
 :focus-visible {
@@ -21,16 +20,16 @@
         display: block;
         position: absolute;
         top: 10px;
-        right: calc(-35vw + 46px);
-        z-index: 9999;
+        right: 0;
+        z-index: 99999999;
     }
 }
 
 .responses-wrapper {
-    flex: 0 0 calc(35vw - 20px);
-    margin-left: 0vw;
-    margin-top: -105px;
+    flex: 0 0 calc(40% - 20px);
+    margin-left: 0;
     padding: 0 24px;
+    overflow: scroll;
 
     .responses-inner {
         flex: 1;
@@ -66,7 +65,7 @@
 }
 
 .opblock-section {
-    flex: 0 0 65vw;
+    flex: 0 0 65%;
     margin-top: 40px;
 
     .opblock-section-header {
@@ -114,3 +113,42 @@ section.schemes.wrapper.block.col-12 {
         font-size: 14px
     }
 }
+
+.opblock-body--left {
+    flex: 0 0 calc(65% - 20px);
+}
+
+.opblock-tag.no-desc {
+    width: calc(65% - 40px);
+}
+
+.opblock-section.opblock-section-request-body {
+    margin-top: 0;
+}
+
+.opblock-section.opblock-section-request-body .renderedMarkdown p {
+    margin: 24px 0;
+    line-height: 1.4rem;
+}
+
+h4.opblock-title.parameter__name.required {
+    padding-left: 4px;
+}
+
+.renderedMarkdown li {
+    line-height: 1.8em;
+}
+
+pre.curl.microlight, pre.microlight {
+    background: #161c4a !important;
+}
+
+.responses-inner h4 {
+    margin-bottom: 6px !important;
+    font-size: 14px !important;
+}
+
+.request-url, .curl-command {
+    margin-bottom: 14px;
+}
+

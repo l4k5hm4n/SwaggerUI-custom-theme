@@ -16,6 +16,7 @@ table
                     padding: 0;
 
                     vertical-align: top;
+                    font-size: 12px;
 
                     &:first-of-type
                     {
@@ -31,7 +32,7 @@ table
     {
         td
         {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 300;
 
             vertical-align: middle;
@@ -53,7 +54,7 @@ table
             td
             {
                 padding: 10px 0 0 0;
-
+                font-size: 12px;
                 vertical-align: top;
 
                 &:first-of-type
@@ -73,7 +74,6 @@ table
             td
             {
                 font-size: 12px;
-                font-weight: bold;
 
                 padding: 12px 0;
 
@@ -207,3 +207,35 @@ table
 
     @include text_code($table-parameter-in-font-color);
 }
+
+td.response-col_description p {
+    margin: 0 !important;
+    font-family: sans-serif;
+    font-size: 12px;
+}
+
+.response-control-media-type {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+small.response-control-media-type__title {
+    flex: 0 0 80px;
+    margin-top: 4px;
+}
+
+small.response-control-media-type__accept-message {
+    flex: 0 0 100%;
+}
+
+.content-type-wrapper {
+    position: absolute;
+    margin-left: 70px;
+    margin-top: 4px;
+
+    select {
+        font-size: 12px;
+        margin-top: -7px;
+        font-weight: normal;
+    }
+} 

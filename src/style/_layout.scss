@@ -201,20 +201,20 @@
                         position: relative;
 
 
-                        &:after
-                        {
-                            position: absolute;
-                            bottom: -15px;
-                            left: 50%;
+                        // &:after
+                        // {
+                        //     position: absolute;
+                        //     bottom: -15px;
+                        //     left: 50%;
 
-                            width: 120%;
-                            height: 4px;
+                        //     width: 120%;
+                        //     height: 4px;
 
-                            content: '';
-                            transform: translateX(-50%);
+                        //     content: '';
+                        //     transform: translateX(-50%);
 
-                            background: $opblock-tab-header-tab-item-active-h4-span-after-background-color;
-                        }
+                        //     background: $opblock-tab-header-tab-item-active-h4-span-after-background-color;
+                        // }
                     }
                 }
             }
@@ -326,6 +326,7 @@
         font-size: 14px;
 
         flex: 1 1 auto;
+        width: 65%;
 
         word-break: break-word;
 
@@ -501,7 +502,6 @@
 .opblock-title_normal
 {
     font-size: 12px;
-
     margin: -16px 0 5px;
     padding: 0px 5px 30px;
 
@@ -521,9 +521,14 @@
         font-size: 14px;
 
         margin: 0;
-
+        line-height: 1.4em;
         @include text_body();
     }
+}
+
+.opblock-description-wrapper {
+    position: relative;
+    padding: 0px 5px 2px;
 }
 
 .opblock-external-docs-wrapper {
@@ -571,7 +576,7 @@
     h5,
     h4
     {
-        font-size: 12px;
+        font-size: 14px;
 
         margin: 10px 0 5px 0;
 
@@ -586,7 +591,6 @@
 
 .response-col_status
 {
-    font-size: 14px;
 
     @include text_body();
 
@@ -602,7 +606,6 @@
 {
     padding-left: 2em;
     max-width: 40em;
-    font-size: 14px;
 
     @include text_body();
 
@@ -685,20 +688,18 @@
 }
 
 .download-contents {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  cursor: pointer;
-  background: #7d8293;
-  text-align: center;
-  padding: 5px;
-  border-radius: 4px;
-  font-family: sans-serif;
-  font-weight: 600;
-  color: white;
-  font-size: 14px;
-  height: 30px;
-  width: 75px;
+    position: absolute;
+    bottom: 6px;
+    right: 10px;
+    cursor: pointer;
+    background: #5462da;
+    text-align: center;
+    padding: 6px 8px 0 8px;
+    border-radius: 4px;
+    font-family: sans-serif;
+    color: #fff;
+    font-size: 12px;
+    height: 26px;
 }
 
 .scheme-container
@@ -818,13 +819,13 @@
 
     &__accept-message {
         color: $response-content-type-controls-accept-header-small-font-color;
-        font-size: .7em;
+        font-size: 1em;
     }
 
     &__title {
         display: block;
         margin-bottom: 0.2em;
-        font-size: .7em;
+        font-size: 1em;
     }
 }
 
@@ -832,7 +833,7 @@
     &__title {
         display: block;
         margin-bottom: 0.2em;
-        font-size: .7em;
+        font-size: 1em;
     }
 }
 
@@ -950,4 +951,10 @@ span
         color: #555;
         font-weight: bold;
     }
+}
+
+.opblock-section.operation-servers {
+    margin-top: 0;
+    margin-bottom: 40px;
+    padding-left: 6px;
 }

@@ -60,6 +60,16 @@
 
 .operation-servers {
   h4.message {
-    margin-bottom: 2em;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 24px -5px 20px;
   }
+}
+
+.servers label {
+  border: 1px solid #d9d9d9;
+  border-radius: 4px;
+  padding: 10px;
+  background: white;
+  margin-left: -2px;
 }

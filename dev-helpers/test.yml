@@ -1,0 +1,1924 @@
+openapi: 3.0.0
+info:
+ title: ''
+ version: ''
+tags:
+ - name: Account
+ - name: Account balance
+ - name: Account transactions
+ - name: Account transfer
+ - name: Account status
+paths:
+ '/accounts/{accountID}':
+   get:
+     tags:
+       - Account
+     summary: Get Account by ID
+     description: 'Get the details of a particular Account created under an IFI. The response returns details of Product, Program, and Ledger that the Account is associated with.'
+     operationId: getAccountByID
+     parameters:
+       - name: ifiID
+         description: ID of the IFI.
+         in: path
+         required: true
+         schema:
+           type: integer
+           example: 140827
+       - name: accountID
+         description: ID of the Account being retrieved.
+         in: path
+         required: true
+         schema:
+           type: string
+           example: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+     responses:
+       default:
+         description: Account
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/GetAccountbyIDResponse'
+     servers:
+       - url: 'http://api.stage.zeta.in/account'
+         variables: {}
+ '{url}/individuals/{individualID}/accounts':
+   get:
+     tags:
+       - Account
+     summary: Get all Accounts for Account Holder
+     description: 'Get the details of all the Accounts created for an Account Holder. The response returns a list of Accounts, and related details for each Account.'
+     operationId: getAccountListForAccountHolder
+     parameters:
+       - name: ifiID
+         description: ID of the IFI.
+         in: path
+         required: true
+         schema:
+           type: integer
+           example: 140827
+       - name: individualID
+         description: ID of the Account Holder that the Accounts belong to. Same as `ownerAccountHolderID`.
+         in: path
+         required: true
+         schema:
+           type: string
+           example: 2e2e2770-7c6f-462b-bb37-2a4b9381f9e6
+     responses:
+       default:
+         description: Account
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/GetAllAccountsAH'
+     servers:
+       - url: 'http://api.stage.zeta.in/account'
+         variables: {}
+ 
+    
+ '{fusion_base_url}/accounts/{accountID}/balance':
+   get:
+     tags:
+       - Account balance
+     summary: Get balance for Account
+     description: 'Get the balance of a particular Account. The response also returns balance currency, last transaction ID, accounting type, and other details.'
+     operationId: getLedgerInfoForAnAccount
+     parameters:
+       - name: ifiID
+         description: ID of the IFI.
+         in: path
+         required: true
+         schema:
+           type: integer
+           example: 140827
+       - name: accountID
+         description: ID of the Account whose balance is being retrieved.
+         in: path
+         required: true
+         schema:
+           type: string
+           example: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+     responses:
+       default:
+         description: Balance
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/GetBalance'
+     servers:
+       - url: 'http://api.stage.zeta.in/account'
+         variables: {}
+ '{fusion_base_url}/accounts/{accountID}/transactions':
+   get:
+     tags:
+       - Account transactions
+     summary: Get all transactions for Account
+     description: 'Get details of all the transactions for an Account. The response returns a list of transactions, with related details for each transaction.</br></br>_Note_: <ul><li>Use `pageNumber` and `pageSize` query parameters for a paginated view. </li><li>Use `startingAfter` and `endingBefore` query parameters to filter results based on date and time.</li></ul>'
+     operationId: getAccountTransactions
+     parameters:
+       - name: ifiID
+         description: ID of the IFI.
+         in: path
+         required: true
+         schema:
+           type: integer
+           format: int64
+           example: 140827
+       - name: accountID
+         description: ID of the Account whose transactions are being retrieved.
+         in: path
+         required: true
+         schema:
+           type: string
+           example: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+       - name: pageNumber
+         in: query
+         description: Index of the page requested.
+         required: true
+         schema:
+           type: integer
+           format: int64
+           example: 1
+       - name: pageSize
+         in: query
+         description: Maximum number of results to be returned per request.
+         required: true
+         schema:
+           type: integer
+           format: int64
+           example: 13
+       - name: startingAfter
+         description: Starting date and time from which transactions should be retrieved. Must be in epoch time.
+         in: query
+         schema:
+           type: integer
+           format: int64
+           example: 1593516684808
+       - name: endingBefore
+         description: Ending date and time till which transactions should be retrieved. Must be in epoch time.
+         in: query
+         schema:
+           type: integer
+           format: int64
+           example: 1595577955811
+     responses:
+       default:
+         description: Account transactions
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/GetTransactionsResponse'
+     servers:
+       - url: 'http://api.stage.zeta.in/account'
+         variables: {}
+ '{fusion_base_url}/accounts/{accountID}/transactions/{transactionID}':
+   get:
+     tags:
+       - Account transactions
+     summary: Get transaction by ID
+     description: 'Get details of a particular transaction for an Account. The response returns balance, transaction amount, time of transaction, and other related details.'
+     operationId: getAccountTransactionByID
+     parameters:
+       - name: ifiID
+         description: ID of the IFI.
+         in: path
+         required: true
+         schema:
+           type: integer
+           format: int64
+           example: 140827
+       - name: accountID
+         description: ID of the Account for which transaction details are retrieved.
+         in: path
+         required: true
+         schema:
+           type: string
+           example: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+       - name: transactionID
+         description: ID of the transaction being retrieved.
+         in: path
+         required: true
+         schema:
+           type: string
+           example: '20200724080555778_46955_301955000979'
+     responses:
+       default:
+         description: Account transaction
+         content:
+           application/json:
+             schema:
+               $ref: '#/components/schemas/AccountTransaction'
+     servers:
+       - url: 'http://api.stage.zeta.in/account'
+         variables: {}
+ '{fusion_base_url}/transfers':
+   post:
+     tags:
+       - Account transfer
+     summary: Transfer funds
+     description: 'Transfer funds from Account to another. </br></br>_Important_: Each fund transfer must have a unique identifier, `requestID`.'
+     operationId: CreatefundTransfer
+     parameters:
+       - name: ifiID
+         in: path
+         description: ID of the IFI.
+         required: true
+         schema:
+           type: string
+           example: 140827
+     requestBody:
+       content:
+         application/json:
+           schema:
+             $ref: '#/components/schemas/FundTransfersRequest'
+       required: false
+     responses:
+       '200':
+         description: Fund transfer successful
+         content:
+           application/json; charset=utf-8:
+             schema:
+               $ref: '#/components/schemas/FundTransfersResponse'
+       '400':
+         description: Bad Request
+         content:
+           application/json; charset=utf-8:
+             schema:
+               $ref: '#/components/schemas/FundTransfer400Error'
+     deprecated: false
+     x-codegen-request-body-name: body
+ '{fusion_base_url}/accounts/{accountID}/updateStatus':
+   put:
+     tags:
+       - Account status
+     summary: Update Account Status
+     description: 'Block or unblock debits, credits, or both for an account holder''s account. Possible transition states to update the account status are: <ul><li>ENABLED: Set to enable account holders to perform both credit and debit using the account</li><li>DEBITS_DISABLED: Set to disable account holders to perform debit using the account</li> <li>CREDITS_DISABLED: Set to disable account holders to perform credit using the account</li><li>BLOCKED: Set to disable account holders to perform both credit and debit using the account</li><li>CLOSED: Set to permanently close the account</li></ul>'
+     operationId: updateAccountStatusUsingPUT_1
+     parameters:
+       - name: ifiID
+         in: path
+         description: ID of the IFI.
+         required: true
+         schema:
+           type: string
+           example: 140827
+       - name: accountID
+         description: ID of the Account whose status to be updated.
+         in: path
+         required: true
+         schema:
+           type: string
+           example: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+     requestBody:
+       description: 'Specify the account status. Supported status types are  <code>ENABLED</code>,<code>DEBITS_DISABLED</code>, <code>CREDITS_DISABLED</code>, <code>BLOCKED</code>,<code>CLOSED</code>'
+       content:
+         application/json:
+           schema:
+             $ref: '#/components/schemas/UpdateAccountStatusRequest'
+       required: true
+     responses:
+       '200':
+         description: OK
+         content:
+           application/json; charset=utf-8:
+             schema:
+               $ref: '#/components/schemas/UpdateAccountStatusResponse'
+     deprecated: false
+     x-codegen-request-body-name: body
+components:
+ schemas:
+   Accessor:
+     type: object
+     properties:
+       accountHolderID:
+         type: string
+       transactionPolicyIDs:
+         type: array
+         items:
+           type: string
+       status:
+         type: string
+       attributes:
+         type: object
+         additionalProperties:
+           type: string
+       createdAt:
+         type: string
+         format: date-time
+       updatedAt:
+         type: string
+         format: date-time
+   AccountRelation:
+     type: object
+     properties:
+       id:
+         type: string
+       accountID:
+         type: string
+       relationshipType:
+         type: string
+       status:
+         type: string
+       attributes:
+         type: object
+         additionalProperties:
+           type: string
+       createdAt:
+         type: string
+         format: date-time
+       updatedAt:
+         type: string
+         format: date-time
+   AccountVector:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of the Vector.
+       ifiID:
+         type: integer
+         format: int64
+         description: ID of the IFI.
+       accountID:
+         type: integer
+         format: int64
+         description: ID of the Account to which the Vector is added.
+       value:
+         type: string
+         description: 'Value of the Vector based on the Vector `type`. If Vector type is `p`, phone number is returned; if the Vector type is `e`, email ID is returned.'
+       type:
+         type: string
+         description: Vector type. phone is identified as `p`; email is identified as `e`.
+       status:
+         type: string
+         description: Operational status of the Vector.
+         enum:
+           - ENABLED
+           - DISABLED
+       attributes:
+         type: object
+         description: Additional properties specified for the Vector.
+         additionalProperties:
+           type: string
+       createdAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Vector is created.
+       updatedAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Vector is updated.
+     example:
+       id: ad4e02c9-41b1-4dc1-86e2-827f35ec8e93
+       ifiID: 140827
+       accountID: f35f88dd-481c-4b0f-84b5-8be991c008ae
+       value: johndoe@gmail.com
+       type: e
+       status: ENABLED
+       attributes:
+         additionalProp1: string
+         additionalProp2: string
+         additionalProp3: string
+       createdAt: 'Aug 6, 2020 10:47:30 AM'
+       updatedAt: 'Aug 6, 2020 10:47:30 AM'
+       headers: {}
+   UpdateAccountStatusRequest:
+     type: object
+     Properties:
+         status:
+           type: string
+           description: Status of the account to be changed
+           allowEmptyValue: 'false'
+     title: UpdateAccountStatusRequest
+   UpdateAccountStatusResponse:
+     type: object
+     properties:
+       id:
+         type: string
+       ifiID:
+         type: integer
+         format: int64
+       status:
+         type: string
+     title: UpdateAccountStatusResponse
+   IssueAccountArtifactRequest:
+     type: object
+     properties:
+       accountHolderID:
+         type: string
+         description: ID of the Account Holder to whom the Account Product is issued.
+       accountProductID:
+         type: string
+         description: ID of the Account Product being issued.
+       name:
+         type: string
+         description: Name to identify the Account Product.
+     example:
+       accountHolderID: d9fa39df-59c2-4949-be28-cf57131f2a17
+       accountProductID: 9e97fc72-d692-4c0a-bccc-ba689954d9af
+       bundleID: ee64c930-c06f-49cb-9443-84b132b9d4e2
+       name: beneficiary account in test999
+   IssueAccountArtifactResponse:
+     type: object
+     properties:
+       bundleID:
+         type: string
+         description: ID of the Bundle that the Account Product belongs to.
+       accountHolderID:
+         type: string
+         description: ID of the Account Holder to whom the Account Product is issued.
+       accountID:
+         type: string
+         description: ID of the Account issued to the Account Holder.
+     example:
+       bundleID: ee64c930-c06f-49cb-9443-84b132b9d4e2
+       accountHolderID: d9fa39df-59c2-4949-be28-cf57131f2a17
+       accountID: 5845b701-ecdf-4096-b9e0-e854408e4779
+   IssueBundleRequest:
+     type: object
+     properties:
+       accountHolderID:
+         type: string
+         description: ID of the Account Holder to whom the Bundle is issued.
+       name:
+         type: string
+         description: Name to identify the Bundle.
+       phoneNumber:
+         type: string
+         description: Phone number of the Account Holder. This number will be linked to the Account/Payment Product issued to the Account Holder.
+     example:
+       accountHolderID: b9988179-9a74-41f5-aba4-0b85e501fd68
+       name: Fintechwalletbundle9adcf36
+       phoneNumber: '+919583170190'
+   IssueBundleResponse:
+     type: object
+     properties:
+       accounts:
+         type: array
+         items:
+           properties:
+             bundleID:
+               type: string
+               description: ID of the Bundle that the Account belongs to.
+             accountHolderID:
+               type: string
+               description: ID of the Account Holder to whom the Account is issued.
+             accountID:
+               type: string
+               description: ID of the Account created for the Account Holder.
+       paymentInstruments:
+         type: array
+         items:
+           properties:
+             bundleID:
+               type: string
+               description: ID of the Bundle that the Payment Instrument belongs to.
+             resourceID:
+               type: string
+               description: ID of the Resource that the Payment Instrument belongs to.
+             status:
+               type: string
+               description: Operational status of the Payment Instrument.
+               enum:
+                 - ACTIVE
+                 - INACTIVE
+             targetAccount:
+               type: string
+               description: 'ID of the Account that the Payment Instrument is mapped to. If an Account is also created in the same request, then the Payment Instrument is mapped to it by default (`accountID`).'
+     example:
+       accounts:
+         - bundleID: 39a8ee50-471d-4da7-a574-141e4770d0af
+           accountHolderID: b9988179-9a74-41f5-aba4-0b85e501fd68
+           accountID: 375e2078-fd4f-4a81-ac87-b32b2b3f4e5a
+       paymentInstruments:
+         - bundleID: 39a8ee50-471d-4da7-a574-141e4770d0af
+           resourceID: d0a21d7b-38ad-4ab1-88a4-fc17c2189244
+           status: ACTIVE
+           targetAccount: 375e2078-fd4f-4a81-ac87-b32b2b3f4e5a
+   IssueFormFactorRequest:
+     type: object
+     properties:
+       formFactorProductID:
+         type: string
+         description: ID of the Form Factor being issued.
+       bundleID:
+         type: string
+         description: ID of the Bundle that the Form Factor belongs to.
+       targetAccountID:
+         type: string
+         description: ID of the Account Holder's Account to be linked to the Form Factor.
+       ifiID:
+         type: string
+         description: ID of the IFI.
+       orderDetails:
+         type: object
+         description: 'Details to be specified for the ordering of the Form Factor. For example, if you are issuing a card, you can pass expiry date, card SKU, and other order details. '
+       resourceID:
+         type: string
+         description: ID of the Resource that the Form Factor belongs to.
+       attributes:
+         type: object
+         description: Additional properties specified for the Form Factor.
+     example:
+       formFactorProductID: 66abce21
+       bundleID: ee64c930-c06f-49cb-9443-84b132b9d4e2
+       targetAccountID: abd86c72-c2bd-4d2a-8d88-b2ad29a14c9a
+       ifiID: 140827
+       orderDetails:
+         orderID: string
+         cardSkuID: IDFC_FINTECH_PHYSICAL
+         expiry:
+           month: 2
+           year: 10
+       resourceID: 42fd6087-6988-4c8d-b27a-c48e4293632d
+       attributes: {}
+   IssueFormFactorResponse:
+     type: object
+     properties:
+       bundleID:
+         type: string
+         description: ID of the Bundle that the Form Factor belongs to.
+       id:
+         type: string
+         description: ID of the Form Factor request. This is different from `formFactorID`.
+       formFactorID:
+         type: string
+         description: 'ID generated for the issued Form Factor. In case of card, this is the Card ID or CGUID; for phone, this is the phone number.'
+       attributes:
+         type: object
+         description: Additional properties specified for the issued Form Factor.
+         additionalProperties:
+           type: string
+     example:
+       bundleID: ee64c930-c06f-49cb-9443-84b132b9d4e2
+       id: 9fed79b6-fb0d-4d55-a870-b2336333c5fb
+       formFactorID: 9c8b11eb-c8a1-4d6f-9ab6-31a3a262a12c
+   IssueResourceRequest:
+     type: object
+     properties:
+       targetAccountID:
+         type: string
+         description: ID of the Account Holder's Account to be linked to the Resource.
+       phoneNumber:
+         type: string
+         description: The phone number to be linked to the Resource.
+       resourceProductID:
+         type: string
+         description: ID of the Resource Product that the Resource belongs to.
+       attributes:
+         type: object
+         description: Additional properties specified for the Resource.
+     example:
+       targetAccountID: f35f88dd-481c-4b0f-84b5-8be991c008ae
+       resourceProductID: 2ac114f3
+       phoneNumber: '+910076507797'
+       attributes: {}
+   IssueResourceResponse:
+     type: object
+     properties:
+       bundleID:
+         type: string
+         description: ID of the Bundle that the Resource belongs to.
+       resourceID:
+         type: string
+         description: ID of the Resource issued to the Account Holder.
+       targetUri:
+         type: string
+         description: ID of the Account that the Resource is linked to.
+       status:
+         type: string
+         description: Operational status of the Resource.
+         enum:
+           - ACTIVE
+           - INACTIVE
+       attributes:
+         type: object
+         description: Additional properties specified for the Resource.
+         additionalProperties:
+           type: string
+     example:
+       bundleID: ee64c930-c06f-49cb-9443-84b132b9d4e2
+       resourceID: a4ba747c-80a6-4032-95da-7e3c66054551
+       targetUri: 'account://f35f88dd-481c-4b0f-84b5-8be991c008ae'
+       status: ACTIVE
+   AccountList:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of the Account.
+       ifiID:
+         type: integer
+         format: int64
+         description: ID of the IFI.
+       accountHolderID:
+         type: string
+         description: ID of the Account Holder to whom the Account is issued.
+       productID:
+         type: integer
+         format: int64
+         description: ID of the Product that the Account belongs to.
+       programIDs:
+         description: IDs of Programs that include the Account.
+         type: array
+         items:
+           type: string
+       attributes:
+         type: object
+         description: Additional properties specified for the Account.
+         additionalProperties:
+           type: string
+       status:
+         type: string
+         description: Operational status of the Account.
+         enum:
+           - ENABLED
+           - DISABLED
+           - CREDIT_DISABLED
+           - DEBIT_DISABLED
+       name:
+         type: string
+         description: Name given to identify the Account.
+   AccountTransaction:
+     type: object
+     properties:
+       accountID:
+         type: integer
+         format: int64
+         description: ID of the Account whose transaction details are retrieved.
+       transactionID:
+         type: string
+         description: ID of the transaction being retrieved.
+       postingID:
+         type: string
+         description: ID of the transaction in Fusion's accounting system. It is used for identifying and tracking the transaction.
+       reversedTransactionIDs:
+         type: array
+         description: IDs of transactions that were reversed.
+         items: {}
+       previousBalance:
+         type: integer
+         format: int64
+         description: Account balance before the transaction.
+       newBalance:
+         type: integer
+         format: int64
+         description: Account balance after the transaction.
+       timestamp:
+         type: integer
+         format: int64
+         description: Timestamp of transaction in epoch format.
+       amount:
+         type: integer
+         format: int64
+         description: Transaction amount.
+       currency:
+         type: string
+         description: 'Currency in which transaction was carried out. Example: INR for Indian Rupee.'
+       recordType:
+         type: string
+         enum:
+           - DEBIT
+           - CREDIT
+         description: ''
+       remarks:
+         type: string
+         description: Note or description regarding the transaction.
+       attributes:
+         type: object
+         description: Additional properties specified for the transaction.
+         additionalProperties:
+           type: string
+     example:
+       accountID: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+       transactionID: '20200724080555778_46955_301955000979'
+       postingID: '554612'
+       reversalTransactionIDs: []
+       previousBalance: 798
+       newBalance: 697
+       timestamp: 1595577955811
+       amount: 101
+       currency: INR
+       recordType: DEBIT
+       remarks: TEST
+       attributes:
+         account.pd-id: '2719627361570819746'
+         zeta.card-program-id: ''
+         debitAuthSignatory: '["1102386@zetauser.zeta.in/1"]'
+         aura.coa-id: '3071036307140878880'
+         account.pf-id: '558731570586644109'
+         banker.version: '2.0'
+         bundle.name: Fintech IDFC Paper KYC
+         paymentRequestID: FUSION-140827-cefaf90f-066c-4fc2-a181-93cccc24184b-1595577951967
+         channel: IMPS
+         policies: '{5234479764113589168,5343374243038545680,6457612509305989245,8516154114592209020,8139814330424178527,5859521083926848171}'
+         account.account-holder-id: 8d3f52a6-c546-40bd-b810-e610b26ec1d7
+         journal.voucherCode: ATLAS_P2M_AUTH
+         bankTransfer.mode: IMPS
+         aura.parent-node-id: '4194617870374301403'
+         bankTransfer.remitterName: null Test Contract change null
+         zeta.ifi: '140827'
+         destinationURI: 'ba://038801588319?ifsc=ICIC0000431'
+         sourceURI: 'account://0e3ba859-1d1e-4682-a0a9-1e82986d2dcb'
+         zeta.ppi-type: OPEN
+         zeta.product-type: Generic
+         zeta.ifi-product-type: GPR_PAPER_KYC_WITHOUT_PAN
+         athena.account-provider-id: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+         zeta.business-id: '140827'
+         bankTransfer.remitterMobile: '+919890034501'
+         challenge.type: X509Cert
+         payment.txn-category: P2BANK
+         authenticationResourceId: 9ba1f200-6340-4f28-9951-6150e0908462
+         journal.self: 'false'
+         zeta.card-program-ids: ''
+         transactionCode: '229545'
+         isForced: 'false'
+         account.account_holder.account_holder_provider_id: 3f8047dc-e7f3-4b00-bf7f-80ff3c9a1696
+         payment.overridden-payer-vector: 'account://0e3ba859-1d1e-4682-a0a9-1e82986d2dcb'
+         paymentCode: PMCINZZ0201
+         paymentID: e1345f8f-4576-404b-8b1c-6174da841d4c
+         challenge.response: |
+           -----BEGIN CERTIFICATE-----
+           MIIBtjCCAVygAwIBAgIUFLTGQEtdH5/Isq0hL9X245T1ovMwCgYIKoZIzj0EAwIw
+           OTE3MDUGA1UEAwwuM2lmRHBfOEFrR1NTVHlyVk1tek9QZz09QGFjY291bnQuaWRm
+           Yy5yZXNvdXJjZTAeFw0yMDA3MjQwODA1NTJaFw0yMDA3MjQwODA3NTJaMDkxNzA1
+           BgNVBAMMLjNpZkRwXzhBa0dTU1R5clZNbXpPUGc9PUBhY2NvdW50LmlkZmMucmVz
+           b3VyY2UwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATeiQnXSGawq+QnXoW0tUIq
+           vii8LAxePs38bqyG2+A+5Nz0MKTGHD5nR+QE+a7mgCZ4VsKIFO8KNAnlVy2gAs8C
+           o0IwQDAdBgNVHQ4EFgQUXhRdz/qnCtfWuOpaPt1JEbHcPrYwDgYDVR0PAQH/BAQD
+           AgEGMA8GA1UdEwEB/wQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgaT+PGlo1kGf2
+           Rntkl8RC7LRAyH0zIB1x7Dafzgt91SYCIQDmk4z9V+fV5cZdpmkYHUPHHGChPqWC
+           8oWjZw8rRIwfJA==
+           -----END CERTIFICATE-----
+         paymentReceiptID: '301955000979'
+         bankTransfer.beneficiaryName: MOYONKO
+         isP2PTransfer: 'false'
+       headers: {}
+   AddAccountVectorRequest:
+     type: object
+     properties:
+       ifiID:
+         description: ID of the IFI.
+         type: integer
+       accountID:
+         description: ID of the Account to which the Vector is being added.
+         type: integer
+       type:
+         type: string
+         description: 'Vector type. To add phone number, specify `p`; to add email specify`e`.'
+       value:
+         description: 'Value of the Vector based on the Vector `type`. Example: If Vector type is phone (`p`), specify phone number; if Vector type is `e`, specify email ID.'
+         type: string
+       status:
+         description: Operational status of the Vector.
+         type: string
+         enum:
+           - ENABLED
+           - DISABLED
+       attributes:
+         type: object
+         description: Additional properties specified for the Vector.
+         additionalProperties:
+           type: string
+     example:
+       ifiID: 140827
+       accountID: f35f88dd-481c-4b0f-84b5-8be991c008ae
+       value: johndoe@gmail.com
+       type: e
+       status: ENABLED
+       headers:
+         additionalProp1: string
+         additionalProp2: string
+         additionalProp3: string
+       attributes:
+         additionalProp1: string
+         additionalProp2: string
+         additionalProp3: string
+   AddAccountVectorResponse:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of Vector that is added.
+       ifiID:
+         description: ID of the IFI.
+         type: integer
+       accountID:
+         description: ID of the Account to which the Vector is added.
+         type: integer
+       type:
+         type: string
+         description: 'Vector type. phone is identified as `p`, email is identified as `e`.'
+       value:
+         description: 'Value of the Vector based on the Vector `type`. Example: If Vector type is phone (`p`), phone number is returned.'
+         type: string
+       status:
+         description: Operational status of the Vector.
+         type: string
+         enum:
+           - ENABLED
+           - DISABLED
+       attributes:
+         type: object
+         description: Additional properties specified for the Vector.
+         additionalProperties:
+           type: string
+       createdAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Vector is created.
+       updatedAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Vector is updated.
+     example:
+       id: ad4e02c9-41b1-4dc1-86e2-827f35ec8e93
+       ifiID: 140827
+       accountID: f35f88dd-481c-4b0f-84b5-8be991c008ae
+       value: johndoe@gmail.com
+       type: e
+       status: ENABLED
+       attributes:
+         additionalProp1: string
+         additionalProp2: string
+         additionalProp3: string
+       createdAt: 'Aug 6, 2020 10:47:30 AM'
+       updatedAt: 'Aug 6, 2020 10:47:30 AM'
+       headers: {}
+   GetAllBundleResponse:
+     type: object
+     properties:
+       '':
+         type: array
+         items:
+           $ref: '#/components/schemas/BundleAllResponse'
+     example:
+       - id: b9ab5961-c0ef-4592-af93-776b8ca74f24
+         ifiID: 140827
+         vboID: '6'
+         name: test-bundle-on-pp01
+         accountProducts:
+           - id: 63e463ef-5896-4a23-ac75-d5c05fd4fdfa
+             productName: GPR_PAPER_KYC_WITH_PAN
+             productID: '5622888348035458281'
+             type: ACCOUNT
+             programIDs: ''
+             ifiID: 140827
+             attributes: {}
+         paymentProducts: []
+         status: active
+         attributes: {}
+         createdAt: 'Apr 17, 2020 8:49:44 AM'
+         updatedAt: 'Apr 17, 2020 8:49:44 AM'
+         shortCode: BUN001
+       - id: 6fd578c5-d17c-48bc-8d35-387a27a48631
+         ifiID: 140827
+         vboID: 4d9d2e7e-d2ef-4ccf-8092-4e741bcaf214
+         name: MValu Min KYC Wallet(with PAN)
+         accountProducts:
+           - id: 8ed12d90-bf92-4cf0-89be-f76befda2151
+             productName: GPR_MIN_KYC_WITH_PAN
+             productID: '4705539073445243817'
+             type: ACCOUNT
+             programIDs: ''
+             ifiID: 140827
+             attributes: {}
+         paymentProducts:
+           - id: b2adeddb-62e9-4209-a73b-54d7d66b5760
+             productName: PAYMENT_PRODUCT_MVALUTECH
+             description: PAYMENT_PRODUCT_MVALUTECH
+             productID: 9d3015bd-448d-46ed-9dd5-a2d45a307a1a
+             type: PAYMENT
+             programIDs: ''
+             ifiID: 140827
+             attributes: {}
+         status: active
+         attributes: {}
+         createdAt: 'Jul 16, 2020 6:05:04 PM'
+         updatedAt: 'Jul 16, 2020 6:05:04 PM'
+         shortCode: BUNIN00180
+       - id: debdbbb5-e1cc-455f-9076-61f06a2246b9
+         ifiID: 140827
+         name: Sample Bundle
+         accountProducts:
+           - id: 1b25a397-1d10-4ce1-be78-0f3478c39dd5
+             productName: CASH
+             productID: '2956857872495316959'
+             type: ACCOUNT
+             programIDs: ''
+             ifiID: 140827
+             attributes: {}
+         paymentProducts: []
+         status: active
+         createdAt: 'Apr 29, 2020 4:25:55 PM'
+         updatedAt: 'Apr 29, 2020 4:25:55 PM'
+         shortCode: '00001'
+         picURL: 'https://go.aws/3bNKj8Z'
+         description: Test bundle
+   BundleAllResponse:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of the Bundle.
+       ifiID:
+         type: integer
+         format: int64
+         description: ID of the IFI.
+       vboID:
+         type: string
+         description: ID of the Fintech allowed to access the Bundle.
+       name:
+         type: string
+         description: Name for the Bundle.
+       accountProducts:
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountProductResponse'
+       paymentProducts:
+         type: array
+         items:
+           $ref: '#/components/schemas/PaymentProductResponse'
+       status:
+         type: string
+         description: Operational status of the Bundle.
+         enum:
+           - active
+           - inactive
+       attributes:
+         type: object
+         description: Additional properties specified for the Bundle.
+       createdAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Account Product is issued.
+       updatedAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Account Product is updated.
+       shortCode:
+         type: string
+         description: Easy to remember code for the Bundle. Value is unique for each Bundle.
+       picURL:
+         type: string
+         description: Image representing the Bundle.
+       description:
+         type: string
+         description: Note or description about the Bundle.
+     example:
+       id: 97400c5f-7af2-48fb-b69b-4ffcab4d851d
+       ifiID: 140827
+       name: PREPAID Bundle 12
+       accountProducts:
+         - id: 85bc03ff-a188-460c-9951-f89b1013b946
+           productName: FUSION_PRODUCT
+           productID: '7706229683808022627'
+           type: ACCOUNT
+           programIDs: string
+           ifiID: 140827
+       paymentProducts:
+         - id: 9b8301a8-48d9-43c5-8ac1-17fce9dcf132
+           productName: 'FINTECH PAYMENT PRODUCT # 001'
+           description: Payment Product for Fintech
+           productID: baefec67
+           type: PAYMENT
+           programIDs: string
+           ifiID: 140827
+       status: inactive
+       createdAt: 'May 13, 2020 8:42:23 AM'
+       updatedAt: 'Jun 2, 2020 10:14:22 AM'
+       shortCode: SVNG
+       picURL: string
+       description: Bundle related to prepaid accounts. Consists of a prepaid account product and a related prepaid card
+   BundleIDResponse:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of the Bundle.
+       ifiID:
+         type: integer
+         format: int64
+         description: ID of the IFI.
+       name:
+         type: string
+         description: Name for the Bundle.
+       accountProducts:
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountProductResponse'
+       paymentProducts:
+         type: array
+         items:
+           $ref: '#/components/schemas/PaymentProductResponse'
+       status:
+         type: string
+         description: Operational status of the Bundle.
+         enum:
+           - active
+           - inactive
+       attributes:
+         type: object
+         description: Additional properties specified for the Bundle.
+       createdAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Bundle is issued.
+       updatedAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Bundle is updated.
+       shortCode:
+         type: string
+         description: Easy to remember code for the Bundle. Value is unique for each Bundle.
+       picURL:
+         type: string
+         description: Image representing the Bundle.
+       description:
+         type: string
+         description: Note or description about the Bundle.
+     example:
+       id: 97400c5f-7af2-48fb-b69b-4ffcab4d851d
+       ifiID: 140827
+       name: PREPAID Bundle 12
+       accountProducts:
+         - id: 85bc03ff-a188-460c-9951-f89b1013b946
+           productName: FUSION_PRODUCT
+           productID: '7706229683808022627'
+           type: ACCOUNT
+           programIDs: string
+           ifiID: 140827
+       paymentProducts:
+         - id: 9b8301a8-48d9-43c5-8ac1-17fce9dcf132
+           productName: 'FINTECH PAYMENT PRODUCT # 001'
+           description: Payment Product for Fintech
+           productID: baefec67
+           type: PAYMENT
+           programIDs: string
+           ifiID: 140827
+       status: inactive
+       createdAt: 'May 13, 2020 8:42:23 AM'
+       updatedAt: 'Jun 2, 2020 10:14:22 AM'
+       shortCode: SVNG
+       picURL: string
+       description: Bundle related to savings accounts. Consists of a prepaid account product and a related prepaid card
+   GetAccountListResponse:
+     type: object
+     properties:
+       entities:
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountList'
+     example:
+       entities:
+         - id: 2e878841-87db-48fd-b97b-71020b278287
+           ifiID: 140827
+           accountHolderID: df2b86db-feee-4679-8420-1d4b29422add
+           productID: 4705539073445244000
+           programIDs: []
+           attributes:
+             bundle.name: Walpool bundle (minKYC with PAN)
+             zeta.business-id: '140827'
+             zeta.card-program-id: ''
+           status: ENABLED
+           name: PA Vaibhav Khemka
+         - id: e575f5d5-ae2a-43e1-b63d-2fd42cfcb5eb
+           ifiID: 140827
+           accountHolderID: df2b86db-feee-4679-8420-1d4b29422add
+           productID: 4705539073445244000
+           programIDs: []
+           attributes:
+             bundle.name: Walpool bundle (minKYC with PAN)
+             zeta.business-id: '140827'
+             zeta.card-program-id: ''
+           status: ENABLED
+           name: PA Vaibhav Khemka
+   GetAccountVectorListResponse:
+     type: object
+     properties:
+       accountVectors:
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountVector'
+     example:
+       accountVectors:
+         - id: ad4e02c9-41b1-4dc1-86e2-827f35ec8e93
+           ifiID: 140827
+           accountID: f35f88dd-481c-4b0f-84b5-8be991c008ae
+           value: johndoe@gmail.com
+           type: e
+           status: ENABLED
+           attributes:
+             additionalProp1: string
+             additionalProp2: string
+             additionalProp3: string
+           createdAt: 'Aug 6, 2020 10:47:30 AM'
+           updatedAt: 'Aug 6, 2020 10:47:30 AM'
+           headers: {}
+         - id: 57bb3100-5654-4bef-81e5-95200597370a
+           ifiID: 140827
+           accountID: f35f88dd-481c-4b0f-84b5-8be991c008ae
+           value: johndoe1@gmail.com
+           type: e
+           status: ENABLED
+           attributes:
+             additionalProp1: string
+             additionalProp2: string
+             additionalProp3: string
+           createdAt: 'Aug 6, 2020 10:49:35 AM'
+           updatedAt: 'Aug 6, 2020 10:49:35 AM'
+           headers: {}
+         - id: d63be813-98f6-465b-bb91-1e5f4e2356f2
+           ifiID: 140827
+           accountID: f35f88dd-481c-4b0f-84b5-8be991c008ae
+           value: '+913470070099'
+           type: p
+           status: ENABLED
+           attributes:
+             additionalProp1: string
+             additionalProp2: string
+             additionalProp3: string
+           createdAt: 'Apr 25, 2020 3:11:16 PM'
+           updatedAt: 'Apr 25, 2020 3:11:16 PM'
+           headers: {}
+         - id: fdcd37f3-1fe0-46bc-b53e-685d365a7f6b
+           ifiID: 140827
+           accountID: f35f88dd-481c-4b0f-84b5-8be991c008ae
+           value: '+910070070099'
+           type: p
+           status: ENABLED
+           attributes:
+             additionalProp1: string
+             additionalProp2: string
+             additionalProp3: string
+           createdAt: 'Jan 8, 2020 5:34:08 PM'
+           updatedAt: 'Jan 8, 2020 5:34:08 PM'
+           headers: {}
+       headers: {}
+   JID:
+     type: object
+     properties:
+       appDomain:
+         type: string
+       bareJID:
+         $ref: '#/components/schemas/JID'
+       defaultServiceNode:
+         type: boolean
+       jidOfAGroup:
+         type: boolean
+       nodeId:
+         type: string
+       primaryServiceName:
+         type: string
+       proxyServiceJID:
+         type: boolean
+       resource:
+         type: string
+       serviceInstanceJID:
+         type: boolean
+       serviceName:
+         type: string
+       serviceViewJID:
+         type: boolean
+       serviceViewName:
+         type: string
+     title: JID
+   AccountProductResponse:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of the Account Product.
+       productName:
+         type: string
+         description: Name of the parent Product that the Account Product belongs to.
+       productID:
+         type: string
+         description: ID of the parent Product that the Account Product belongs to.
+       type:
+         description: Account Product type.
+         type: string
+         enum:
+           - ACCOUNT
+           - PAYMENT
+       programIDs:
+         type: string
+         description: IDs of Programs that include the Account Product.
+       ifiID:
+         type: integer
+         format: int64
+         description: ID of the IFI.
+       attributes:
+         type: object
+         description: Additional properties specified for the Account Product.
+   PaymentProductResponse:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of the Payment Product.
+       productName:
+         type: string
+         description: Name of the parent Product that the Payment Product belongs to.
+       productID:
+         type: string
+         description: ID of the parent Product that the Payment Product belongs to.
+       type:
+         description: Payment Product type.
+         type: string
+         enum:
+           - ACCOUNT
+           - PAYMENT
+       programIDs:
+         type: string
+         description: ID of the Programs that include the Payment Product.
+       ifiID:
+         type: integer
+         format: int64
+         description: ID of the IFI.
+       attributes:
+         type: object
+         description: Additional properties specified for the Payment Product.
+   FundTransfersRequest:
+     type: object
+     properties:
+       requestID:
+         type: string
+         description: ID of the fund transfer request. Must be unique for each transfer.
+       amount:
+         $ref: '#/components/schemas/Amount'
+       transferCode:
+         type: string
+         description: Code specifying the fund transfer mode.
+       debitAccountID:
+         type: string
+         description: ID of the Account from where the funds are debited.
+       creditAccountID:
+         type: string
+         description: ID of the Account to which the funds are credited.
+       transferTime:
+         type: number
+         description: Timestamp of fund transfer. Must be in epoch format.
+         format: double
+       remarks:
+         type: string
+         description: Note or description regarding the fund transfer.
+       attributes:
+         type: object
+         description: Additional properties specified for the fund transfer.
+         additionalProperties:
+           type: string
+     example:
+       requestID: 8439eknhvutcvh44425ut
+       amount:
+         currency: INR
+         amount: 21
+       transferCode: ATLAS_P2M_AUTH
+       debitAccountID: c3b61955-f392-4f7a-905b-d561a462decc
+       creditAccountID: 422782d2-adcd-49a6-bde1-eb0461a582ba
+       transferTime: 1574741608000
+       remarks: Fund transfer test
+       attributes: {}
+   Amount:
+     title: Amount
+     type: object
+     properties:
+       value:
+         type: integer
+         format: int64
+         description: Fund transfer amount.
+       currency:
+         type: string
+         description: 'Currency in which the funds are transferred. Example: INR for Indian Rupee.'
+   FundTransfersResponse:
+     type: object
+     properties:
+       requestID:
+         type: string
+         description: ID of the fund transfer request.
+       transferID:
+         type: string
+         description: Unique ID generated for the fund transfer.
+       status:
+         type: string
+         description: 'Status of fund transfer. Example: SUCCESS for a successful transfer.'
+     example:
+       requestID: 8439eknhvutcvh44428ut
+       transferID: 20200806154945431_562_8439eknhvutcvh44428ut
+       status: SUCCESS
+   FundTransfer400Error:
+     type: object
+     properties:
+       code:
+         type: string
+         description: Error code.
+       message:
+         type: string
+         description: Error description.
+       details:
+         type: object
+         properties:
+           errorCode:
+             type: string
+             description: Error code.
+     example:
+       code: REQUEST_MISMATCH
+       message: 'The request has an old requestID, but different content'
+       details:
+         errorCode: REQUEST_MISMATCH
+   GetAllAccountsAH:
+     type: object
+     properties:
+       accounts:
+         type: array
+         items:
+           $ref: '#/components/schemas/GetAccountbyIDResponse'
+     example:
+       accounts:
+         - id: 594667fe-11d3-413e-b010-5cfba5e35651
+           vectors: []
+           accessors: []
+           relationships: []
+           ifiID: 140827
+           ownerAccountHolderID: 2e2e2770-7c6f-462b-bb37-2a4b9381f9e6
+           accountProviderID: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+           name: FA Test Parent
+           productFamilyID: 558731570586644100
+           productID: 5573245728074003000
+           programIDs: []
+           ledgerID: 3513132202797876000
+           status: ENABLED
+           attributes:
+             bundle.name: WalPool Product Bundle(Aadhar OTP KYC without PAN)
+             zeta.business-id: '140827'
+             zeta.card-program-id: ''
+           createdAt:
+             date:
+               year: 2020
+               month: 8
+               day: 5
+             time:
+               hour: 17
+               minute: 30
+               second: 5
+               nano: 970617000
+           updatedAt:
+             date:
+               year: 2020
+               month: 8
+               day: 5
+             time:
+               hour: 17
+               minute: 30
+               second: 5
+               nano: 970617000
+           headers: {}
+         - id: 5519dcf6-e0f0-47db-82d4-0b6e63234061
+           vectors: []
+           accessors: []
+           relationships: []
+           ifiID: 140827
+           ownerAccountHolderID: 2e2e2770-7c6f-462b-bb37-2a4b9381f9e6
+           accountProviderID: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+           name: FA Test Parent
+           productFamilyID: 558731570586644100
+           productID: 5573245728074003000
+           programIDs: []
+           ledgerID: 4270699331323025400
+           status: ENABLED
+           attributes:
+             bundle.name: WalPool Product Bundle(Aadhar OTP KYC without PAN)
+             zeta.business-id: '140827'
+             zeta.card-program-id: ''
+           createdAt:
+             date:
+               year: 2020
+               month: 8
+               day: 5
+             time:
+               hour: 17
+               minute: 30
+               second: 2
+               nano: 847469000
+           updatedAt:
+             date:
+               year: 2020
+               month: 8
+               day: 5
+             time:
+               hour: 17
+               minute: 30
+               second: 2
+               nano: 847469000
+           headers: {}
+       headers: {}
+   GetAccountbyIDResponse:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of the Account.
+       vectors:
+         description: Details of Vectors added to the Account.
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountVector'
+       accessors:
+         description: Account Holders who have access to the Account.
+         type: array
+         items:
+           $ref: '#/components/schemas/Accessor'
+       relationships:
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountRelation'
+       ifiID:
+         type: integer
+         format: int64
+         description: ID of the IFI.
+       ownerAccountHolderID:
+         type: string
+         description: ID of the Account Holder that the Account belongs to. Same as `individualID`.
+       accountProviderID:
+         type: string
+         description: ID of the Account Provider.
+       name:
+         type: string
+         description: Name given to identify the Account.
+       productFamilyID:
+         type: integer
+         format: int64
+         description: ID of the Product Family that the Account belongs to.
+       productID:
+         type: integer
+         format: int64
+         description: ID of the Product that the Account belongs to.
+       programIDs:
+         description: IDs of the Programs that include the Account.
+         type: array
+         items:
+           type: string
+       ledgerID:
+         type: integer
+         format: int64
+       status:
+         type: string
+         description: Operational status of the Account.
+         enum:
+           - ENABLED
+           - DISABLED
+           - CREDIT_DISABLED
+           - DEBIT_DISABLED
+       tags:
+         $ref: '#/components/schemas/tag'
+       attributes:
+         type: object
+         description: Additional properties specified for the Account.
+         additionalProperties:
+           type: string
+       createdAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Account is created.
+       updatedAt:
+         type: string
+         format: date-time
+         description: Timestamp of when the Account is updated.
+     example:
+       id: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+       vectors: []
+       accessors: []
+       relationships: []
+       ifiID: 140827
+       ownerAccountHolderID: 8d3f52a6-c546-40bd-b810-e610b26ec1d7
+       accountProviderID: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+       name: Bundle
+       productFamilyID: 558731570586644100
+       productID: 2719627361570819600
+       programIDs: []
+       ledgerID: 4361867930713937400
+       status: ENABLED
+       tags:
+         - type: vbo-id
+           value: 4fa18593-d2d9-4bf3-bea7-7f6deb9f2ca4
+           attributes: {}
+       attributes:
+         bundle.name: FINTECH IDFC Paper KYC
+         zeta.business-id: '140827'
+         zeta.card-program-id: ''
+       createdAt:
+         date:
+           year: 2020
+           month: 6
+           day: 27
+         time:
+           hour: 7
+           minute: 49
+           second: 12
+           nano: 609420000
+       updatedAt:
+         date:
+           year: 2020
+           month: 6
+           day: 27
+         time:
+           hour: 7
+           minute: 49
+           second: 12
+           nano: 609420000
+       headers: {}
+   tag:
+     type: object
+     description: Tag is a mechanism for classifying and filtering objects in Fusion.
+     properties:
+       type:
+         type: string
+       value:
+         type: string
+       attributes:
+         type: object
+         additionalProperties:
+           type: string
+   AccountInfo:
+     type: object
+     properties:
+       id:
+         type: string
+         description: ID of the Account being retrieved.
+       vectors:
+         description: Details of Vectors added to the Account.
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountVector'
+       accessors:
+         description: Account Holders who have access to the Account.
+         type: array
+         items:
+           $ref: '#/components/schemas/Accessor'
+       relationships:
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountRelation'
+       ifiID:
+         type: integer
+         format: int64
+         description: ID of the IFI.
+       ownerAccountHolderID:
+         type: string
+         description: ID of the Account Holder to whom the Account is issued.
+       accountProviderID:
+         type: string
+         description: ID of the Account Provider.
+       name:
+         type: string
+         description: Name given to identify the Account.
+       productFamilyID:
+         type: integer
+         format: int64
+         description: ID of the Product Family that the Account belongs to.
+       productFamilyName:
+         type: string
+         description: Name of the Product Family that the Account belongs to.
+       productID:
+         type: integer
+         format: int64
+         description: ID of the Product that the Account belongs to.
+       productName:
+         type: string
+         description: Name of the Product that the Account belongs to.
+       programIDs:
+         description: IDs of the Programs that include the Account.
+         type: array
+         items:
+           type: string
+       balance:
+         type: integer
+         format: int64
+         description: Account balance.
+       currency:
+         type: string
+         description: 'Currency of the funds in the Account. Example: INR.'
+       status:
+         type: string
+         description: 'Operational status of the Account. '
+         enum:
+           - ENABLED
+           - DISABLED
+           - CREDIT_DISABLED
+           - DEBIT_DISABLED
+       accountingType:
+         description: Accounting type of the Account.
+         type: string
+         enum:
+           - ASSET
+           - LIABILITY
+           - INCOME
+           - EXPENSE
+           - EQUITY
+       attributes:
+         description: Additional properties specified for the Account.
+         type: object
+         additionalProperties:
+           type: string
+     example:
+       id: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+       vectors: []
+       accessors: []
+       relationships: []
+       ifiID: 140827
+       ownerAccountHolderID: 8d3f52a6-c546-40bd-b810-e610b26ec1d7
+       accountProviderID: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+       name: Bundle
+       productFamilyID: 558731570586644100
+       productFamilyName: GPR
+       productID: 2719627361570819600
+       productName: GPR_PAPER_KYC_WITH_PAN
+       programIDs: []
+       balance: 697
+       currency: INR
+       status: ENABLED
+       accountingType: LIABILITY
+       attributes:
+         bundle.name: FINTECH IDFC Paper KYC
+         zeta.business-id: '140827'
+         zeta.card-program-id: ''
+       headers: {}
+   GetBalance:
+     type: object
+     properties:
+       balance:
+         type: integer
+         format: int64
+         description: Account balance.
+       currency:
+         type: string
+         description: Currency of the balance in the Account.
+       lastTransactionID:
+         type: string
+         description: ID of the last transaction.
+       accountingType:
+         type: string
+         description: Accounting type of the Account.
+         enum:
+           - ASSET
+           - LIABILITY
+           - INCOME
+           - EXPENSE
+           - EQUITY
+       attributes:
+         description: Additional properties specified for the balance.
+         type: object
+         additionalProperties:
+           type: string
+     example:
+       balance: 697
+       currency: INR
+       lastTransactionID: '20200724080555778_46955_301955000979'
+       accountingType: LIABILITY
+       headers: {}
+   GetTransactionsResponse:
+     type: object
+     properties:
+       accountTransactionList:
+         type: array
+         items:
+           $ref: '#/components/schemas/AccountTransaction'
+       totalRecord:
+         type: integer
+         description: Total number of transactions performed using the Account.
+     example:
+       accountTransactionList:
+         - accountID: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+           transactionID: '20200724080555778_46955_301955000979'
+           postingID: '554612'
+           reversalTransactionIDs: []
+           previousBalance: 798
+           newBalance: 697
+           timestamp: 1595577955811
+           amount: 101
+           currency: INR
+           recordType: DEBIT
+           remarks: TEST
+           attributes:
+             account.pd-id: '2719627361570819746'
+             zeta.card-program-id: ''
+             debitAuthSignatory: '["1102386@zetauser.zeta.in/1"]'
+             aura.coa-id: '3071036307140878880'
+             account.pf-id: '558731570586644109'
+             banker.version: '2.0'
+             bundle.name: Fintech IDFC Paper KYC
+             paymentRequestID: FUSION-140827-cefaf90f-066c-4fc2-a181-93cccc24184b-1595577951967
+             channel: IMPS
+             policies: '{5234479764113589168,5343374243038545680,6457612509305989245,8516154114592209020,8139814330424178527,5859521083926848171}'
+             account.account-holder-id: 8d3f52a6-c546-40bd-b810-e610b26ec1d7
+             journal.voucherCode: ATLAS_P2M_AUTH
+             bankTransfer.mode: IMPS
+             aura.parent-node-id: '4194617870374301403'
+             bankTransfer.remitterName: null Test Contract change null
+             zeta.ifi: '140827'
+             destinationURI: 'ba://038801588319?ifsc=ICIC0000431'
+             sourceURI: 'account://0e3ba859-1d1e-4682-a0a9-1e82986d2dcb'
+             zeta.ppi-type: OPEN
+             zeta.product-type: Generic
+             zeta.ifi-product-type: GPR_PAPER_KYC_WITHOUT_PAN
+             athena.account-provider-id: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+             zeta.business-id: '140827'
+             bankTransfer.remitterMobile: '+919890034501'
+             challenge.type: X509Cert
+             payment.txn-category: P2BANK
+             authenticationResourceId: 9ba1f200-6340-4f28-9951-6150e0908462
+             journal.self: 'false'
+             zeta.card-program-ids: ''
+             transactionCode: '229545'
+             isForced: 'false'
+             account.account_holder.account_holder_provider_id: 3f8047dc-e7f3-4b00-bf7f-80ff3c9a1696
+             payment.overridden-payer-vector: 'account://0e3ba859-1d1e-4682-a0a9-1e82986d2dcb'
+             paymentCode: PMCINZZ0201
+             paymentID: e1345f8f-4576-404b-8b1c-6174da841d4c
+             challenge.response: |
+               -----BEGIN CERTIFICATE-----
+               MIIBtjCCAVygAwIBAgIUFLTGQEtdH5/Isq0hL9X245T1ovMwCgYIKoZIzj0EAwIw
+               OTE3MDUGA1UEAwwuM2lmRHBfOEFrR1NTVHlyVk1tek9QZz09QGFjY291bnQuaWRm
+               Yy5yZXNvdXJjZTAeFw0yMDA3MjQwODA1NTJaFw0yMDA3MjQwODA3NTJaMDkxNzA1
+               BgNVBAMMLjNpZkRwXzhBa0dTU1R5clZNbXpPUGc9PUBhY2NvdW50LmlkZmMucmVz
+               b3VyY2UwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATeiQnXSGawq+QnXoW0tUIq
+               vii8LAxePs38bqyG2+A+5Nz0MKTGHD5nR+QE+a7mgCZ4VsKIFO8KNAnlVy2gAs8C
+               o0IwQDAdBgNVHQ4EFgQUXhRdz/qnCtfWuOpaPt1JEbHcPrYwDgYDVR0PAQH/BAQD
+               AgEGMA8GA1UdEwEB/wQFMAMBAf8wCgYIKoZIzj0EAwIDSAAwRQIgaT+PGlo1kGf2
+               Rntkl8RC7LRAyH0zIB1x7Dafzgt91SYCIQDmk4z9V+fV5cZdpmkYHUPHHGChPqWC
+               8oWjZw8rRIwfJA==
+               -----END CERTIFICATE-----
+             paymentReceiptID: '301955000979'
+             bankTransfer.beneficiaryName: MOYONKO
+             isP2PTransfer: 'false'
+           headers: {}
+         - accountID: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+           transactionID: 20200630113124774_24588_FUSION-140827-cefaf90f-066c-4fc2-a181-93cccc24184b-1593516684636
+           postingID: '554611'
+           reversalTransactionIDs: []
+           previousBalance: 899
+           newBalance: 798
+           timestamp: 1593516684808
+           amount: 101
+           currency: INR
+           recordType: DEBIT
+           remarks: TEST
+           attributes:
+             account.pd-id: '2719627361570819746'
+             zeta.card-program-id: ''
+             debitAuthSignatory: '["10@zetauser.zeta.in/1"]'
+             aura.coa-id: '3071036307140878880'
+             account.pf-id: '558731570586644109'
+             bundle.name: FINTECH IDFC Paper KYC
+             policies: '{8139814330424178527,6457612509305989245,5343374243038545680,5234479764113589168,8516154114592209020,5859521083926848171}'
+             account.account-holder-id: 8d3f52a6-c546-40bd-b810-e610b26ec1d7
+             journal.voucherCode: ATLAS_P2M_AUTH
+             journal.self: 'false'
+             zeta.card-program-ids: ''
+             aura.parent-node-id: '4194617870374301403'
+             isForced: 'false'
+             payment.captured: 'true'
+             account.account_holder.account_holder_provider_id: 3f8047dc-e7f3-4b00-bf7f-80ff3c9a1696
+             zeta.ifi: '140827'
+             zeta.ppi-type: OPEN
+             zeta.product-type: Generic
+             zeta.ifi-product-type: GPR_PAPER_KYC_WITHOUT_PAN
+             athena.account-provider-id: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+             zeta.business-id: '140827'
+             isP2PTransfer: 'false'
+           headers: {}
+         - accountID: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+           transactionID: 20200630110628077_2992_lah_test_4_mom
+           postingID: '554610'
+           reversalTransactionIDs: []
+           previousBalance: 399
+           newBalance: 899
+           timestamp: 1593515188404
+           amount: 500
+           currency: INR
+           recordType: CREDIT
+           remarks: TEST
+           attributes:
+             account.pd-id: '2719627361570819746'
+             zeta.card-program-id: ''
+             debitAuthSignatory: '["10@zetauser.zeta.in/1"]'
+             aura.coa-id: '3071036307140878880'
+             account.pf-id: '558731570586644109'
+             bundle.name: Fintech IDFC Paper KYC
+             policies: '{8139814330424178527,6457612509305989245,5343374243038545680,5234479764113589168,8516154114592209020,5859521083926848171}'
+             account.account-holder-id: 8d3f52a6-c546-40bd-b810-e610b26ec1d7
+             journal.voucherCode: ATLAS_P2M_AUTH
+             journal.self: 'false'
+             zeta.card-program-ids: ''
+             aura.parent-node-id: '4194617870374301403'
+             isForced: 'false'
+             payment.captured: 'true'
+             account.account_holder.account_holder_provider_id: 3f8047dc-e7f3-4b00-bf7f-80ff3c9a1696
+             zeta.ifi: '140827'
+             zeta.ppi-type: OPEN
+             zeta.product-type: Generic
+             zeta.ifi-product-type: GPR_PAPER_KYC_WITHOUT_PAN
+             athena.account-provider-id: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+             zeta.business-id: '140827'
+             isP2PTransfer: 'false'
+           headers: {}
+         - accountID: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+           transactionID: '20200630101216947_24283_299397001183'
+           postingID: '554609'
+           reversalTransactionIDs: []
+           previousBalance: 500
+           newBalance: 399
+           timestamp: 1593511936973
+           amount: 101
+           currency: INR
+           recordType: DEBIT
+           remarks: TEST
+           attributes:
+             account.pd-id: '2719627361570819746'
+             zeta.card-program-id: ''
+             debitAuthSignatory: '["1102386@zetauser.zeta.in/1"]'
+             aura.coa-id: '3071036307140878880'
+             account.pf-id: '558731570586644109'
+             banker.version: '2.0'
+             bundle.name: FINTECH IDFC Paper KYC
+             paymentRequestID: FUSION-140827-cefaf90f-066c-4fc2-a181-93cccc24184b-1593511936216
+             channel: IMPS
+             policies: '{8139814330424178527,6457612509305989245,5343374243038545680,5234479764113589168,8516154114592209020,5859521083926848171}'
+             account.account-holder-id: 8d3f52a6-c546-40bd-b810-e610b26ec1d7
+             journal.voucherCode: ATLAS_P2M_AUTH
+             bankTransfer.mode: IMPS
+             aura.parent-node-id: '4194617870374301403'
+             bankTransfer.remitterName: null Test Contract change null
+             zeta.ifi: '140827'
+             destinationURI: 'ba://038801588319?ifsc=ICIC0000431'
+             sourceURI: 'account://0e3ba859-1d1e-4682-a0a9-1e82986d2dcb'
+             zeta.ppi-type: OPEN
+             zeta.product-type: Generic
+             zeta.ifi-product-type: GPR_PAPER_KYC_WITHOUT_PAN
+             athena.account-provider-id: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+             zeta.business-id: '140827'
+             bankTransfer.remitterMobile: '+919890034500'
+             challenge.type: X509Cert
+             payment.txn-category: P2BANK
+             authenticationResourceId: 9ba1f200-6340-4f28-9951-6150e0908462
+             journal.self: 'false'
+             zeta.card-program-ids: ''
+             transactionCode: '102530'
+             isForced: 'false'
+             account.account_holder.account_holder_provider_id: 3f8047dc-e7f3-4b00-bf7f-80ff3c9a1696
+             payment.overridden-payer-vector: 'account://0e3ba859-1d1e-4682-a0a9-1e82986d2dcb'
+             paymentCode: PMCINZZ0201
+             paymentID: 6fc9456a-91f7-4048-8d94-dc534cbecd54
+             challenge.response: |
+               -----BEGIN CERTIFICATE-----
+               MIIBtTCCAVygAwIBAgIUI2Tyw+MNMxOaUyt3FRjRo2XkhY8wCgYIKoZIzj0EAwIw
+               OTE3MDUGA1UEAwwuM2lmRHBfOEFrR1NTVHlyVk1tek9QZz09QGFjY291bnQuaWRm
+               Yy5yZXNvdXJjZTAeFw0yMDA2MzAxMDEyMTZaFw0yMDA2MzAxMDE0MTZaMDkxNzA1
+               BgNVBAMMLjNpZkRwXzhBa0dTU1R5clZNbXpPUGc9PUBhY2NvdW50LmlkZmMucmVz
+               b3VyY2UwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATeiQnXSGawq+QnXoW0tUIq
+               vii8LAxePs38bqyG2+A+5Nz0MKTGHD5nR+QE+a7mgCZ4VsKIFO8KNAnlVy2gAs8C
+               o0IwQDAdBgNVHQ4EFgQUXhRdz/qnCtfWuOpaPt1JEbHcPrYwDgYDVR0PAQH/BAQD
+               AgEGMA8GA1UdEwEB/wQFMAMBAf8wCgYIKoZIzj0EAwIDRwAwRAIgetGBVUrHT284
+               y9ByQa/EvOalW/Q6LS07VyeDS4u9lcICIArCIE6qHk8sbyBpWpT/WCSrMfAW9Y+Q
+               WF2QNs7UkZbM
+               -----END CERTIFICATE-----
+             paymentReceiptID: '299397001183'
+             bankTransfer.beneficiaryName: MOYONKO
+             isP2PTransfer: 'false'
+           headers: {}
+         - accountID: 0e3ba859-1d1e-4682-a0a9-1e82986d2dcb
+           transactionID: 20200627075338225_11841_lah_test_1
+           postingID: '554608'
+           reversalTransactionIDs: []
+           previousBalance: 0
+           newBalance: 500
+           timestamp: 1593244418395
+           amount: 500
+           currency: INR
+           recordType: CREDIT
+           remarks: TEST
+           attributes:
+             account.pd-id: '2719627361570819746'
+             zeta.card-program-id: ''
+             debitAuthSignatory: '["10@zetauser.zeta.in/1"]'
+             aura.coa-id: '3071036307140878880'
+             account.pf-id: '558731570586644109'
+             bundle.name: Fintech IDFC Paper KYC
+             policies: '{8139814330424178527,5234479764113589168,6457612509305989245,5343374243038545680,8516154114592209020,5859521083926848171}'
+             account.account-holder-id: 8d3f52a6-c546-40bd-b810-e610b26ec1d7
+             journal.voucherCode: ATLAS_P2M_AUTH
+             journal.self: 'false'
+             zeta.card-program-ids: ''
+             aura.parent-node-id: '4194617870374301403'
+             isForced: 'false'
+             payment.captured: 'true'
+             account.account_holder.account_holder_provider_id: 3f8047dc-e7f3-4b00-bf7f-80ff3c9a1696
+             zeta.ifi: '140827'
+             zeta.ppi-type: OPEN
+             zeta.product-type: Generic
+             zeta.ifi-product-type: GPR_PAPER_KYC_WITHOUT_PAN
+             athena.account-provider-id: a36ac47b-c2a2-406c-b6a0-f8857fc5f735
+             zeta.business-id: '140827'
+             isP2PTransfer: 'false'
+           headers: {}
+       totalRecord: 5
+       headers: {}
