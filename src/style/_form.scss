@@ -1,7 +1,7 @@
 select
 {
     font-size: 14px;
-    font-weight: 700;
+    // font-weight: 700;
     cursor: pointer;
     padding: 10px 28px 8px 8px;
     border: none;
@@ -140,14 +140,13 @@ textarea
     border: none;
     border-radius: 4px;
     outline: none;
+    line-height: 1.4em;
     background: rgba($form-textarea-background-color,.8);
 
     @include text_code();
 
-    &:focus
-    {
-        border: 2px solid $form-textarea-focus-border-color;
-    }
+    font-weight: normal;
+    border: 1px solid #e4e4e4;
 
     &.curl
     {

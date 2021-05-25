@@ -1,5 +1,9 @@
-#swagger-ui {
+body {
     padding-right: 2em;
+}
+
+#swagger-ui {
+    padding-top: 24px;
 }
 
 :focus-visible {
@@ -152,3 +156,10 @@ pre.curl.microlight, pre.microlight {
     margin-bottom: 14px;
 }
 
+.opblock-description-wrapper pre p {
+    color: white !important;
+}
+
+.opblock-section.opblock-section-request-body .opblock-section-header {
+    margin-bottom: 20px;
+}

@@ -5,7 +5,7 @@ import ImPropTypes from "react-immutable-proptypes"
 import toString from "lodash/toString"
 
 
-export default class OperationSummary extends PureComponent {
+export default class OperationSummaryHead extends PureComponent {
 
   static propTypes = {
     specPath: ImPropTypes.list.isRequired,
@@ -60,16 +60,34 @@ export default class OperationSummary extends PureComponent {
     const securityIsOptional = hasSecurity && security.size === 1 && security.first().isEmpty()
     const allowAnonymous = !hasSecurity || securityIsOptional
     return (
-      <section id={`${method}/${operationId || originalOperationId || displayOperationId }`}>
-        
-      {!showSummary ? null :
-        <div className="opblock-summary-description">
-          {toString(resolvedSummary || summary)}
-        </div>
-      }
+      <div className={`opblock-summary opblock-summary-${method}`} onClick={toggleShown} >
+        <OperationSummaryMethod method={method} />
+        <div className={`opblock-summary-container`}>
+        <OperationSummaryPath getComponent={getComponent} operationProps={operationProps} specPath={specPath} />
 
-      {this.props.children}
-      </section>
+        {/* {!showSummary ? null :
+          <div className="opblock-summary-description">
+            {toString(resolvedSummary || summary)}
+          </div>
+        } */}
+
+        {displayOperationId && (originalOperationId || operationId) ? <span className="opblock-summary-operation-id">{originalOperationId || operationId}</span> : null}
+
+        {
+          allowAnonymous ? null :
+            <AuthorizeOperationBtn
+              isAuthorized={isAuthorized}
+              onClick={() => {
+                const applicableDefinitions = authSelectors.definitionsForRequirements(security)
+                authActions.showDefinitions(applicableDefinitions)
+              }}
+            />
+        }
+
+        </div>
+
+        <JumpToPath path={specPath} />{/* TODO: use wrapComponents here, swagger-ui doesn't care about jumpToPath */}
+      </div>
     )
 
   }

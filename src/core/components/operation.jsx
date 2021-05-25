@@ -5,6 +5,7 @@ import { getExtensions, sanitizeUrl, escapeDeepLinkPath } from "core/utils"
 import { buildUrl } from "core/utils/url"
 import { Iterable, List } from "immutable"
 import ImPropTypes from "react-immutable-proptypes"
+import OperationSummaryHead  from "core/components/operation-summary-head"
 
 
 export default class Operation extends PureComponent {
@@ -118,6 +119,8 @@ export default class Operation extends PureComponent {
           <Collapse isOpened={true}>
             <div className="opblock-body">
             <div className="opblock-body--left">
+            
+            <OperationSummaryHead operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} />
             <OperationSummary operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} >
 
             { (operation && operation.size) || operation === null ? null :

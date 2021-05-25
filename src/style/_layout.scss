@@ -254,7 +254,6 @@
             margin-left: auto;
 
             @include text_headline();
-            margin-right: 130px;
 
             >span
             {
@@ -274,8 +273,7 @@
         }
     }
 
-    .opblock-summary-method
-    {
+    .opblock-summary-method {
         font-size: 14px;
         font-weight: 700;
         padding: 10px 16px;
@@ -285,6 +283,20 @@
         font-family: sans-serif;
         color: #4A59D9;
     }
+
+    .opblock-summary-get {
+        .opblock-summary-method {
+            color: #4A59D9;
+        }
+    }
+
+    .opblock-summary-post {
+        .opblock-summary-method {
+            color: #06BF50;
+            background: #06bf501a;
+        }
+    }
+
 
     .opblock-summary-path,
     .opblock-summary-operation-id,
@@ -339,9 +351,13 @@
         display: flex;
         align-items: center;
 
-        padding: 5px;
+        padding: 10px 5px 8px 5px;
 
         cursor: pointer;
+        position: sticky;
+        top: 0px;
+        background: #fafafa;
+        z-index: 999999;
 
         .view-line-link
         {

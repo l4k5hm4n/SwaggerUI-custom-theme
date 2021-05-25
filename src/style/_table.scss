@@ -228,6 +228,8 @@ small.response-control-media-type__accept-message {
     flex: 0 0 100%;
 }
 
+.responses-inner {
+
 .content-type-wrapper {
     position: absolute;
     margin-left: 70px;
@@ -239,3 +241,4 @@ small.response-control-media-type__accept-message {
         font-weight: normal;
     }
 } 
+}
