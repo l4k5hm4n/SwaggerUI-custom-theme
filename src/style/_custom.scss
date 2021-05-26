@@ -1,4 +1,4 @@
-body {
+body.swagger__ui {
     padding-right: 2em;
 }
 
@@ -51,13 +51,15 @@ body {
     border-radius: 6px;
     position: relative;
     margin-left: 12px;
+    display: flex;
+    flex: 1;
 
     button {
         padding: 0 10px 0 0 !important;
 
         svg {
             margin-top: -4px;
-            margin-bottom: -4px;
+            margin-bottom: -5px;
             fill: #4a59d8
                 
         }
@@ -163,3 +165,18 @@ pre.curl.microlight, pre.microlight {
 .opblock-section.opblock-section-request-body .opblock-section-header {
     margin-bottom: 20px;
 }
+
+.execute-wrapper, .opblock-section .btn-group  {
+
+    button.btn.execute.opblock-control__btn{
+        display: flex;
+        justify-content: center;
+    }
+
+    .loading-container {
+        flex: 0 0 32px;
+        padding: 0;
+    }
+
+}
+

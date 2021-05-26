@@ -89,7 +89,9 @@ export default class OperationContainer extends PureComponent {
     // // if(isShown && resolvedSubtree === undefined) {
     // //   this.requestResolvedSubtree()
     // // }
-    // //keeps the operations tab open everytime
+    // 
+    
+    //keeps the operations tab open everytime
     this.requestResolvedSubtree()
   }
 

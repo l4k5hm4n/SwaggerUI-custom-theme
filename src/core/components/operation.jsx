@@ -195,7 +195,9 @@ export default class Operation extends PureComponent {
                       path={ path }
                       method={ method }
                       onExecute={ onExecute }
-                      disabled={executeInProgress}/>
+                      disabled={executeInProgress}>
+                                    {executeInProgress ? <div className="loading-container"><div className="loading"></div></div> : null}
+                      </Execute>
                 }
   
                 { (!tryItOutEnabled || !response || !allowTryItOut) ? null :
@@ -219,7 +221,6 @@ export default class Operation extends PureComponent {
               }
 
             </div>
-            {executeInProgress ? <div className="loading-container"><div className="loading"></div></div> : null}
 
               { !responses ? null :
                   <Responses

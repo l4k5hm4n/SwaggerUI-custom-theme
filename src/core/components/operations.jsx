@@ -35,7 +35,6 @@ export default class Operations extends React.Component {
     if(taggedOps.size === 0) {
       return <h3> No operations defined in spec!</h3>
     }
-
     return (
       <div>
         { taggedOps.map(this.renderOperationTag).toArray() }
@@ -56,6 +55,7 @@ export default class Operations extends React.Component {
     const OperationContainer = getComponent("OperationContainer", true)
     const OperationTag = getComponent("OperationTag")
     const operations = tagObj.get("operations")
+
     return (
       <OperationTag
         key={"operation-" + tag}
@@ -73,8 +73,7 @@ export default class Operations extends React.Component {
               const path = op.get("path")
               const method = op.get("method")
               const specPath = Im.List(["paths", path, method])
-
-
+              
               // FIXME: (someday) this logic should probably be in a selector,
               // but doing so would require further opening up
               // selectors to the plugin system, to allow for dynamic

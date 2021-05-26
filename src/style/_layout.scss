@@ -296,6 +296,19 @@
         }
     }
 
+    .opblock-summary-put {
+        .opblock-summary-method {
+            background: #f4ad221a;
+            color: #F4AD22;
+        }
+    }
+
+    .opblock-summary-delete {
+        .opblock-summary-method {
+            background: #f30e0e1a;
+            color: #F30E0E;
+        }
+    }
 
     .opblock-summary-path,
     .opblock-summary-operation-id,
@@ -318,8 +331,8 @@
 
     .opblock-summary-path
     {
-        flex-shrink: 0;
-        max-width: calc(100% - 110px - 15rem);
+        flex: 0 0 calc(100% - 36px);
+        padding-left: 16px !important;
     }
 
     .opblock-summary-path__deprecated
@@ -356,7 +369,7 @@
         position: sticky;
         top: 0px;
         background: #fafafa;
-        z-index: 999999999999;
+        z-index: 99999999;
 
         .view-line-link
         {
@@ -723,7 +736,15 @@
     padding: 30px 0;
 
     background: $scheme-container-background-color;
-    box-shadow: 0 1px 2px 0 rgba($scheme-container-box-shadow-color,.15);
+    border-radius: 8px;
+    box-shadow: 0 0 24px #0000000f;
+    // box-shadow: 0 1px 2px 0 rgba($scheme-container-box-shadow-color,.15);
+
+    .servers-title {
+        font-size: 16px !important;
+        margin-bottom: 8px;
+        display: block;
+    }
 
     .schemes
     {
@@ -768,41 +789,38 @@
     {
         position: relative;
 
+        // &:after
+        // {
+        //     font-size: 10px;
+        //     font-weight: bold;
 
-        &:after
-        {
-            font-size: 10px;
-            font-weight: bold;
+        //     position: absolute;
+        //     top: 50%;
+        //     left: 50%;
 
-            position: absolute;
-            top: 50%;
-            left: 50%;
+        //     content: 'loading';
+        //     transform: translate(-50%,-50%);
+        //     text-transform: uppercase;
 
-            content: 'loading';
-            transform: translate(-50%,-50%);
-            text-transform: uppercase;
-
-            @include text_headline();
-        }
+        //     @include text_headline();
+        // }
 
         &:before
         {
             position: absolute;
             top: 50%;
             left: 50%;
-
             display: block;
-
-            width: 60px;
-            height: 60px;
-            margin: -30px -30px;
+            width: 20px;
+            height: 20px;
+            margin-top: -17px;
 
             content: '';
             animation: rotation 1s infinite linear, opacity .5s;
 
             opacity: 1;
-            border: 2px solid rgba($loading-container-before-border-color, .1);
-            border-top-color: rgba($loading-container-before-border-top-color, .6);
+            border: 2px solid #fafafa1f;
+            border-top-color: #fefefe;
             border-radius: 100%;
 
             backface-visibility: hidden;

@@ -43,7 +43,7 @@
   </style>
 </head>
 
-<body>
+<body class="swagger__ui">
   <div class="flex">
   <div class="left-nav"></div>
   <div id="swagger-ui"></div>
@@ -57,7 +57,7 @@
       window["SwaggerUIStandalonePreset"] = window["swagger-ui-standalone-preset"]
       // Build a system
       const ui = SwaggerUIBundle({
-        url: "http://0.0.0.0:3200/test.yml",
+        url: "https://tools.corp.zeta.in/ls/jenkins-spec-output/corporate-core-preprod.json",
         dom_id: '#swagger-ui',
         presets: [
           SwaggerUIBundle.presets.apis,
