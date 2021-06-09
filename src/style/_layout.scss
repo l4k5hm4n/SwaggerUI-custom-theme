@@ -617,10 +617,11 @@
     }
 }
 
-.response-col_status
-{
+.response-col_status{
 
     @include text_body();
+    padding: 16px 6px 16px 0 !important;
+    word-break: break-all;
 
     .response-undocumented
     {
@@ -632,7 +633,7 @@
 
 .response-col_links
 {
-    padding-left: 2em;
+    padding: 16px 0 0 2em;
     max-width: 40em;
 
     @include text_body();
@@ -852,13 +853,15 @@
 
     &__accept-message {
         color: $response-content-type-controls-accept-header-small-font-color;
-        font-size: 1em;
+        font-size: 12px;
+        margin-top: -3.6px;
     }
 
     &__title {
         display: block;
         margin-bottom: 0.2em;
         font-size: 1em;
+        font-weight: 700;
     }
 }
 
@@ -867,6 +870,7 @@
         display: block;
         margin-bottom: 0.2em;
         font-size: 1em;
+        font-weight: 700;
     }
 }
 

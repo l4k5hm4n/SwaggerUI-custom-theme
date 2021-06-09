@@ -100,6 +100,13 @@ export default class Responses extends React.Component {
                      </label> }
         </div>
         <div className="responses-inner">
+        <LiveResponse response={ tryItOutResponse }
+                                                getComponent={ getComponent }
+                                                getConfigs={ getConfigs }
+                                                specSelectors={ specSelectors }
+                                                path={ this.props.path }
+                                                method={ this.props.method }
+                                                displayRequestDuration={ displayRequestDuration } />
           {
             !tryItOutResponse ? null
                               : <div>

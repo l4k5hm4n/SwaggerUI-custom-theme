@@ -85,13 +85,13 @@
 
         visibility: hidden;
 
-        padding: .1em .5em;
+        padding: 4px 6px;
 
         white-space: nowrap;
 
         color: $model-hint-font-color;
         border-radius: 4px;
-        background: rgba($model-hint-background-color,.7);
+        background: #4a5ad7;
     }
 
     p
@@ -271,13 +271,12 @@ section.models
 
 .model-box
 {
-    padding: 10px;
+    padding: 4px 10px 14px 10px;
     // display: inline-block;
 
     border-radius: 4px;
     background: #161d4a;
     color: white;
-    overflow: scroll;
     // background: rgba($section-models-model-box-background-color,.1);
 
     .model-jump-to-path

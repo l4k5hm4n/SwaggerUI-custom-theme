@@ -54,12 +54,13 @@ table
             td
             {
                 padding: 10px 0 0 0;
-                font-size: 12px;
+                font-size: 14px;
                 vertical-align: top;
+                margin-top: 20px;
 
                 &:first-of-type
                 {
-                    min-width: 6em;
+                    min-width: 5em;
                     padding: 10px 0;
                 }
             }
@@ -73,7 +74,7 @@ table
             th,
             td
             {
-                font-size: 12px;
+                font-size: 14px;
 
                 padding: 12px 0;
 
@@ -194,6 +195,7 @@ table
 
 .response-col_description {
     width: 99%; // forces other columns to shrink to their content widths
+    padding: 16px 0;
 }
 
 .response-col_links {
@@ -211,12 +213,19 @@ table
 td.response-col_description p {
     margin: 0 !important;
     font-family: sans-serif;
-    font-size: 12px;
+    font-size: 14px;
+    line-height: 1.2rem;
 }
 
 .response-control-media-type {
     display: flex;
     flex-wrap: wrap;
+    flex: 0 0 50%;
+}
+
+.response-control-examples {
+    flex: 0 0 50%;
+    margin-top: 5px;
 }
 
 small.response-control-media-type__title {
@@ -232,8 +241,8 @@ small.response-control-media-type__accept-message {
 
 .content-type-wrapper {
     position: absolute;
-    margin-left: 70px;
-    margin-top: 4px;
+    margin-left: 84px;
+    margin-top: 3px;
 
     select {
         font-size: 12px;
