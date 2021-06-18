@@ -37,13 +37,13 @@ export default class BaseLayout extends React.Component {
 
     let loadingMessage = null
   
-    // if(loadingStatus === "loading") {
-    //   loadingMessage = <div className="info">
-    //     <div className="loading-container">
-    //       <div className="loading"></div>
-    //     </div>
-    //   </div>
-    // }
+    if(loadingStatus === "loading") {
+      loadingMessage = <div className="info">
+        <div className="loading-container">
+          <div className="loading"></div>
+        </div>
+      </div>
+    }
 
     if(loadingStatus === "failed") {
       loadingMessage = <div className="info">
@@ -72,7 +72,7 @@ export default class BaseLayout extends React.Component {
     if(loadingMessage) {
       return <div className="swagger-ui">
         <div className="loading-container">
-          {/* {loadingMessage} */}
+          {loadingMessage}
         </div>
       </div>
     }
@@ -118,7 +118,7 @@ export default class BaseLayout extends React.Component {
                 <Models/>
               </Col>
             </Row> */}
-          </VersionPragmaFilter>
+</VersionPragmaFilter>
         </div>
       )
   }

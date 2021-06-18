@@ -72,6 +72,8 @@ export default class Responses extends React.Component {
       method,
       oas3Selectors,
       oas3Actions,
+      tryItOutEnabled,
+      showServerResponse
     } = this.props
     let defaultCode = defaultStatusCode( responses )
 
@@ -100,24 +102,20 @@ export default class Responses extends React.Component {
                      </label> }
         </div>
         <div className="responses-inner">
-        <LiveResponse response={ tryItOutResponse }
-                                                getComponent={ getComponent }
-                                                getConfigs={ getConfigs }
-                                                specSelectors={ specSelectors }
-                                                path={ this.props.path }
-                                                method={ this.props.method }
-                                                displayRequestDuration={ displayRequestDuration } />
           {
             !tryItOutResponse ? null
                               : <div>
                                   <LiveResponse response={ tryItOutResponse }
+                                                tryItOutEnabled= { tryItOutEnabled }
+                                                showServerResponse = {showServerResponse}
+                                                tryItOutResponse= {tryItOutResponse}
                                                 getComponent={ getComponent }
                                                 getConfigs={ getConfigs }
                                                 specSelectors={ specSelectors }
                                                 path={ this.props.path }
                                                 method={ this.props.method }
                                                 displayRequestDuration={ displayRequestDuration } />
-                                  <h4>Responses</h4>
+                                  <h4>Response Codes</h4>
                                 </div>
 
           }

@@ -12,7 +12,8 @@ export default class OperationContainer extends PureComponent {
 
     this.state = {
       tryItOutEnabled: tryItOutEnabled === true || tryItOutEnabled === "true",
-      executeInProgress: false
+      executeInProgress: false,
+      showServerResponse: false,
     }
   }
 
@@ -86,10 +87,9 @@ export default class OperationContainer extends PureComponent {
     // const { isShown } = this.props
     // const resolvedSubtree = this.getResolvedSubtree()
 
-    // // if(isShown && resolvedSubtree === undefined) {
-    // //   this.requestResolvedSubtree()
-    // // }
-    // 
+    // if(isShown && resolvedSubtree === undefined) {
+    //   this.requestResolvedSubtree()
+    // }
     
     //keeps the operations tab open everytime
     this.requestResolvedSubtree()
@@ -108,18 +108,19 @@ export default class OperationContainer extends PureComponent {
     }
   }
 
-  // toggleShown =() => {
-  //   let { layoutActions, tag, operationId, isShown } = this.props
-  //   const resolvedSubtree = this.getResolvedSubtree()
-  //   if(!isShown && resolvedSubtree === undefined) {
-  //     // transitioning from collapsed to expanded
-  //     this.requestResolvedSubtree()
-  //   }
-  //   layoutActions.show(["operations", tag, operationId], !isShown)
-  // }
+  toggleShown =() => {
+    let { layoutActions, tag, operationId, isShown } = this.props
+    const resolvedSubtree = this.getResolvedSubtree()
+    if(!isShown && resolvedSubtree === undefined) {
+      // transitioning from collapsed to expanded
+      this.requestResolvedSubtree()
+    }
+    layoutActions.show(["operations", tag, operationId], !isShown)
+  }
 
   onCancelClick=() => {
     this.setState({tryItOutEnabled: !this.state.tryItOutEnabled})
+    this.setState({ showServerResponse: false})
   }
 
   onTryoutClick =() => {
@@ -127,6 +128,7 @@ export default class OperationContainer extends PureComponent {
   }
 
   onExecute = () => {
+    this.setState({ showServerResponse: true})
     this.setState({ executeInProgress: true })
   }
 
@@ -190,7 +192,8 @@ export default class OperationContainer extends PureComponent {
       authSelectors,
       oas3Actions,
       oas3Selectors,
-      fn
+      fn,
+      showServerResponse
     } = this.props
 
     const Operation = getComponent( "operation" )
@@ -217,7 +220,8 @@ export default class OperationContainer extends PureComponent {
       displayRequestDuration,
       isDeepLinkingEnabled,
       executeInProgress: this.state.executeInProgress,
-      tryItOutEnabled: this.state.tryItOutEnabled
+      tryItOutEnabled: this.state.tryItOutEnabled,
+      showServerResponse: this.state.showServerResponse,
     })
 
     return (
@@ -226,13 +230,12 @@ export default class OperationContainer extends PureComponent {
         response={response}
         request={request}
         isShown={isShown}
-
+        showServerResponse = {showServerResponse}
         toggleShown={this.toggleShown}
         onTryoutClick={this.onTryoutClick}
         onCancelClick={this.onCancelClick}
         onExecute={this.onExecute}
         specPath={specPath}
-
         specActions={ specActions }
         specSelectors={ specSelectors }
         oas3Actions={oas3Actions}

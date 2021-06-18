@@ -40,6 +40,7 @@ export default class OperationTag extends React.Component {
       getConfigs,
       getComponent,
       specUrl,
+      firstOperation
     } = this.props
 
     let {
@@ -63,13 +64,15 @@ export default class OperationTag extends React.Component {
     } else {
       tagExternalDocsUrl = rawTagExternalDocsUrl
     }
-
+    // gives the unique operations tag id
     let isShownKey = ["operations-tag", tag]
-    let showTag = layoutSelectors.isShown(isShownKey, docExpansion === "full" || docExpansion === "list")
-
+    // checks if the tag can be shown or not based on the docExpansion config value
+    // let showTag = layoutSelectors.isShown(isShownKey, docExpansion === "full" || docExpansion === "list")
+    let showTag = layoutSelectors.isShown(isShownKey, false || firstOperation)
+    // console.log(isShownKey,showTag)
+    // console.log(docExpansion,deepLinking)
     return (
       <div className={showTag ? "opblock-tag-section is-open" : "opblock-tag-section"} >
-
         <h4
           onClick={() => layoutActions.show(isShownKey, !showTag)}
           className={!tagDescription ? "opblock-tag no-desc" : "opblock-tag" }
@@ -86,7 +89,7 @@ export default class OperationTag extends React.Component {
             <small>
                 <Markdown source={tagDescription} />
               </small>
-            }
+          }
 
             <div>
               { !tagExternalDocsDescription ? null :

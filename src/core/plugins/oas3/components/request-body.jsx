@@ -30,8 +30,6 @@ export const getDefaultRequestBodyValue = (requestBody, mediaType, activeExample
   return stringify(exampleValue)
 }
 
-
-
 const RequestBody = ({
   userHasEditedBody,
   requestBody,
@@ -273,6 +271,16 @@ const RequestBody = ({
           />
         </div>
       ) : (
+        <div>
+        <div style={{display: 'none'}}>
+        <RequestBodyEditor
+          value={requestBodyValue}
+          errors={requestBodyErrors}
+          defaultValue={sampleRequestBody}
+          onChange={onChange}
+          getComponent={getComponent}
+        />
+       </div>
         <ModelExample
           getComponent={ getComponent }
           getConfigs={ getConfigs }
@@ -291,6 +299,7 @@ const RequestBody = ({
           }
           includeWriteOnly={true}
         />
+      </div>
       )
     }
     {

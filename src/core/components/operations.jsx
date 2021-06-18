@@ -35,6 +35,9 @@ export default class Operations extends React.Component {
     if(taggedOps.size === 0) {
       return <h3> No operations defined in spec!</h3>
     }
+
+    // console.log(taggedOps.map((currElement) => { console.log(currElement.toJS().operations,Object.keys(taggedOps.toJS())[0])  }))
+    
     return (
       <div>
         { taggedOps.map(this.renderOperationTag).toArray() }
@@ -43,7 +46,7 @@ export default class Operations extends React.Component {
     )
   }
 
-  renderOperationTag = (tagObj, tag) => {
+   renderOperationTag = (tagObj, tag) => {
     const {
       specSelectors,
       getComponent,
@@ -52,9 +55,13 @@ export default class Operations extends React.Component {
       layoutActions,
       getConfigs,
     } = this.props
+    // console.log(tagObj,tag,layoutSelectors, 'ls', layoutActions, 'la', getComponent, 'gc', specSelectors.url(), 'url' )
     const OperationContainer = getComponent("OperationContainer", true)
     const OperationTag = getComponent("OperationTag")
     const operations = tagObj.get("operations")
+    // console.log(operations)
+    // console.log(layoutSelectors, 'ls',oas3Selectors, 'os',layoutActions,'la' )
+    const firstOperationTag = Object.keys(specSelectors.taggedOperations().toJS())[0]
 
     return (
       <OperationTag
@@ -66,14 +73,15 @@ export default class Operations extends React.Component {
         layoutActions={layoutActions}
         getConfigs={getConfigs}
         getComponent={getComponent}
-        specUrl={specSelectors.url()}>
+        specUrl={specSelectors.url()}
+        firstOperation={(firstOperationTag == tag ? true : false )}>
         <div className="operation-tag-content">
           {
             operations.map(op => {
               const path = op.get("path")
               const method = op.get("method")
               const specPath = Im.List(["paths", path, method])
-              
+              // console.warn(specPath, path, method)
               // FIXME: (someday) this logic should probably be in a selector,
               // but doing so would require further opening up
               // selectors to the plugin system, to allow for dynamic

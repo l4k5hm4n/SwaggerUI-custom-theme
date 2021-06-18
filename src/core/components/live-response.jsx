@@ -48,7 +48,7 @@ export default class LiveResponse extends React.Component {
   }
 
   render() {
-    const { response, getComponent, getConfigs, displayRequestDuration, specSelectors, path, method } = this.props
+    const { response, getComponent, getConfigs, displayRequestDuration, specSelectors, path, method, tryItOutEnabled, showServerResponse } = this.props
     const { showMutatedRequest, requestSnippetsEnabled } = getConfigs()
 
     const curlRequest = showMutatedRequest ? specSelectors.mutatedRequestFor(path, method) : specSelectors.requestFor(path, method)
@@ -84,6 +84,8 @@ export default class LiveResponse extends React.Component {
             </div>
           </div>
         }
+        { tryItOutEnabled && showServerResponse? 
+        <div>
         <h4>Server response</h4>
         <table className="responses-table live-responses-table">
           <thead>
@@ -127,6 +129,8 @@ export default class LiveResponse extends React.Component {
             </tr>
           </tbody>
         </table>
+        </div>
+        : null }
       </div>
     )
   }

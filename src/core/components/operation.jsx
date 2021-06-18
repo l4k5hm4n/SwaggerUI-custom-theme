@@ -7,7 +7,6 @@ import { Iterable, List } from "immutable"
 import ImPropTypes from "react-immutable-proptypes"
 import OperationSummaryHead  from "core/components/operation-summary-head"
 
-
 export default class Operation extends PureComponent {
   static propTypes = {
     specPath: ImPropTypes.list.isRequired,
@@ -42,6 +41,19 @@ export default class Operation extends PureComponent {
     summary: ""
   }
 
+  // auto execute CURL
+  componentDidMount() {
+
+    setTimeout( () => {
+      let { specActions, operation } = this.props
+      let path = operation.toJS().path
+      let method = operation.toJS().method
+      // console.log({ operation, path, method })
+      specActions.execute({ operation, path, method })
+    }, 200)
+
+  }
+
   render() {
     let {
       specPath,
@@ -74,7 +86,8 @@ export default class Operation extends PureComponent {
       allowTryItOut,
       displayRequestDuration,
       tryItOutEnabled,
-      executeInProgress
+      executeInProgress,
+      showServerResponse
     } = operationProps.toJS()
 
     let {
@@ -200,12 +213,12 @@ export default class Operation extends PureComponent {
                       </Execute>
                 }
   
-                { (!tryItOutEnabled || !response || !allowTryItOut) ? null :
+                {/* { (!tryItOutEnabled || !response || !allowTryItOut) ? null :
                     <Clear
                       specActions={ specActions }
                       path={ path }
                       method={ method }/>
-                }
+                } */}
                 
               </div>
                 </Parameters >
@@ -224,6 +237,8 @@ export default class Operation extends PureComponent {
 
               { !responses ? null :
                   <Responses
+                    tryItOutEnabled= { tryItOutEnabled }
+                    showServerResponse = { showServerResponse }
                     responses={ responses }
                     request={ request }
                     tryItOutResponse={ response }

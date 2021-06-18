@@ -111,8 +111,8 @@ export default class Parameters extends Component {
     } = this.props
 
 
+let parametersPath = []
 let parametersQuery = []
-let parametersBody = []
 
     const ParameterRow = getComponent("parameterRow")
     const TryItOutButton = getComponent("TryItOutButton")
@@ -150,6 +150,9 @@ let parametersBody = []
         {this.state.parametersVisible ? <div className="parameters-container">
           {!groupedParametersArr.length ? <div className="opblock-description-wrapper"><p>No parameters</p></div> :
             <div className="table-container parameters">
+              <div>
+
+              </div>
               {/* <table className="">
                 <thead>
                 <tr>
@@ -163,7 +166,7 @@ let parametersBody = []
 
                     if(specSelectors.parameterWithMetaByIdentity(pathMethod, parameter).get('in') == "path") {
 
-                        parametersQuery = [...parametersQuery ,<ParameterRow
+                        parametersPath = [...parametersPath ,<ParameterRow
                           fn={fn}
                           specPath={specPath.push(i.toString())}
                           getComponent={getComponent}
@@ -183,7 +186,7 @@ let parametersBody = []
                     }
 
                     else {
-                      parametersBody = [...parametersBody ,<ParameterRow
+                      parametersQuery = [...parametersQuery ,<ParameterRow
                         fn={fn}
                         specPath={specPath.push(i.toString())}
                         getComponent={getComponent}
@@ -204,6 +207,34 @@ let parametersBody = []
                   })
                 }
                   <div className="parameters__query">
+                  {parametersPath.length > 0 ?
+                  <div className="opblock-section-header">
+                            {isOAS3 ? (
+                              <div className="tab-header">
+                                <div onClick={() => this.toggleTab("parameters")}
+                                    className={`tab-item ${this.state.parametersVisible && "active"}`}>
+                                  <h4 className="opblock-title"><span>Path Parameters</span></h4>
+                                </div>
+                                {operation.get("callbacks") ?
+                                  (
+                                    <div onClick={() => this.toggleTab("callbacks")}
+                                        className={`tab-item ${this.state.callbackVisible && "active"}`}>
+                                      <h4 className="opblock-title"><span>Callbacks</span></h4>
+                                    </div>
+                                  ) : null
+                                }
+                              </div>
+                            ) : (
+                              <div className="tab-header">
+                                <h4 className="opblock-title">Path Parameters</h4>
+                              </div>
+                            )}
+                  </div> : null }
+
+                  {parametersPath.map((parameter, i) => parameter) }
+                  </div>
+
+                  <div className="parameters__body">
                   {parametersQuery.length > 0 ?
                   <div className="opblock-section-header">
                             {isOAS3 ? (
@@ -228,35 +259,7 @@ let parametersBody = []
                             )}
                   </div> : null }
 
-                  {parametersQuery.map((parameter, i) => parameter) }
-                  </div>
-
-                  <div className="parameters__body">
-                  {parametersBody.length > 0 ?
-                  <div className="opblock-section-header">
-                            {isOAS3 ? (
-                              <div className="tab-header">
-                                <div onClick={() => this.toggleTab("parameters")}
-                                    className={`tab-item ${this.state.parametersVisible && "active"}`}>
-                                  <h4 className="opblock-title"><span>Body Parameters</span></h4>
-                                </div>
-                                {operation.get("callbacks") ?
-                                  (
-                                    <div onClick={() => this.toggleTab("callbacks")}
-                                        className={`tab-item ${this.state.callbackVisible && "active"}`}>
-                                      <h4 className="opblock-title"><span>Callbacks</span></h4>
-                                    </div>
-                                  ) : null
-                                }
-                              </div>
-                            ) : (
-                              <div className="tab-header">
-                                <h4 className="opblock-title">Body Parameters</h4>
-                              </div>
-                            )}
-                  </div> : null }
-
-                  {parametersBody.map((parameter, i) => parameter)}
+                  {parametersQuery.map((parameter, i) => parameter)}
                   </div>
                                   
                 {/* </tbody>
