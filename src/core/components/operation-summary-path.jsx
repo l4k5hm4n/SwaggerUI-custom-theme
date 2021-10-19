@@ -40,6 +40,7 @@ export default class OperationSummaryPath extends PureComponent{
       <span className={ deprecated ? "opblock-summary-path__deprecated" : "opblock-summary-path" } 
         onCopyCapture={this.onCopyCapture}
         data-path={path}>
+        <span className={`summary-path-method ${this.props.method} }`}>{this.props.method}</span>
         <DeepLink
             enabled={isDeepLinkingEnabled}
             isShown={isShown}

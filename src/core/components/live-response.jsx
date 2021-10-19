@@ -77,13 +77,13 @@ export default class LiveResponse extends React.Component {
         { curlRequest && (requestSnippetsEnabled === true || requestSnippetsEnabled === "true"
           ? <RequestSnippets request={ curlRequest }/>
           : <Curl request={ curlRequest } getConfigs={ getConfigs } />) }
-        { url && <div>
-            <h4>Request URL</h4>
+        {/* { url && <div>
             <div className="request-url">
+              <h4>Request URL</h4>
               <pre className="microlight">{url}</pre>
             </div>
           </div>
-        }
+        } */}
         { tryItOutEnabled && showServerResponse? 
         <div>
         <h4>Server response</h4>

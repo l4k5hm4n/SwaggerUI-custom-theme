@@ -57,6 +57,7 @@
       window["SwaggerUIStandalonePreset"] = window["swagger-ui-standalone-preset"]
       // Build a system
       const ui = SwaggerUIBundle({
+        test: "test",
         url: "/test.json",
         dom_id: '#swagger-ui',
         presets: [
@@ -69,6 +70,8 @@
         layout: "StandaloneLayout"
       })
 
+      window.singleLayout = false
+      window.operation = "createSchemaVersion"
       window.ui = ui
 
       ui.initOAuth({

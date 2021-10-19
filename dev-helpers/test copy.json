@@ -1,0 +1,1266 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Cosmos AHP Service Public API",
+      "description": "Cosmos AHP Service Public API",
+      "contact": {
+        "name": "Zeta",
+        "email": "support@zeta.in"
+      },
+      "version": "v1"
+    },
+    "servers": [
+      {
+        "url": "https://api-playground0zetaapps.mum1.zeta.in/api"
+      }
+    ],
+    "tags": [
+      {
+        "name": "Application Management"
+      },
+      {
+        "name": "Application Stage Management"
+      },
+      {
+        "name": "Application Section Management"
+      }
+    ],
+    "paths": {
+      "/api/v1/ifi/{ifiId}/application/{applicationId}": {
+        "get": {
+          "tags": [
+            "Application Management"
+          ],
+          "summary": "Get application details by Id",
+          "description": "This is an API to get application of potential account holder by application Id",
+          "operationId": "getApplicationById",
+          "parameters": [
+            {
+              "name": "ifiId",
+              "in": "path",
+              "description": "This is the unique identification code (ID) of the issuing financial institution (IFI) linked to the application.",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "example": 140793
+            },
+            {
+              "name": "applicationId",
+              "in": "path",
+              "description": "This is the unique identifier for the application created.",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "example": "d742e2a7-cc39-41b7-b16a-8fdc9c5851d5"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApplicationResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Request validation failed",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseForBadRequest"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseForUnauthorizedRequest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/ifi/{ifiId}/spool/{spoolID}/application/{applicationID}/stage/{stage}/complete": {
+        "post": {
+          "tags": [
+            "Application Stage Management"
+          ],
+          "summary": "Mark Application's stage as Complete",
+          "operationId": "markComplete",
+          "parameters": [
+            {
+              "name": "ifiId",
+              "in": "path",
+              "description": "This is the unique identification code (ID) of the issuing financial institution (IFI) linked to the application.",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "example": 140793
+            },
+            {
+              "name": "spoolID",
+              "in": "path",
+              "description": "spool ID of the application",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "example": "22cf9f92-1866-4160-94ab-2e95f1b0dcad"
+            },
+            {
+              "name": "applicationID",
+              "in": "path",
+              "description": "This is the unique identification code (ID) of the application.",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "example": "d742e2a7-cc39-41b7-b16a-8fdc9c5851d5"
+            },
+            {
+              "name": "stage",
+              "in": "path",
+              "description": "This is the name of the stage to which you want to move the application.",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "example": "DATA_CAPTURE"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApplicationResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Request validation failed",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseForBadRequest"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseForUnauthorizedRequest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/ifi/{ifiId}/spool/{spoolId}/application": {
+        "post": {
+          "tags": [
+            "Application Management"
+          ],
+          "summary": "Create a Application. This API is for creating application for potential account holder",
+          "operationId": "createApplication",
+          "parameters": [
+            {
+              "name": "ifiId",
+              "in": "path",
+              "description": "This is the unique identification code (ID) of the issuing financial institution (IFI) linked to the application.",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "example": 140793
+            },
+            {
+              "name": "spoolId",
+              "in": "path",
+              "description": "This is the unique identifier code of the spool linked to the application.",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "example": "22cf9f92-1866-4160-94ab-2e95f1b0dcad"
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateApplicationRequest"
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApplicationResponse"
+                  }
+                }
+              }
+            },
+            "201": {
+              "description": "Application is Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApplicationResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Request validation failed",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseForBadRequest"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseForUnauthorizedRequest"
+                  }
+                }
+              }
+            }
+          },
+          "callbacks": {
+            "myEvent": {
+              "APPLICATION_CREATED": {
+                "post": {
+                  "requestBody": {
+                    "required": true,
+                    "content": {
+                      "application/json": {
+                        "schema": {
+                          "$ref": "#/components/schemas/CreateApplicationEvent"
+                        }
+                      }
+                    }
+                  },
+                  "responses": {
+                    "400": {
+                      "description": "Request validation failed",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "$ref": "#/components/schemas/ResponseForBadRequest"
+                          }
+                        }
+                      }
+                    },
+                    "401": {
+                      "description": "Unauthorized",
+                      "content": {
+                        "application/json": {
+                          "schema": {
+                            "$ref": "#/components/schemas/ResponseForUnauthorizedRequest"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/api/v1/ifi/{ifiID}/spool/{spoolID}/application/{applicationID}/section/{sectionName}": {
+        "put": {
+          "tags": [
+            "Application Section Management"
+          ],
+          "summary": "Update a section",
+          "operationId": "updateSection",
+          "parameters": [
+            {
+              "name": "ifiID",
+              "in": "path",
+              "description": "This is the unique identification code (ID) of the issuing financial institution (IFI) linked to the application.",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "example": 140793
+            },
+            {
+              "name": "spoolID",
+              "in": "path",
+              "description": "This is the unique identifier code of the spool linked to the application.",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "example": "22cf9f92-1866-4160-94ab-2e95f1b0dcad"
+            },
+            {
+              "name": "applicationID",
+              "in": "path",
+              "description": "This is the unique identification code (ID) of the application.",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "example": "d742e2a7-cc39-41b7-b16a-8fdc9c5851d5"
+            },
+            {
+              "name": "sectionName",
+              "in": "path",
+              "description": "This is the name of the application section based on which you are querying.",
+              "required": true,
+              "schema": {
+                "type": "string"
+              },
+              "example": "educationDetails"
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateApplicationSectionRequest"
+                }
+              }
+            },
+            "required": false
+          },
+          "responses": {
+            "200": {
+              "description": "Section Updated",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ApplicationSectionResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Request validation failed",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseForBadRequest"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ResponseForUnauthorizedRequest"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "AddApplicationVectorRequest": {
+          "required": [
+            "type",
+            "value"
+          ],
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of the vector",
+              "example": "pan"
+            },
+            "value": {
+              "type": "string",
+              "description": "Value of the vector",
+              "example": "BFRPG6781C"
+            },
+            "attributes": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/JsonElement"
+              },
+              "description": "Attribute map of the vector.",
+              "example": "{}"
+            }
+          }
+        },
+        "ApplicationResponse": {
+          "type": "object",
+          "properties": {
+            "applicationId": {
+              "type": "string",
+              "description": "Application Id of the Application",
+              "example": "d742e2a7-cc39-41b7-b16a-8fdc9c5851d5"
+            },
+            "spoolId": {
+              "type": "string",
+              "description": "Spool Id of the Application",
+              "example": "22cf9f92-1866-4160-94ab-2e95f1b0dcad"
+            },
+            "ifiId": {
+              "type": "integer",
+              "description": "ifi Id of the Application",
+              "format": "int64",
+              "example": 140793
+            },
+            "requestId": {
+              "type": "string",
+              "description": "Request Id of the Application",
+              "example": "request_cah_sbm-1104"
+            },
+            "status": {
+              "type": "string",
+              "description": "Status of Application (INITIATED/COMPLETED/FAILED/REJECTED/ACCEPTED)",
+              "example": "INITIATED"
+            },
+            "sections": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/ApplicationSectionResponse"
+              },
+              "description": "Sections of a Application"
+            },
+            "vectors": {
+              "type": "array",
+              "description": "Vectors of a Application",
+              "items": {
+                "$ref": "#/components/schemas/ApplicationVectorResponse"
+              }
+            },
+            "stages": {
+              "type": "array",
+              "description": "Stages of a Application",
+              "items": {
+                "$ref": "#/components/schemas/ApplicationStageResponse"
+              }
+            },
+            "tags": {
+              "type": "array",
+              "description": "Tags of a Application",
+              "items": {
+                "$ref": "#/components/schemas/Tag"
+              }
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "Created date and time of the Stage(ISO 8601 Format)",
+              "example": "2021-10-06T14:54:22.794+05:30"
+            },
+            "updatedAt": {
+              "type": "string",
+              "description": "Updated date and time of the Application(ISO 8601 Format)",
+              "example": "2021-10-06T14:54:22.794+05:30"
+            }
+          }
+        },
+        "ApplicationSectionResponse": {
+          "type": "object",
+          "properties": {
+            "sectionId": {
+              "type": "string",
+              "description": "ID of the section",
+              "example": "d742e2a7-cc39-41b7-b16a-8fdc9c5851d5"
+            },
+            "ifiId": {
+              "type": "integer",
+              "description": "ID of the IFI (on-boarded organization) under which the section is being created",
+              "format": "int64",
+              "example": 140793
+            },
+            "spoolId": {
+              "type": "string",
+              "description": "Spool Id of the Application",
+              "example": "22cf9f92-1866-4160-94ab-2e95f1b0dcad"
+            },
+            "applicationId": {
+              "type": "string",
+              "description": "Id of the application",
+              "example": "d742e2a7-cc39-41b7-b16a-8fdc9c5851d5"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the section",
+              "example": "educationDetails"
+            },
+            "type": {
+              "type": "string",
+              "description": "Type of the section",
+              "example": "Education"
+            },
+            "details": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/Section"
+              },
+              "description": "Details of section"
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "Created date and time of the section (ISO 8601 Format)",
+              "example": "2021-10-06T14:54:22.794+05:30"
+            },
+            "updatedAt": {
+              "type": "string",
+              "description": "Updated date and time of the section (ISO 8601 Format)",
+              "example": "2021-10-06T14:54:22.794+05:30"
+            }
+          }
+        },
+        "ApplicationStageResponse": {
+          "type": "object",
+          "properties": {
+            "stageId": {
+              "type": "string",
+              "description": "Id of the stage",
+              "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4"
+            },
+            "ifiId": {
+              "type": "integer",
+              "description": "ifi Id of the stage",
+              "format": "int64",
+              "example": 140793
+            },
+            "applicationId": {
+              "type": "string",
+              "description": "application Id of the stage",
+              "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4"
+            },
+            "spoolId": {
+              "type": "string",
+              "description": "spool Id of the application",
+              "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4"
+            },
+            "name": {
+              "type": "string",
+              "description": "name of the stage",
+              "example": "DATA_CAPTURE"
+            },
+            "status": {
+              "type": "string",
+              "description": "status of the stage",
+              "example": "ENABLED"
+            },
+            "details": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/JsonElement"
+              },
+              "description": "details of the stage",
+              "example": "{}"
+            },
+            "result": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/JsonElement"
+              },
+              "description": "result of the stage",
+              "example": "{}"
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "created date and time of the stage(ISO 8601 Format)",
+              "example": "2021-03-10T14:54:22.794+05:30"
+            },
+            "updatedAt": {
+              "type": "string",
+              "description": "updated date and time of the stage(ISO 8601 Format)",
+              "example": "2021-03-10T14:54:22.794+05:30"
+            }
+          }
+        },
+        "ApplicationVectorResponse": {
+          "type": "object",
+          "properties": {
+            "vectorId": {
+              "type": "string",
+              "description": "Id of the vector",
+              "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4"
+            },
+            "ifiId": {
+              "type": "integer",
+              "description": "ifi Id of the vector",
+              "format": "int64",
+              "example": 140793
+            },
+            "spoolId": {
+              "type": "string",
+              "description": "spool Id of the application",
+              "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4"
+            },
+            "applicationId": {
+              "type": "string",
+              "description": "application Id of the vector",
+              "example": "ad216872-5e25-4c4c-9200-d8f9aa85f1d4"
+            },
+            "type": {
+              "type": "string",
+              "description": "type of the vector",
+              "example": "p"
+            },
+            "value": {
+              "type": "string",
+              "description": "value of the vector",
+              "example": 918899889988
+            },
+            "status": {
+              "type": "string",
+              "description": "status of the vector",
+              "example": "ENABLED"
+            },
+            "attributes": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/JsonElement"
+              },
+              "description": "attributes of the vector",
+              "example": "{}"
+            },
+            "createdAt": {
+              "type": "string",
+              "description": "created date and time of the stage(ISO 8601 Format)",
+              "example": "2021-03-10T14:54:22.794+05:30"
+            },
+            "updatedAt": {
+              "type": "string",
+              "description": "updated date and time of the vector(ISO 8601 Format)",
+              "example": "2021-03-10T14:54:22.794+05:30"
+            }
+          }
+        },
+        "CreateApplicationRequest": {
+          "required": [
+            "requestId"
+          ],
+          "type": "object",
+          "properties": {
+            "requestId": {
+              "type": "string",
+              "description": "This is the unique identification code (ID) of the application if create application request fails",
+              "example": "request_cah_sbm-1104"
+            },
+            "sections": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/CreateApplicationSectionRequest"
+              },
+              "description": "This is a section inside the application. Example Personal Details Section"
+            },
+            "vectors": {
+              "type": "array",
+              "description": "This is vectors list which defines the unique id's of the application",
+              "items": {
+                "$ref": "#/components/schemas/AddApplicationVectorRequest"
+              }
+            },
+            "tags": {
+              "type": "array",
+              "description": "These are list of tags associated with the application",
+              "items": {
+                "$ref": "#/components/schemas/Tag"
+              }
+            }
+          },
+          "description": "Payload for create application may vary as per spool. Spool is defined as per ifi"
+        },
+        "CreateApplicationSectionRequest": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of the section",
+              "example": "Education"
+            },
+            "name": {
+              "type": "string",
+              "description": "name of the section",
+              "example": "educationDetails"
+            },
+            "details": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/Section"
+              },
+              "description": "Details map of the section"
+            }
+          }
+        },
+        "JID": {
+          "type": "object",
+          "properties": {
+            "appDomain": {
+              "type": "string"
+            },
+            "serviceName": {
+              "type": "string"
+            },
+            "nodeId": {
+              "type": "string"
+            },
+            "resource": {
+              "type": "string"
+            },
+            "serviceInstanceJID": {
+              "type": "boolean"
+            },
+            "primaryServiceName": {
+              "type": "string"
+            },
+            "serviceViewName": {
+              "type": "string"
+            },
+            "bareJID": {
+              "$ref": "#/components/schemas/JID"
+            },
+            "serviceViewJID": {
+              "type": "boolean"
+            },
+            "defaultServiceNode": {
+              "type": "boolean"
+            },
+            "jidOfAGroup": {
+              "type": "boolean"
+            },
+            "proxyServiceJID": {
+              "type": "boolean"
+            },
+            "internalJID": {
+              "type": "boolean"
+            }
+          }
+        },
+        "JsonArray": {
+          "type": "object",
+          "properties": {
+            "asBoolean": {
+              "type": "boolean"
+            },
+            "asInt": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "asString": {
+              "type": "string"
+            },
+            "asNumber": {
+              "$ref": "#/components/schemas/Number"
+            },
+            "asDouble": {
+              "type": "number",
+              "format": "double"
+            },
+            "asFloat": {
+              "type": "number",
+              "format": "float"
+            },
+            "asLong": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "asByte": {
+              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+              "type": "string",
+              "format": "byte"
+            },
+            "asCharacter": {
+              "type": "string"
+            },
+            "asBigDecimal": {
+              "type": "number"
+            },
+            "asBigInteger": {
+              "type": "integer"
+            },
+            "asShort": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "asJsonObject": {
+              "$ref": "#/components/schemas/JsonObject"
+            },
+            "asJsonPrimitive": {
+              "$ref": "#/components/schemas/JsonPrimitive"
+            },
+            "asJsonArray": {
+              "$ref": "#/components/schemas/JsonArray"
+            },
+            "jsonArray": {
+              "type": "boolean"
+            },
+            "jsonObject": {
+              "type": "boolean"
+            },
+            "jsonPrimitive": {
+              "type": "boolean"
+            },
+            "jsonNull": {
+              "type": "boolean"
+            },
+            "asJsonNull": {
+              "$ref": "#/components/schemas/JsonNull"
+            }
+          }
+        },
+        "JsonElement": {
+          "type": "object",
+          "properties": {
+            "asBoolean": {
+              "type": "boolean"
+            },
+            "asInt": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "asString": {
+              "type": "string"
+            },
+            "asJsonObject": {
+              "$ref": "#/components/schemas/JsonObject"
+            },
+            "asJsonPrimitive": {
+              "$ref": "#/components/schemas/JsonPrimitive"
+            },
+            "asJsonArray": {
+              "$ref": "#/components/schemas/JsonArray"
+            },
+            "jsonArray": {
+              "type": "boolean"
+            },
+            "jsonObject": {
+              "type": "boolean"
+            },
+            "jsonPrimitive": {
+              "type": "boolean"
+            },
+            "jsonNull": {
+              "type": "boolean"
+            },
+            "asJsonNull": {
+              "$ref": "#/components/schemas/JsonNull"
+            },
+            "asNumber": {
+              "$ref": "#/components/schemas/Number"
+            },
+            "asDouble": {
+              "type": "number",
+              "format": "double"
+            },
+            "asFloat": {
+              "type": "number",
+              "format": "float"
+            },
+            "asLong": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "asByte": {
+              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+              "type": "string",
+              "format": "byte"
+            },
+            "asCharacter": {
+              "type": "string"
+            },
+            "asBigDecimal": {
+              "type": "number"
+            },
+            "asBigInteger": {
+              "type": "integer"
+            },
+            "asShort": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "JsonNull": {
+          "type": "object",
+          "properties": {
+            "asBoolean": {
+              "type": "boolean"
+            },
+            "asInt": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "asString": {
+              "type": "string"
+            },
+            "asJsonObject": {
+              "$ref": "#/components/schemas/JsonObject"
+            },
+            "asJsonPrimitive": {
+              "$ref": "#/components/schemas/JsonPrimitive"
+            },
+            "asJsonArray": {
+              "$ref": "#/components/schemas/JsonArray"
+            },
+            "jsonArray": {
+              "type": "boolean"
+            },
+            "jsonObject": {
+              "type": "boolean"
+            },
+            "jsonPrimitive": {
+              "type": "boolean"
+            },
+            "jsonNull": {
+              "type": "boolean"
+            },
+            "asJsonNull": {
+              "$ref": "#/components/schemas/JsonNull"
+            },
+            "asNumber": {
+              "$ref": "#/components/schemas/Number"
+            },
+            "asDouble": {
+              "type": "number",
+              "format": "double"
+            },
+            "asFloat": {
+              "type": "number",
+              "format": "float"
+            },
+            "asLong": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "asByte": {
+              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+              "type": "string",
+              "format": "byte"
+            },
+            "asCharacter": {
+              "type": "string"
+            },
+            "asBigDecimal": {
+              "type": "number"
+            },
+            "asBigInteger": {
+              "type": "integer"
+            },
+            "asShort": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "JsonObject": {
+          "type": "object",
+          "properties": {
+            "asBoolean": {
+              "type": "boolean"
+            },
+            "asInt": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "asString": {
+              "type": "string"
+            },
+            "asJsonObject": {
+              "$ref": "#/components/schemas/JsonObject"
+            },
+            "asJsonPrimitive": {
+              "$ref": "#/components/schemas/JsonPrimitive"
+            },
+            "asJsonArray": {
+              "$ref": "#/components/schemas/JsonArray"
+            },
+            "jsonArray": {
+              "type": "boolean"
+            },
+            "jsonObject": {
+              "type": "boolean"
+            },
+            "jsonPrimitive": {
+              "type": "boolean"
+            },
+            "jsonNull": {
+              "type": "boolean"
+            },
+            "asJsonNull": {
+              "$ref": "#/components/schemas/JsonNull"
+            },
+            "asNumber": {
+              "$ref": "#/components/schemas/Number"
+            },
+            "asDouble": {
+              "type": "number",
+              "format": "double"
+            },
+            "asFloat": {
+              "type": "number",
+              "format": "float"
+            },
+            "asLong": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "asByte": {
+              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+              "type": "string",
+              "format": "byte"
+            },
+            "asCharacter": {
+              "type": "string"
+            },
+            "asBigDecimal": {
+              "type": "number"
+            },
+            "asBigInteger": {
+              "type": "integer"
+            },
+            "asShort": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "JsonPrimitive": {
+          "type": "object",
+          "properties": {
+            "asBoolean": {
+              "type": "boolean"
+            },
+            "asInt": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "number": {
+              "type": "boolean"
+            },
+            "asString": {
+              "type": "string"
+            },
+            "boolean": {
+              "type": "boolean"
+            },
+            "string": {
+              "type": "boolean"
+            },
+            "asNumber": {
+              "$ref": "#/components/schemas/Number"
+            },
+            "asDouble": {
+              "type": "number",
+              "format": "double"
+            },
+            "asFloat": {
+              "type": "number",
+              "format": "float"
+            },
+            "asLong": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "asByte": {
+              "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$",
+              "type": "string",
+              "format": "byte"
+            },
+            "asCharacter": {
+              "type": "string"
+            },
+            "asBigDecimal": {
+              "type": "number"
+            },
+            "asBigInteger": {
+              "type": "integer"
+            },
+            "asShort": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "asJsonObject": {
+              "$ref": "#/components/schemas/JsonObject"
+            },
+            "asJsonPrimitive": {
+              "$ref": "#/components/schemas/JsonPrimitive"
+            },
+            "asJsonArray": {
+              "$ref": "#/components/schemas/JsonArray"
+            },
+            "jsonArray": {
+              "type": "boolean"
+            },
+            "jsonObject": {
+              "type": "boolean"
+            },
+            "jsonPrimitive": {
+              "type": "boolean"
+            },
+            "jsonNull": {
+              "type": "boolean"
+            },
+            "asJsonNull": {
+              "$ref": "#/components/schemas/JsonNull"
+            }
+          }
+        },
+        "Number": {
+          "type": "object"
+        },
+        "ResponseForBadRequest": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "error code",
+                  "example": "400 BAD_REQUEST"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "error message",
+                  "example": "Bad Request"
+                }
+              }
+            }
+          }
+        },
+        "ResponseForUnauthorizedRequest": {
+          "type": "object",
+          "properties": {
+            "error": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "description": "error code",
+                  "example": "401 UNAUTHORIZED"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "error message",
+                  "example": "Unauthorized"
+                }
+              }
+            }
+          }
+        },
+        "Tag": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "this tag is usefel to filter out application",
+              "example": "vbo-id"
+            },
+            "value": {
+              "type": "string",
+              "description": "this gives the tag value",
+              "example": "4fa18593-d2d9-4bf3-bea7-7f6deb9f2ca4"
+            },
+            "attributes": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "UpdateApplicationSectionRequest": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "type of the section",
+              "example": "Education"
+            },
+            "details": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/components/schemas/Section"
+              },
+              "description": "details of the section"
+            }
+          }
+        },
+        "Section": {
+          "type": "object",
+          "properties": {
+            "schoolName": {
+              "type": "string",
+              "description": "Applicant's school Name",
+              "example": "Delhi Public School"
+            },
+            "educationLevel": {
+              "type": "string",
+              "example": "Graduate"
+            }
+          }
+        },
+        "CreateApplicationEvent": {
+          "type": "object",
+          "properties": {
+            "tenant": {
+              "type": "number",
+              "description": "tenant Id will be ifi Id",
+              "example": 140793
+            },
+            "objectId": {
+              "type": "string",
+              "description": "objectId will be application Id",
+              "example": "d742e2a7-cc39-41b7-b16a-8fdc9c5851d5"
+            },
+            "objectType": {
+              "type": "string",
+              "example": "APPLICATION-V1"
+            },
+            "stateMachineState": {
+              "type": "string",
+              "example": "created"
+            },
+            "operationType": {
+              "type": "string",
+              "example": "CREATED"
+            },
+            "data": {
+              "$ref": "#/components/schemas/ApplicationResponse"
+            }
+          }
+        }
+      }
+    }
+  }

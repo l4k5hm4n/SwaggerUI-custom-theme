@@ -138,7 +138,7 @@ let parametersQuery = []
     const retainRequestBodyValueFlagForOperation = (f) => oas3Actions.setRetainRequestBodyValueFlag({ value: f, pathMethod })
     return (
       <div className="opblock-section">
-                              {allowTryItOut ? (
+                              {/* {allowTryItOut ? (
                               <TryItOutButton
                                 isOAS3={specSelectors.isOAS3()}
                                 hasUserEditedBody={oas3Selectors.hasUserEditedBody(...pathMethod)}
@@ -146,7 +146,7 @@ let parametersQuery = []
                                 onCancelClick={this.props.onCancelClick}
                                 onTryoutClick={onTryoutClick}
                                 onResetClick={() => oas3Actions.setRequestBodyValue({ value: undefined, pathMethod })}/>
-                            ) : null}
+                            ) : null} */}
         {this.state.parametersVisible ? <div className="parameters-container">
           {!groupedParametersArr.length ? <div className="opblock-description-wrapper"><p>No parameters</p></div> :
             <div className="table-container parameters">

@@ -64,7 +64,10 @@ export default class OperationSummary extends PureComponent {
         
       {!showSummary ? null :
         <div className="opblock-summary-description">
-          {toString(resolvedSummary || summary)}
+          {this.props.methodIndex+1}. {toString(resolvedSummary || summary)}
+          <span className={`opblock-methodType ${method}`}>
+            {method}
+          </span>
         </div>
       }
 

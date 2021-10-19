@@ -13,9 +13,7 @@ import configsPlugin from "core/plugins/configs"
 import deepLinkingPlugin from "core/plugins/deep-linking"
 import filter from "core/plugins/filter"
 import onComplete from "core/plugins/on-complete"
-
 import OperationContainer from "core/containers/OperationContainer"
-
 import App from "core/components/app"
 import AuthorizationPopup from "core/components/auth/authorization-popup"
 import AuthorizeBtn from "core/components/auth/authorize-btn"

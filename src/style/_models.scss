@@ -4,7 +4,7 @@
     font-weight: 300;
 
     @include text_code();
-    color: white;
+    color: #3b4151 !important;
     font-weight: 400;
 
     .deprecated
@@ -43,14 +43,11 @@
         &:after
         {
             display: block;
-
             width: 20px;
             height: 20px;
-
+            transform: rotate(-90deg);
             content: '';
-
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Cpath xmlns='http://www.w3.org/2000/svg' fill='white' d='M10 6L8.59 7.41 14.17 12l-4.58 4.59L10 18l6-6z'/%3E%3C/svg%3E");            background-size: 100%;
-        }
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none'%3E%3Cmask id='mask0_5391:17402' style='mask-type:alpha' maskUnits='userSpaceOnUse' x='5' y='7' width='10' height='6'%3E%3Cpath d='M6.77082 7.49998L10.0042 10.7333L13.2375 7.49998C13.5625 7.17498 14.0875 7.17498 14.4125 7.49998C14.7375 7.82498 14.7375 8.34998 14.4125 8.67498L10.5875 12.5C10.2625 12.825 9.73749 12.825 9.41249 12.5L5.58749 8.67498C5.43144 8.51928 5.34375 8.30791 5.34375 8.08748C5.34375 7.86704 5.43144 7.65567 5.58749 7.49998C5.91249 7.18331 6.44582 7.17498 6.77082 7.49998V7.49998Z' fill='white'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_5391:17402)'%3E%3Crect width='20' height='20' fill='%23484848'/%3E%3C/g%3E%3C/svg%3E");        }
     }
 
     &-jump-to-path
@@ -89,9 +86,9 @@
 
         white-space: nowrap;
 
-        color: $model-hint-font-color;
+        border: 1px solid #e9eaf7;
         border-radius: 4px;
-        background: #4a5ad7;
+        background: #5b64a3;
     }
 
     p
@@ -101,12 +98,12 @@
 
     .property
     {
-        color: #fff;
+        color: #3f4555;
         font-style: italic;
 
         &.primitive
         {
-             color: #fff;
+             color: #3f4555;
         }
     }
 }
@@ -274,9 +271,9 @@ section.models
     padding: 4px 10px 14px 10px;
     // display: inline-block;
 
-    border-radius: 4px;
-    background: #161d4a;
-    color: white;
+    border-radius: 0 0 4px 4px;
+    background: #4a59d91a;
+    color: black;
     // background: rgba($section-models-model-box-background-color,.1);
 
     .model-jump-to-path
@@ -295,10 +292,9 @@ section.models
 .model-title
 {
     font-size: 14px;
-    color: #fff;
 
     @include text_headline($section-models-model-title-font-color);
-
+    color: white;
     img
     {
         margin-left: 1em;
@@ -307,7 +303,9 @@ section.models
     }
 
     .model-title__text {
-        color: #fff;
+        color: #3b4151;
+        font-family: monospace;
+
     }
 }
 
@@ -353,4 +351,5 @@ span
 {
     // color: $prop-format-font-color;
     color: white;
+    display: none;
 }

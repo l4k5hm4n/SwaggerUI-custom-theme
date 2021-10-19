@@ -57,7 +57,7 @@ export default class OperationContainer extends PureComponent {
   }
 
   mapStateToProps(nextState, props) {
-    const { op, layoutSelectors, getConfigs } = props
+    const { op, layoutSelectors, getConfigs, index } = props
     const { docExpansion, deepLinking, displayOperationId, displayRequestDuration, supportedSubmitMethods } = getConfigs()
     const showSummary = layoutSelectors.showSummary()
     const operationId = op.getIn(["operation", "__originalOperationId"]) || op.getIn(["operation", "operationId"]) || opId(op.get("operation"), props.path, props.method) || op.get("id")
@@ -247,6 +247,7 @@ export default class OperationContainer extends PureComponent {
         getComponent={ getComponent }
         getConfigs={ getConfigs }
         fn={fn}
+        methodIndex={this.props.methodIndex}
       />
     )
   }

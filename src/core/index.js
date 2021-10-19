@@ -102,7 +102,7 @@ export default function SwaggerUI(opts) {
 
     syntaxHighlight: {
       activated: true,
-      theme: "agate"
+      theme: "atelier-sulphurpool-light"
     }
   }
 

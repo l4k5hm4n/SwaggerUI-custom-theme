@@ -60,10 +60,10 @@ export default class OperationSummaryHead extends PureComponent {
     const securityIsOptional = hasSecurity && security.size === 1 && security.first().isEmpty()
     const allowAnonymous = !hasSecurity || securityIsOptional
     return (
-      <div className={`opblock-summary opblock-summary-${method}`} onClick={toggleShown} >
-        <OperationSummaryMethod method={method} />
+      <div className={`opblock-summary opblock-summary-${method}`} >
+        {/* <OperationSummaryMethod method={method} /> */}
         <div className={`opblock-summary-container`}>
-        <OperationSummaryPath getComponent={getComponent} operationProps={operationProps} specPath={specPath} />
+        <OperationSummaryPath method={method} getComponent={getComponent} operationProps={operationProps} specPath={specPath} />
 
         {/* {!showSummary ? null :
           <div className="opblock-summary-description">
@@ -73,7 +73,7 @@ export default class OperationSummaryHead extends PureComponent {
 
         {displayOperationId && (originalOperationId || operationId) ? <span className="opblock-summary-operation-id">{originalOperationId || operationId}</span> : null}
 
-        {
+        {/* {
           allowAnonymous ? null :
             <AuthorizeOperationBtn
               isAuthorized={isAuthorized}
@@ -82,7 +82,7 @@ export default class OperationSummaryHead extends PureComponent {
                 authActions.showDefinitions(applicableDefinitions)
               }}
             />
-        }
+        } */}
 
         </div>
 

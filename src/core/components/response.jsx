@@ -174,11 +174,11 @@ export default class Response extends React.Component {
     let example = getExampleComponent( sampleResponse, HighlightCode, getConfigs )
 
     return (
-      <tr className={ "response " + ( className || "") } data-code={code}>
-        <td className="response-col_status">
+      <div className={ "response " + ( className || "") } data-code={code}>
+        {/* <td className="response-col_status">
           { code }
-        </td>
-        <td className="response-col_description">
+        </td> */}
+        <div className="response-col_description">
 
           <div className="response-col_description__inner">
             <Markdown source={ response.get( "description" ) } />
@@ -262,15 +262,15 @@ export default class Response extends React.Component {
             />
           ) : null}
 
-        </td>
-        {isOAS3 ? <td className="response-col_links">
+        </div>
+        {/* {isOAS3 ? <td className="response-col_links">
           { links ?
             links.toSeq().entrySeq().map(([key, link]) => {
               return <OperationLink key={key} name={key} link={ link } getComponent={getComponent}/>
             })
           : <i>No links</i>}
-        </td> : null}
-      </tr>
+        </td> : null} */}
+      </div>
     )
   }
 }

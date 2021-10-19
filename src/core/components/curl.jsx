@@ -31,10 +31,14 @@ export default class Curl extends React.Component {
 
     return (
       <div className="curl-command">
-        <h4>Curl</h4>
-        <div className="copy-to-clipboard">
-            <CopyToClipboard text={curl}><button/></CopyToClipboard>
+      <div className="curl-header">
+        <h4>Curl Request</h4>
+        <div className="utility-buttons">
+        <CopyToClipboard text={curl}><button/></CopyToClipboard>
+            <button className="maximize-btn"></button>
         </div>
+      </div>
+
         <div>
           {curlBlock}
         </div>

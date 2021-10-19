@@ -74,6 +74,7 @@ export default class Operation extends PureComponent {
       oas3Selectors
     } = this.props
     let operationProps = this.props.operation
+    let methodIndex = this.props.methodIndex
 
     let {
       deprecated,
@@ -127,15 +128,29 @@ export default class Operation extends PureComponent {
     let onChangeKey = [ path, method ] // Used to add values to _this_ operation ( indexed by path and method )
 
     return (
-        <div className={deprecated ? "opblock opblock-deprecated" : true ? `opblock opblock-${method} is-open` : `opblock opblock-${method}`} id={escapeDeepLinkPath(isShownKey.join("-"))} >
+        <div className={`${deprecated ? "opblock opblock-deprecated" : true ? `opblock opblock-${method}` : `opblock opblock-${method} is-open`} `}  id={escapeDeepLinkPath(isShownKey.join("-"))} >
+            <div className={`op-method-header ${isShown ? "method-visible" : "method-hidden"}`} onClick={
+              () => {
+                setTimeout( () => {
+                  let { specActions, operation } = this.props
+                  let path = operation.toJS().path
+                  let method = operation.toJS().method
+                  // console.log({ operation, path, method })
+                  specActions.execute({ operation, path, method })
+                }, 0)
+                toggleShown();
+              }
+              } >
 
-          <Collapse isOpened={true}>
-            <div className="opblock-body">
-            <div className="opblock-body--left">
+            <div className="op-method-header-title" >
+
             
-            <OperationSummaryHead operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} />
-            <OperationSummary operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} >
+            <svg xmlns="http://www.w3.org/2000/svg" className={`arrow ${isShown ? "arrow-direction-down" : "arrow-direction-right"}`} width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M17.2892 9.00002C16.8992 8.61002 16.2692 8.61002 15.8792 9.00002L11.9992 12.88L8.11925 9.00002C7.72925 8.61002 7.09925 8.61002 6.70925 9.00002C6.31925 9.39002 6.31925 10.02 6.70925 10.41L11.2992 15C11.6892 15.39 12.3192 15.39 12.7092 15L17.2992 10.41C17.6792 10.03 17.6792 9.39002 17.2892 9.00002Z" fill="#4A59D9"/>
+            </svg>
 
+            <OperationSummary methodIndex={methodIndex} operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} >
+            
             { (operation && operation.size) || operation === null ? null :
                     <img height={"32px"} width={"32px"} src={require("core/../img/rolling-load.svg")} className="opblock-loading-animation" />
                   }
@@ -161,6 +176,15 @@ export default class Operation extends PureComponent {
                   }
 
               </OperationSummary> 
+              </div>
+              </div>
+          <Collapse isOpened={isShown}>
+            <div className="opblock-body">
+            <div className="opblock-body--left">
+
+            <div className="opblock-body--1">
+            
+            <OperationSummaryHead operationProps={operationProps} toggleShown={toggleShown} getComponent={getComponent} authActions={authActions} authSelectors={authSelectors} specPath={specPath} />
 
               { !operation || !operation.size ? null :
                 <Parameters
@@ -196,7 +220,7 @@ export default class Operation extends PureComponent {
                   getEffectiveServerValue={oas3Selectors.serverEffectiveValue}
                 />
               }
-                <div className={(!tryItOutEnabled || !response || !allowTryItOut) ? "execute-wrapper" : "btn-group"}>
+                {/* <div className={(!tryItOutEnabled || !response || !allowTryItOut) ? "execute-wrapper" : "btn-group"}>
                 { !tryItOutEnabled || !allowTryItOut ? null :
   
                     <Execute
@@ -213,29 +237,31 @@ export default class Operation extends PureComponent {
                       </Execute>
                 }
   
-                {/* { (!tryItOutEnabled || !response || !allowTryItOut) ? null :
+                { (!tryItOutEnabled || !response || !allowTryItOut) ? null :
                     <Clear
                       specActions={ specActions }
                       path={ path }
                       method={ method }/>
-                } */}
+                }
                 
-              </div>
+              </div> */}
                 </Parameters >
               }
 
-              {!tryItOutEnabled || !allowTryItOut ? null : schemes && schemes.size ? <div className="opblock-schemes">
+              {/* {!tryItOutEnabled || !allowTryItOut ? null : schemes && schemes.size ? <div className="opblock-schemes">
                     <Schemes schemes={ schemes }
                              path={ path }
                              method={ method }
                              specActions={ specActions }
                              currentScheme={ operationScheme } />
                   </div> : null
-              }
+              } */}
 
             </div>
 
-              { !responses ? null :
+            <div className="opblock-body--2">
+
+            { !responses ? null :
                   <Responses
                     tryItOutEnabled= { tryItOutEnabled }
                     showServerResponse = { showServerResponse }
@@ -256,6 +282,9 @@ export default class Operation extends PureComponent {
                     displayRequestDuration={ displayRequestDuration }
                     fn={fn} />
               }
+            </div>
+
+            </div>
 
               { !showExtensions || !extensions.size ? null :
                 <OperationExt extensions={ extensions } getComponent={ getComponent } />

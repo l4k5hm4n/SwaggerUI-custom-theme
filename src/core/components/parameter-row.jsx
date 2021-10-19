@@ -304,12 +304,14 @@ export default class ParameterRow extends Component {
             : null
           }
 
-          { (bodyParam || !isExecute) && paramExample !== undefined ?
+          {/* { (bodyParam || !isExecute) && paramExample !== undefined ?
             <Markdown source={"<i>Example</i> : " + paramExample}/>
             : null
-          }
+          } */}
 
           {(isFormData && !isFormDataSupported) && <div>Error: your browser does not support FormData</div>}
+
+          <span className="param-example">Example : </span>
 
           {
             isOAS3 && param.get("examples") ? (
@@ -363,6 +365,7 @@ export default class ParameterRow extends Component {
 
           {
             isOAS3 && param.get("examples") ? (
+              
               <Example
                 example={param.getIn([
                   "examples",
